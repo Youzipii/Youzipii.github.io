@@ -48,7 +48,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-08-06 14:26:14'
+  postUpdate: '2024-08-06 14:26:38'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -188,99 +188,4 @@ python爬虫爬百度翻译在翻译网站随便输入个中文翻译，然后�
 
 然后也要注意请求方法，对于参数我们可以去payload（载荷）看
 
-之前找错了，那个表单有个sign和ts（时间戳），这两个是会变化的值，在写data的时候不容易弄，发现sug里有个更简单的表单数据，就用这个了，下面是代码.
-import requestsimport time# timestamp = time.time()# print(&quot;当前时间戳：&quot;, timestamp)while True:    word = input(&quot;请输入你需要翻译的中文(q-退出)：&quot;)    if word == &#x27;q&#x27;:        break    else:        data = &#123;            &#x27;kw&#x27;:word,        &#125;        resp = requests.post(&quot;http ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2024/03/14/burp-sqlmap/" title="burp+sqlmap">burp+sqlmap</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-14T10:53:51.000Z" title="发表于 2024-03-14 18:53:51">2024-03-14</time></span></div><div class="content">burp+sqlmap第一步：Extend-&gt;BApp store-&gt;SQLIpy Sqlmap Interation
-
-要先安装一下jythonhttps://www.jython.org/download.html
-
-
-连接失败，去这个网站https://portswigger.net/bappstore/下载
-
-
-如果启动时会报错，可能时jyphon有问题，去重新下或换个版本就行
-</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2024/03/02/sql/" title="sql">sql</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-02T09:15:09.000Z" title="发表于 2024-03-02 17:15:09">2024-03-02</time></span></div><div class="content">SQL注入1、查找注入点
-2、判断是字符型还是数字型注入 
-3、如果字符型，找到他的闭合方式
-4、判断查询列数，group by 或 order by
-5、查询回显位置 -1（id要是不存在的数据）
-注入分类
-按照查询字段
-
-字符型:输入参数为整形
-数字型:输入参数为字符型
-
-
-按照注入方法
-
-Union注入
-报错注入
-布尔注入
-时间注入
-
-
-
-注入点注入点就是可以实行注入的地方，通常是一个访问数据库的连接，如本页面的注入点input the ID
-Less1
-如何判断是字符型还是数字型实用and 1&#x3D;1 和and 1&#x3D;2来判断，数字型一般提交内容为数字，但数字不一定为数字型。
-Less-1 提交and 1&#x3D;1和提交and 1&#x3D;2，如果是数字型，你1&#x3D;2就不会正常显示，是字符型则仍能正常显示，这里是字符型
-
-Less-2则是数字型了
-
-也可以直接用运算2-1如果显示的是2的数据则是字符型，注意+号会被认为是空格
-
-闭合方式一个单引号-‘
-两个单引号’’
-一个单引号’+)
-两个单引号’’+)
-或双引号
-其他
-如何判断闭合方式例如Less- ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2024/03/02/docker/" title="docker">docker</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-02T09:03:07.000Z" title="发表于 2024-03-02 17:03:07">2024-03-02</time></span></div><div class="content">DockerHypervisor允许多个操作系统共享一个CPU(多核CPU的情况可以是多个CPU)。处于操作系统与硬件系统之间，用于实现多个虚拟机共享宿主机的硬件系统。
-hyper-v则是微软提供的商业化Hypervisor，运行在windows系统上
-KVM与Xen是linux系统上开源的Hypervisor
-现在的Windows系统的架构（操作系统和应用层分别是两个虚拟机，位于Hyper-V之上）
-
-容器与虚拟机的最大区别是
-虚拟机中存在独立的硬件系统与操作系统，但容器中的全部是共享的宿主机中的操作系统与硬件系统。
-VMware Workstation 要等到15.5.5版本开始，才对VMM虚拟机技术进行了重构，之前需要直接调用CPU的虚拟化功能，现在调用Win10系统的WHP（Windows 的Hypervisor平台）的API，解决了VMware Workstation与Hyper-V的不兼容问题。
-Docker的架构图
-Docker使用客户机-服务器架构。Docker客户端与Docker守护进程通信，后者完成构建、运行和分发Docker容器的繁重工作。Docker客户端和守护 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/11/01/Linux%E5%9F%BA%E7%A1%80/" title="Linux">Linux</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-31T16:28:18.000Z" title="发表于 2023-11-01 00:28:18">2023-11-01</time></span></div><div class="content">LinuxLinux下基本命令的掌握ls指令语法：ls [ 选项 ] [文件或目录]
-功能：对于目录，该命令列出该目录下的所有子目录与文件。对于文件，将列出文件名以及其他信息。
-常用选项：
-
--a 列出目录下的所有文件，包括以.开头的隐含文件。
--d 将目录象文件一样显示，而不是显示其下的文件。如:ls -d指定目录
--i 输出文件的i节点的索引信息。如ls -ai指定文件
--k 以k字节的形式表示文件的大小。ls -alk 指定文件
--| 列出文件的详细信息。
--t 以时间排序。
--R 列出所有子目录下的文件。(递归)
--h 可以显示大小单位，但要和-l参数一起使用
-
-文件系统可以看这篇文章——[详细讲解，Linux内核——文件系统（建议收藏）][https://zhuanlan.zhihu.com/p/505338841]pwd命令语法：pwd
-功能：显示用户当前所在目录
-常用选项：无
-
-cd指令Linux系统中，磁盘上的文件和目录被组成一颗目录树，每个节点都是目录或文件
-语法：cd 目录名
-功能：改变工作目录，将当前工作目录改变到指定的目录下
-举例：
-cd ..: 返回上级目录c ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2022/10/14/Kv1MP4ZiHeSyjd6.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Youzipii</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">49</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Youzipii" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Practice makes perfect.</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/06/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E5%9C%BA-zgsf-web1/" title="应急响应靶场-zgsf-web1">应急响应靶场-zgsf-web1</a><time datetime="2024-08-06T04:36:01.000Z" title="发表于 2024-08-06 12:36:01">2024-08-06</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/04/OSCP-005-Broken/" title="OSCP-005-Broken">OSCP-005-Broken</a><time datetime="2024-08-04T07:57:08.000Z" title="发表于 2024-08-04 15:57:08">2024-08-04</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/01/OSCP-004-Matrix/" title="OSCP-004-Matrix">OSCP-004-Matrix</a><time datetime="2024-08-01T12:21:41.000Z" title="发表于 2024-08-01 20:21:41">2024-08-01</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/07/23/weblogic/" title="weblogic">weblogic</a><time datetime="2024-07-23T06:48:31.000Z" title="发表于 2024-07-23 14:48:31">2024-07-23</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/07/21/%E7%AE%80%E6%98%93%E7%88%86%E7%A0%B4poc/" title="简易爆破poc">简易爆破poc</a><time datetime="2024-07-21T07:22:48.000Z" title="发表于 2024-07-21 15:22:48">2024-07-21</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
-            <i class="fas fa-folder-open"></i>
-            <span>分类</span>
-            
-            </div>
-            <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="card-category-list-name">数学</span><span class="card-category-list-count">2</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C</a> <a href="/tags/HTML/" style="font-size: 1.2em; color: #999da3">HTML</a> <a href="/tags/JS/" style="font-size: 1.1em; color: #999">JS</a> <a href="/tags/Java/" style="font-size: 1.1em; color: #999">Java</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/OJ/" style="font-size: 1.1em; color: #999">OJ</a> <a href="/tags/OSCP/" style="font-size: 1.3em; color: #99a1ac">OSCP</a> <a href="/tags/SQL/" style="font-size: 1.1em; color: #999">SQL</a> <a href="/tags/bash/" style="font-size: 1.1em; color: #999">bash</a> <a href="/tags/docker/" style="font-size: 1.1em; color: #999">docker</a> <a href="/tags/iptables/" style="font-size: 1.1em; color: #999">iptables</a> <a href="/tags/linux/" style="font-size: 1.1em; color: #999">linux</a> <a href="/tags/ms17-010/" style="font-size: 1.1em; color: #999">ms17_010</a> <a href="/tags/msf/" style="font-size: 1.1em; color: #999">msf</a> <a href="/tags/note/" style="font-size: 1.1em; color: #999">note</a> <a href="/tags/php/" style="font-size: 1.1em; color: #999">php</a> <a href="/tags/pthon/" style="font-size: 1.1em; color: #999">pthon</a> <a href="/tags/shell/" style="font-size: 1.1em; color: #999">shell</a> <a href="/tags/sql/" style="font-size: 1.1em; color: #999">sql</a> <a href="/tags/strings/" style="font-size: 1.1em; color: #999">strings</a> <a href="/tags/tcpdump/" style="font-size: 1.1em; color: #999">tcpdump</a> <a href="/tags/tools/" style="font-size: 1.1em; color: #999">tools</a> <a href="/tags/udf%E6%8F%90%E6%9D%83/" style="font-size: 1.1em; color: #999">udf提权</a> <a href="/tags/vulhub/" style="font-size: 1.1em; color: #999">vulhub</a> <a href="/tags/weblogic/" style="font-size: 1.1em; color: #999">weblogic</a> <a href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 1.1em; color: #999">反序列化</a> <a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 1.1em; color: #999">命令</a> <a href="/tags/%E5%A5%87%E6%80%9D%E5%A6%99%E6%83%B3/" style="font-size: 1.1em; color: #999">奇思妙想</a> <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" style="font-size: 1.1em; color: #999">应急响应</a> <a href="/tags/%E6%8E%92%E6%9F%A5/" style="font-size: 1.1em; color: #999">排查</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 1.1em; color: #999">数学建模</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E7%AB%9E%E8%B5%9B/" style="font-size: 1.1em; color: #999">数学竞赛</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 1.1em; color: #999">爬虫</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 1.1em; color: #999">环境</a> <a href="/tags/%E7%9F%AD%E9%93%BE%E6%8E%A5%E8%BF%98%E5%8E%9F/" style="font-size: 1.1em; color: #999">短链接还原</a> <a href="/tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/" style="font-size: 1.1em; color: #999">缓冲区溢出</a> <a href="/tags/%E9%9D%B6%E5%9C%BA/" style="font-size: 1.4em; color: #99a5b6">靶场</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">49</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-08-06T06:26:14.318Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By Youzipii</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
-  endLoading: () => {
-    document.body.style.overflow = 'auto';
-    document.getElementById('loading-box').classList.add("loaded")
-  },
-  initLoading: () => {
-    document.body.style.overflow = '';
-    document.getElementById('loading-box').classList.remove("loaded")
-
-  }
-}
-window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+之前找错了，那个表单有个sign和ts（时间戳），这两个是会变化的值，在写data的时候不容易弄，�
