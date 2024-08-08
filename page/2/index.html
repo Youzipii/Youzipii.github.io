@@ -1,18 +1,18 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>You_zip - 柚子</title><meta name="author" content="Youzipii"><meta name="copyright" content="Youzipii"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>You_zip - 柚子</title><meta name="author" content="Youzipii"><meta name="copyright" content="Youzipii"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="You_zip">
 <meta property="og:url" content="http://example.com/page/2/index.html">
 <meta property="og:site_name" content="You_zip">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/foot.ico">
+<meta property="og:image" content="http://example.com/image/bk_image/favtor.ico">
 <meta property="article:author" content="Youzipii">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/foot.ico"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/page/2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="http://example.com/image/bk_image/favtor.ico"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
-  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  localSearch: undefined,
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -23,7 +23,7 @@
     post: false
   },
   runtime: '',
-  date_suffix: {
+  dateSuffix: {
     just: '刚刚',
     min: '分钟前',
     hour: '小时前',
@@ -33,85 +33,96 @@
   copyright: undefined,
   lightbox: 'fancybox',
   Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
-    }
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
   },
   isPhotoFigcaption: false,
   islazyload: false,
-  isAnchor: false
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
   title: 'You_zip',
   isPost: false,
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-08-08 19:13:11'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
+  postUpdate: '2024-08-08 19:53:05'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
         }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
       }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
         document.documentElement.setAttribute('data-theme', 'dark')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
           document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
         }
       }
-      win.activateLightMode = function () {
+      win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
           document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
@@ -119,9 +130,9 @@
       }
       const t = saveToLocal.get('theme')
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
-        
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
       const asideStatus = saveToLocal.get('aside-status')
       if (asideStatus !== undefined) {
         if (asideStatus === 'hide') {
@@ -131,27 +142,27 @@
         }
       }
     
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
       }
-    }
-    detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/foot.ico" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">41</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/wall.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">You_zip</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">You_zip</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/Youzipii" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2024/05/29/xd/" title="xd">xd</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-29T14:42:54.000Z" title="发表于 2024-05-29 22:42:54">2024-05-29</time></span></div><div class="content">Day1:操作系统-名词-文件下载-反弹SHELL-防火墙绕过前后端，POC&#x2F;ExP，Payload&#x2F;shellcode，后门&#x2F;webshe1l，木马&#x2F;病毒反弹，回显，跳板（科学上网），黑白盒测试（不知道&#x2F;知道源代码），暴力解，社会工程学，撞库，ATT&amp;CK]https://attack.mitre.org/等参考:
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/image/bk_image/favtor.ico" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">41</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/image/bk_image/bg1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="You_zip"><span class="site-name">You_zip</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">You_zip</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/29/xd/" title="xd">xd</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-29T14:42:54.000Z" title="发表于 2024-05-29 22:42:54">2024-05-29</time></span></div><div class="content">Day1:操作系统-名词-文件下载-反弹SHELL-防火墙绕过前后端，POC&#x2F;ExP，Payload&#x2F;shellcode，后门&#x2F;webshe1l，木马&#x2F;病毒反弹，回显，跳板（科学上网），黑白盒测试（不知道&#x2F;知道源代码），暴力解，社会工程学，撞库，ATT&amp;CK]https://attack.mitre.org/等参考:
 https://forum.ywhack.com/bountytips.php?download
 https://forum.ywhack.com/reverse-shell/
 术语解释：https://www.cnblogs.com/sunny11/p/13583083.html
 1.渗透测试常用专业术语1.1. POC、EXP、Payload与Shellcode
 POC:全称’ProofofConcept’，中文’概念验证”，常指一段漏洞证明的代码。
 EXP:全称’Exploit”，中文‘利用’，指利用系统漏洞进行攻击的动作。
-Payload:中文’有效载荷’，指成功exploit之后，真正在目标系统执行的代码 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2024/05/27/NFS/" title="NFS">NFS</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-27T12:42:18.000Z" title="发表于 2024-05-27 20:42:18">2024-05-27</time></span></div><div class="content">环境配置（巨难搞）你普通的yum install dnf后，执行命令可能会出现段错误，这我觉得可能版本太旧了，dmesg会发现出现在python2.7.5,试着更新下源，结果一个错误解决又出现另一个错误。。。
+Payload:中文’有效载荷’，指成功exploit之后，真正在目标系统执行的代码 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/27/NFS/" title="NFS">NFS</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-27T12:42:18.000Z" title="发表于 2024-05-27 20:42:18">2024-05-27</time></span></div><div class="content">环境配置（巨难搞）你普通的yum install dnf后，执行命令可能会出现段错误，这我觉得可能版本太旧了，dmesg会发现出现在python2.7.5,试着更新下源，结果一个错误解决又出现另一个错误。。。
 https://ipcmen.com/dnf
 https://blog.csdn.net/GX_1_11_real/article/details/99670417
 https://blog.csdn.net/qq_34202873/article/details/117094056
 https://www.cnblogs.com/zgqbky/p/13036069.html
 修改resolve.conf不够解决问题，需要继续在&#x2F;etc&#x2F;sysconfig&#x2F;network-script&#x2F;ifcfg-ens33增加DNS
 安装完成后，有个情况dnf的信息很少，因为有些东西没安装全，需要换源
-换源的时候注意aliyun的镜像源里Centos-Base.repo需要把里面的$releaserver换成7，最好是把yum.reepos.d文件夹备份 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2024/05/25/linux%E6%8E%92%E6%9F%A5%E7%BB%8F%E9%AA%8C/" title="linux排查经验">linux排查经验</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-25T15:02:20.000Z" title="发表于 2024-05-25 23:02:20">2024-05-25</time></span></div><div class="content">2024&#x2F;5&#x2F;25文章来源: https:&#x2F;&#x2F;forum.butian.net&#x2F;share&#x2F;3015
+换源的时候注意aliyun的镜像源里Centos-Base.repo需要把里面的$releaserver换成7，最好是把yum.reepos.d文件夹备份 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/25/linux%E6%8E%92%E6%9F%A5%E7%BB%8F%E9%AA%8C/" title="linux排查经验">linux排查经验</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-25T15:02:20.000Z" title="发表于 2024-05-25 23:02:20">2024-05-25</time></span></div><div class="content">2024&#x2F;5&#x2F;25文章来源: https:&#x2F;&#x2F;forum.butian.net&#x2F;share&#x2F;3015
 查CPU异常占用top -c -o %CPU
 
 显示了系统中所有进程的 CPU 使用率，并且按照使用率从高到低排序，有时候出现超过百分百也有可能是因为多核CPU0.
@@ -170,7 +181,7 @@ ps -aux --sort=-%cpu
 进入对应的PID查看具体路径信息ps -aux | grep PID
 
 查到路径，可以拷贝相关文件分析，微步之类的，看是否是恶意远控陈旭等
-守护进程​	Linux系统启动时会启动很多系统服务进程，这些系统服务进程没有控制 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2024/05/21/%E4%B8%80%E4%B8%AACPU%E5%B9%B3%E5%9D%87%E4%BD%BF%E7%94%A8%E7%8E%87%E8%84%9A%E6%9C%AC/" title="一个CPU平均使用率脚本">一个CPU平均使用率脚本</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-21T13:29:28.000Z" title="发表于 2024-05-21 21:29:28">2024-05-21</time></span></div><div class="content">#!/bin/bashPREV_TOTAL=0 #存储CPU总时间PREV_IDLE=0 #存储CPU空闲时间while true; do		#读取CPU统计数据并累加到TOTAL变量	CPU=($(sed -n &#x27;s/^cpu\s//p&#x27; /proc/stat))	IDLE=$&#123;CPU[3]&#125;	TOTAL=0	for VALUE in &quot;$&#123;CPU[@]:0:8&#125;&quot;; do		TOTAL=$((TOTAL+VALUE))	done	#计算当前与上一次的CPU总时间差并4舍5入	DIFF_IDLE=$((IDLE-PREV_IDLE))	DIFF_TOTAL=$((TOTAL-PREV_TOTAL))	DIFF_USAGE=$(((1000*(DIFF_TOTAL-DIFF_IDLE)/DIFF_TOTAL+5)/10))	#打印使用率并更新变量以供下一次使用	echo -en &quot;\rCPU: $DIFF_USAGE% \b\b&quot;	PREV_TOTAL=&quot;$TOTAL&quot ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2024/05/20/%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%88%A9%E7%94%A8%E6%B5%8B%E8%AF%95/" title="永恒之蓝利用测试">永恒之蓝利用测试</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-20T15:17:02.000Z" title="发表于 2024-05-20 23:17:02">2024-05-20</time></span></div><div class="content">MSF综合渗透测试框架
+守护进程​	Linux系统启动时会启动很多系统服务进程，这些系统服务进程没有控制 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/21/%E4%B8%80%E4%B8%AACPU%E5%B9%B3%E5%9D%87%E4%BD%BF%E7%94%A8%E7%8E%87%E8%84%9A%E6%9C%AC/" title="一个CPU平均使用率脚本">一个CPU平均使用率脚本</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-21T13:29:28.000Z" title="发表于 2024-05-21 21:29:28">2024-05-21</time></span></div><div class="content">#!/bin/bashPREV_TOTAL=0 #存储CPU总时间PREV_IDLE=0 #存储CPU空闲时间while true; do		#读取CPU统计数据并累加到TOTAL变量	CPU=($(sed -n &#x27;s/^cpu\s//p&#x27; /proc/stat))	IDLE=$&#123;CPU[3]&#125;	TOTAL=0	for VALUE in &quot;$&#123;CPU[@]:0:8&#125;&quot;; do		TOTAL=$((TOTAL+VALUE))	done	#计算当前与上一次的CPU总时间差并4舍5入	DIFF_IDLE=$((IDLE-PREV_IDLE))	DIFF_TOTAL=$((TOTAL-PREV_TOTAL))	DIFF_USAGE=$(((1000*(DIFF_TOTAL-DIFF_IDLE)/DIFF_TOTAL+5)/10))	#打印使用率并更新变量以供下一次使用	echo -en &quot;\rCPU: $DIFF_USAGE% \b\b&quot;	PREV_TOTAL=&quot;$TOTAL&quot ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/20/%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%88%A9%E7%94%A8%E6%B5%8B%E8%AF%95/" title="永恒之蓝利用测试">永恒之蓝利用测试</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-20T15:17:02.000Z" title="发表于 2024-05-20 23:17:02">2024-05-20</time></span></div><div class="content">MSF综合渗透测试框架
 Auxiliary  辅助模块  为渗透测试信息搜集提供了大量的辅助模块支持
 Exploits 攻击模块  利用发现的安全漏洞或配置弱点对远程目标系统 进行攻击，从而获得对远程目标系统访问权的代码组件。
 Payload 攻击载荷模块   攻击成功后促使靶机运行的一段植入代码
@@ -188,7 +199,7 @@ background  将当前操作在后台运行
 use  使用所选择的模块
 set 设置选项
 unset 取消设置的选项
-session 会话，主要是多个目标，切换时可以 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2024/05/19/%E4%B8%80%E4%BA%9B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" title="一些读书笔记">一些读书笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-19T12:23:11.000Z" title="发表于 2024-05-19 20:23:11">2024-05-19</time></span></div><div class="content">读书笔记主要是记录一些常识
+session 会话，主要是多个目标，切换时可以 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/19/%E4%B8%80%E4%BA%9B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" title="一些读书笔记">一些读书笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-05-19T12:23:11.000Z" title="发表于 2024-05-19 20:23:11">2024-05-19</time></span></div><div class="content">读书笔记主要是记录一些常识
 msf篇渗透测试：是一种通过模拟恶意攻击者的技术与方法，挫败目标系统安全控制措施，取得访问控制权，并发现具备业务影响后果安全隐患的一种安全测试与评估方式。
 渗透测试的分类:黑盒和白盒、灰盒（白+黑）
 一定的测试流程：
@@ -220,7 +231,7 @@ CNNVD 中国国家漏洞库
 CNVD 中国国家信息安全漏洞共享平台
 乌云（民间组织）
 SCAP
-CVE ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2024/04/28/kali-docker-vulhub/" title="kali+docker+vulhub">kali+docker+vulhub</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-28T15:36:09.000Z" title="发表于 2024-04-28 23:36:09">2024-04-28</time></span></div><div class="content">vulhub环境搭建安装证书环境#记得配下源 编辑 /etc/apt/source.listapt-update#安装https和ca证书apt-get install -y apt-transport-https ca-certificates#dirmngrapt-get install dirmngr
+CVE ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/28/kali-docker-vulhub/" title="kali+docker+vulhub">kali+docker+vulhub</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-28T15:36:09.000Z" title="发表于 2024-04-28 23:36:09">2024-04-28</time></span></div><div class="content">vulhub环境搭建安装证书环境#记得配下源 编辑 /etc/apt/source.listapt-update#安装https和ca证书apt-get install -y apt-transport-https ca-certificates#dirmngrapt-get install dirmngr
 
 补充知s识dirmngr
 添加GPG密钥并添加更新源获取指定URL的GPG（GNU Privacy Guard）密钥，并使用apt-key命令将其添加到密钥环中。
@@ -232,7 +243,7 @@ curl：这是一个命令行工具，用于使用各种支持的协议从服务�
 -f：它告诉curl在请求失败时静默失败，不生成任何输出。
 -s：它使curl以静默模式运行，不显示任何进度或错误消息。
 -S：如果发生错误，它强制curl显示错误消息。
--L：它指示curl在服务器响应重定 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2024/04/28/OSCP-003-Troll/" title="OSCP-003-Troll">OSCP-003-Troll</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-28T09:28:30.000Z" title="发表于 2024-04-28 17:28:30">2024-04-28</time></span></div><div class="content">kali：192.138.174.137
+-L：它指示curl在服务器响应重定 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/28/OSCP-003-Troll/" title="OSCP-003-Troll">OSCP-003-Troll</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-28T09:28:30.000Z" title="发表于 2024-04-28 17:28:30">2024-04-28</time></span></div><div class="content">kali：192.138.174.137
 信息收集主机发现nmap -sn 192.168.174.0/24或arp-scan -l或netdiscover -i eht0#比较慢
 
 发现目标主机：192.168.174.156
@@ -247,7 +258,7 @@ nmap -p22 --script &quot;default or safe&quot; 192.168.174.156
 “safe”脚本：这个脚本也是nmap的内置脚本之一，它执行一些安全性相关的扫描任务。它会检查目标主机是否存在已知的安全漏洞、弱密码、常见的网络配置错误等。
 
 扫描完也没有发现什么信息，点开之前打卡的靶机，发现
-Are you sure you want to do this? Login: ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2024/04/26/Load-Of-The-Root/" title="Load Of The Root">Load Of The Root</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-26T05:23:35.000Z" title="发表于 2024-04-26 13:23:35">2024-04-26</time></span></div><div class="content">Load Of The Root参考kali：192.168.174.137
+Are you sure you want to do this? Login: ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/26/Load-Of-The-Root/" title="Load Of The Root">Load Of The Root</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-26T05:23:35.000Z" title="发表于 2024-04-26 13:23:35">2024-04-26</time></span></div><div class="content">Load Of The Root参考kali：192.168.174.137
 信息收集主机发现nmap -sn 192.168.174.0&#x2F;24
 
 获得目标地址：192.168.174.151
@@ -258,7 +269,7 @@ for i in &#123;1..254&#125;; do ping -c 1 -w 0.1 192.168.174.$i|grep from; done
 
 -sS: 这个参数指定使用TCP SYN扫描（半开放扫描）
 -A: 这个参数启用操作系统探测、版本探测、脚本扫描和traceroute等一系列高级扫描技术。使用”-A”参数相当于同时启用了”-O”（操作系统探测）、”-sV”（版本探测:识别目标主机上运行的服务和应用程序的版本信息。）和”–script”（脚本扫描）参数。这样可以提供更丰富的扫描结果和更全面的主机信息。
--n: 这个参数禁用DNS解析。如前面解释所述，禁用DNS解析可以加快扫描速 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2024/04/18/php-SER-libs/" title="php反序列化">php反序列化</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-18T13:49:23.000Z" title="发表于 2024-04-18 21:49:23">2024-04-18</time></span></div><div class="content">php面像对象基本知识对象的三个特征：对象的行为、对象的形态、对象的表示
+-n: 这个参数禁用DNS解析。如前面解释所述，禁用DNS解析可以加快扫描速 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/18/php-SER-libs/" title="php反序列化">php反序列化</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-18T13:49:23.000Z" title="发表于 2024-04-18 21:49:23">2024-04-18</time></span></div><div class="content">php面像对象基本知识对象的三个特征：对象的行为、对象的形态、对象的表示
 类的定义：类是定义了一件事物的抽象特点，它将数据的形式以及这些数据上的操作封装在一起。
 对象是具有类类型的变量，是对类的实例。
 内部构成：成员变量(属性) +成员函数（方法）
@@ -270,16 +281,5 @@ for i in &#123;1..254&#125;; do ping -c 1 -w 0.1 192.168.174.$i|grep from; done
 &lt;?phpclass Class_Name&#123;    //成员变量声明    //成员函数声明&#125;?&gt;
 
 创建一个类:
-&lt;?phpclass hero&#123; //定义类(类名)    var $name;	//生命成员变量    var $sex;   ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#content-inner">6</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/foot.ico" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Youzipii</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">41</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Youzipii"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Youzipii" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Practice makes perfect.</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/07/xxl-job/" title="xxl-job">xxl-job</a><time datetime="2024-08-07T14:27:56.000Z" title="发表于 2024-08-07 22:27:56">2024-08-07</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/07/Maven%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="Maven环境配置">Maven环境配置</a><time datetime="2024-08-07T14:27:40.000Z" title="发表于 2024-08-07 22:27:40">2024-08-07</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/06/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E5%9C%BA-zgsf-web1/" title="应急响应靶场-zgsf-web1">应急响应靶场-zgsf-web1</a><time datetime="2024-08-06T04:36:01.000Z" title="发表于 2024-08-06 12:36:01">2024-08-06</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/04/OSCP-005-Broken/" title="OSCP-005-Broken">OSCP-005-Broken</a><time datetime="2024-08-04T07:57:08.000Z" title="发表于 2024-08-04 15:57:08">2024-08-04</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/01/OSCP-004-Matrix/" title="OSCP-004-Matrix">OSCP-004-Matrix</a><time datetime="2024-08-01T12:21:41.000Z" title="发表于 2024-08-01 20:21:41">2024-08-01</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C</a> <a href="/tags/HTML/" style="font-size: 1.23em; color: #999ea6">HTML</a> <a href="/tags/JS/" style="font-size: 1.1em; color: #999">JS</a> <a href="/tags/Java/" style="font-size: 1.1em; color: #999">Java</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/OJ/" style="font-size: 1.1em; color: #999">OJ</a> <a href="/tags/OSCP/" style="font-size: 1.37em; color: #99a4b2">OSCP</a> <a href="/tags/SQL/" style="font-size: 1.1em; color: #999">SQL</a> <a href="/tags/bash/" style="font-size: 1.1em; color: #999">bash</a> <a href="/tags/docker/" style="font-size: 1.1em; color: #999">docker</a> <a href="/tags/iptables/" style="font-size: 1.1em; color: #999">iptables</a> <a href="/tags/linux/" style="font-size: 1.1em; color: #999">linux</a> <a href="/tags/maven/" style="font-size: 1.1em; color: #999">maven</a> <a href="/tags/ms17-010/" style="font-size: 1.1em; color: #999">ms17_010</a> <a href="/tags/msf/" style="font-size: 1.1em; color: #999">msf</a> <a href="/tags/note/" style="font-size: 1.1em; color: #999">note</a> <a href="/tags/php/" style="font-size: 1.1em; color: #999">php</a> <a href="/tags/pthon/" style="font-size: 1.1em; color: #999">pthon</a> <a href="/tags/shell/" style="font-size: 1.1em; color: #999">shell</a> <a href="/tags/sql/" style="font-size: 1.1em; color: #999">sql</a> <a href="/tags/strings/" style="font-size: 1.1em; color: #999">strings</a> <a href="/tags/tcpdump/" style="font-size: 1.1em; color: #999">tcpdump</a> <a href="/tags/tools/" style="font-size: 1.1em; color: #999">tools</a> <a href="/tags/udf%E6%8F%90%E6%9D%83/" style="font-size: 1.1em; color: #999">udf提权</a> <a href="/tags/vulhub/" style="font-size: 1.1em; color: #999">vulhub</a> <a href="/tags/weblogic/" style="font-size: 1.1em; color: #999">weblogic</a> <a href="/tags/xxl-job/" style="font-size: 1.1em; color: #999">xxl-job</a> <a href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 1.1em; color: #999">反序列化</a> <a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 1.1em; color: #999">命令</a> <a href="/tags/%E5%A5%87%E6%80%9D%E5%A6%99%E6%83%B3/" style="font-size: 1.1em; color: #999">奇思妙想</a> <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" style="font-size: 1.1em; color: #999">应急响应</a> <a href="/tags/%E6%8E%92%E6%9F%A5/" style="font-size: 1.1em; color: #999">排查</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 1.1em; color: #999">数学建模</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E7%AB%9E%E8%B5%9B/" style="font-size: 1.1em; color: #999">数学竞赛</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 1.1em; color: #999">爬虫</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 1.1em; color: #999">环境</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 1.1em; color: #999">环境配置</a> <a href="/tags/%E7%9F%AD%E9%93%BE%E6%8E%A5%E8%BF%98%E5%8E%9F/" style="font-size: 1.1em; color: #999">短链接还原</a> <a href="/tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/" style="font-size: 1.1em; color: #999">缓冲区溢出</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">51</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-08-08T11:13:10.809Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By Youzipii</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
-  endLoading: () => {
-    document.body.style.overflow = 'auto';
-    document.getElementById('loading-box').classList.add("loaded")
-  },
-  initLoading: () => {
-    document.body.style.overflow = '';
-    document.getElementById('loading-box').classList.remove("loaded")
-
-  }
-}
-window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+&lt;?phpclass hero&#123; //定义类(类名)    var $name;	//生命成员变量    var $sex;   ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#content-inner">6</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/image/bk_image/favtor.ico" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Youzipii</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">41</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/07/xxl-job/" title="xxl-job">xxl-job</a><time datetime="2024-08-07T14:27:56.000Z" title="发表于 2024-08-07 22:27:56">2024-08-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/07/Maven%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="Maven环境配置">Maven环境配置</a><time datetime="2024-08-07T14:27:40.000Z" title="发表于 2024-08-07 22:27:40">2024-08-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/06/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E5%9C%BA-zgsf-web1/" title="应急响应靶场-zgsf-web1">应急响应靶场-zgsf-web1</a><time datetime="2024-08-06T04:36:01.000Z" title="发表于 2024-08-06 12:36:01">2024-08-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/04/OSCP-005-Broken/" title="OSCP-005-Broken">OSCP-005-Broken</a><time datetime="2024-08-04T07:57:08.000Z" title="发表于 2024-08-04 15:57:08">2024-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/01/OSCP-004-Matrix/" title="OSCP-004-Matrix">OSCP-004-Matrix</a><time datetime="2024-08-01T12:21:41.000Z" title="发表于 2024-08-01 20:21:41">2024-08-01</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/php/" style="font-size: 1.1em; color: #999">php</a> <a href="/tags/linux/" style="font-size: 1.1em; color: #999">linux</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 1.1em; color: #999">环境</a> <a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 1.1em; color: #999">命令</a> <a href="/tags/JS/" style="font-size: 1.1em; color: #999">JS</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 1.1em; color: #999">环境配置</a> <a href="/tags/maven/" style="font-size: 1.1em; color: #999">maven</a> <a href="/tags/ms17-010/" style="font-size: 1.1em; color: #999">ms17_010</a> <a href="/tags/xxl-job/" style="font-size: 1.1em; color: #999">xxl-job</a> <a href="/tags/HTML/" style="font-size: 1.2em; color: #999da3">HTML</a> <a href="/tags/sql/" style="font-size: 1.1em; color: #999">sql</a> <a href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 1.1em; color: #999">反序列化</a> <a href="/tags/OJ/" style="font-size: 1.1em; color: #999">OJ</a> <a href="/tags/%E9%9D%B6%E5%9C%BA/" style="font-size: 1.4em; color: #99a5b6">靶场</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C</a> <a href="/tags/docker/" style="font-size: 1.1em; color: #999">docker</a> <a href="/tags/%E6%8E%92%E6%9F%A5/" style="font-size: 1.1em; color: #999">排查</a> <a href="/tags/OSCP/" style="font-size: 1.3em; color: #99a1ac">OSCP</a> <a href="/tags/tcpdump/" style="font-size: 1.1em; color: #999">tcpdump</a> <a href="/tags/udf%E6%8F%90%E6%9D%83/" style="font-size: 1.1em; color: #999">udf提权</a> <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" style="font-size: 1.1em; color: #999">应急响应</a> <a href="/tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/" style="font-size: 1.1em; color: #999">缓冲区溢出</a> <a href="/tags/weblogic/" style="font-size: 1.1em; color: #999">weblogic</a> <a href="/tags/pthon/" style="font-size: 1.1em; color: #999">pthon</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/tags/iptables/" style="font-size: 1.1em; color: #999">iptables</a> <a href="/tags/strings/" style="font-size: 1.1em; color: #999">strings</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 1.1em; color: #999">数学建模</a> <a href="/tags/note/" style="font-size: 1.1em; color: #999">note</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E7%AB%9E%E8%B5%9B/" style="font-size: 1.1em; color: #999">数学竞赛</a> <a href="/tags/msf/" style="font-size: 1.1em; color: #999">msf</a> <a href="/tags/shell/" style="font-size: 1.1em; color: #999">shell</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 1.1em; color: #999">爬虫</a> <a href="/tags/Java/" style="font-size: 1.1em; color: #999">Java</a> <a href="/tags/SQL/" style="font-size: 1.1em; color: #999">SQL</a> <a href="/tags/bash/" style="font-size: 1.1em; color: #999">bash</a> <a href="/tags/%E5%A5%87%E6%80%9D%E5%A6%99%E6%83%B3/" style="font-size: 1.1em; color: #999">奇思妙想</a> <a href="/tags/vulhub/" style="font-size: 1.1em; color: #999">vulhub</a> <a href="/tags/%E7%9F%AD%E9%93%BE%E6%8E%A5%E8%BF%98%E5%8E%9F/" style="font-size: 1.1em; color: #999">短链接还原</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">51</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-08-08T11:53:04.541Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Youzipii</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

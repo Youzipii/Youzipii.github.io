@@ -1,18 +1,18 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>You_zip - 柚子</title><meta name="author" content="Youzipii"><meta name="copyright" content="Youzipii"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>You_zip - 柚子</title><meta name="author" content="Youzipii"><meta name="copyright" content="Youzipii"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="You_zip">
 <meta property="og:url" content="http://example.com/page/5/index.html">
 <meta property="og:site_name" content="You_zip">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/foot.ico">
+<meta property="og:image" content="http://example.com/image/bk_image/favtor.ico">
 <meta property="article:author" content="Youzipii">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/foot.ico"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/page/5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="http://example.com/image/bk_image/favtor.ico"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
-  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  localSearch: undefined,
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -23,7 +23,7 @@
     post: false
   },
   runtime: '',
-  date_suffix: {
+  dateSuffix: {
     just: '刚刚',
     min: '分钟前',
     hour: '小时前',
@@ -33,85 +33,96 @@
   copyright: undefined,
   lightbox: 'fancybox',
   Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
-    }
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
   },
   isPhotoFigcaption: false,
   islazyload: false,
-  isAnchor: false
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
   title: 'You_zip',
   isPost: false,
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-08-08 19:13:11'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
+  postUpdate: '2024-08-08 19:53:05'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
         }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
       }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
         document.documentElement.setAttribute('data-theme', 'dark')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
           document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
         }
       }
-      win.activateLightMode = function () {
+      win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
           document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
@@ -119,9 +130,9 @@
       }
       const t = saveToLocal.get('theme')
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
-        
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
       const asideStatus = saveToLocal.get('aside-status')
       if (asideStatus !== undefined) {
         if (asideStatus === 'hide') {
@@ -131,13 +142,13 @@
         }
       }
     
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
       }
-    }
-    detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/foot.ico" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">41</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/wall.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">You_zip</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">You_zip</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/Youzipii" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/03/12/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="MySQL学习笔记">MySQL学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-12T11:23:08.000Z" title="发表于 2023-03-12 19:23:08">2023-03-12</time></span></div><div class="content">连接数据库mysql -u root -p123456 --登陆时密码-p后不能有空格update mysql.user set authentication_string=password(&#x27;123456&#x27;) where user=&#x27;root&#x27; and Host = &#x27;localhost&#x27;; --修改用户密码flush privileges; -- 刷新权限所有语句结尾都是用;结尾show databases; -- 查看所有数据库mysql&gt; use home -- 切换数据库 use 数据库名show tables; -- 查看数据库中所有的表describe student; -- 显示数据库中所有信息
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/image/bk_image/favtor.ico" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">41</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/image/bk_image/bg1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="You_zip"><span class="site-name">You_zip</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">You_zip</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/12/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="MySQL学习笔记">MySQL学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-12T11:23:08.000Z" title="发表于 2023-03-12 19:23:08">2023-03-12</time></span></div><div class="content">连接数据库mysql -u root -p123456 --登陆时密码-p后不能有空格update mysql.user set authentication_string=password(&#x27;123456&#x27;) where user=&#x27;root&#x27; and Host = &#x27;localhost&#x27;; --修改用户密码flush privileges; -- 刷新权限所有语句结尾都是用;结尾show databases; -- 查看所有数据库mysql&gt; use home -- 切换数据库 use 数据库名show tables; -- 查看数据库中所有的表describe student; -- 显示数据库中所有信息
 
 create database westos; -- 创建一个数据库exit; -- 退出连接-- 单行注释(SQL的本来的注释)/*	SQL多行注释123*/	
 
@@ -146,12 +157,12 @@ DDL 定义
 DML 操作
 DQL 查询
 DCL 控制
-操作数据库操作数据库-&gt;操作数据库中的表-&gt ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/03/12/%E7%89%9B%E5%AE%A2%E5%B0%8F%E7%99%BD%E8%B5%9B68%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" title="牛客小白赛68失败经验">牛客小白赛68失败经验</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-12T05:31:39.000Z" title="发表于 2023-03-12 13:31:39">2023-03-12</time></span></div><div class="content">参赛经历本来是去初学者试炼营，偶然点进小白赛，发现参赛的方式不是很复杂，蛮试一下
+操作数据库操作数据库-&gt;操作数据库中的表-&gt ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/12/%E7%89%9B%E5%AE%A2%E5%B0%8F%E7%99%BD%E8%B5%9B68%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" title="牛客小白赛68失败经验">牛客小白赛68失败经验</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-12T05:31:39.000Z" title="发表于 2023-03-12 13:31:39">2023-03-12</time></span></div><div class="content">参赛经历本来是去初学者试炼营，偶然点进小白赛，发现参赛的方式不是很复杂，蛮试一下
 A题Tokitsukaze and New Operation
 我的思路是用模10，除10的方法遍历每位数，再去做，途中也遇到很多问题，相乘小于10，要乘的10的不同次方，在解决种种问题后，自测运行过了
 判断位数是否一致int istrue(int x, int y)&#123;	int countx = 0;	int county = 0;	do	&#123;		x = x / 10;		countx++;	&#125;while (x != 0);	do	&#123;		y = y / 10;		county++;	&#125;while (y != 0);	if (countx == county)		return 1;	else		return 0;&#125;
 
-计算各位数相乘int cacux(int x, int y)&#123;	int count = 0;	int num = x;//注意x的值不能变，引入变量 	do	&#123;		num = num / 10;		count++;	 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/03/11/%E5%AD%A6%E7%94%9F%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/" title="学生基本信息输入输出引发的思考">学生基本信息输入输出引发的思考</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-11T15:17:37.000Z" title="发表于 2023-03-11 23:17:37">2023-03-11</time></span></div><div class="content">BC11 学生基本信息输入描述:依次输入一个学生的学号，以及3科（C语言，数学，英语）成绩，在屏幕上输出该学生的学号，3科成绩（注：输出成绩时需进行四舍五入且保留2位小数）。
+计算各位数相乘int cacux(int x, int y)&#123;	int count = 0;	int num = x;//注意x的值不能变，引入变量 	do	&#123;		num = num / 10;		count++;	 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/11/%E5%AD%A6%E7%94%9F%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/" title="学生基本信息输入输出引发的思考">学生基本信息输入输出引发的思考</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-11T15:17:37.000Z" title="发表于 2023-03-11 23:17:37">2023-03-11</time></span></div><div class="content">BC11 学生基本信息输入描述:依次输入一个学生的学号，以及3科（C语言，数学，英语）成绩，在屏幕上输出该学生的学号，3科成绩（注：输出成绩时需进行四舍五入且保留2位小数）。
 数据范围：学号满足 1≤n≤20000000,各科成绩使用百分制，且不可能出现负数
 输入描述：学号以及3科成绩，学号和成绩之间用英文分号隔开，成绩之间用英文逗号隔开。
 输出描述：学号，3科成绩，输出格式详见输出样例。
@@ -160,7 +171,7 @@ A题Tokitsukaze and New Operation
 
 
 实际上int的取值范围依赖于计算机系统,这里显示的4Byte，说明可以存取的数字范围是-2147483648～2147483647机2^32 ~ 2^32 - 1,所以用int类型就够了。
-剩下的三个数用float即可，但题目又有要求要四舍五入，如果直接用%.2f的形式他会自动四舍 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/03/11/%E4%B8%89%E5%AD%90%E6%A3%8B/" title="三子棋">三子棋</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-11T05:46:45.000Z" title="发表于 2023-03-11 13:46:45">2023-03-11</time></span></div><div class="content">文件#pragma once//符号的定义#define ROW 3#define COL 3#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;#include &lt;time.h&gt;//函数的声明//初始化棋盘void InitBoard(char board[ROW][COL], int row, int col);//打印棋盘void DisplayBoard(char board[ROW][COL],int row,int col);//玩家下棋void PlayerMove(char board[][COL], int row, int col);//电脑下棋void ComputerMove(char board[ROW][COL], int row, int col);//1.玩家赢了-*//2.电脑赢了-#//3.平局-Q//4.游戏继续-C//判断是否赢游戏char IsWin(char board[ROW][COL], int row, int col);//判断是否继续游戏int IsFull(char boa ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/03/09/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="JavaScript学习笔记">JavaScript学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-09T09:01:37.000Z" title="发表于 2023-03-09 17:01:37">2023-03-09</time></span></div><div class="content">JavaScript概述
+剩下的三个数用float即可，但题目又有要求要四舍五入，如果直接用%.2f的形式他会自动四舍 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/11/%E4%B8%89%E5%AD%90%E6%A3%8B/" title="三子棋">三子棋</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-11T05:46:45.000Z" title="发表于 2023-03-11 13:46:45">2023-03-11</time></span></div><div class="content">文件#pragma once//符号的定义#define ROW 3#define COL 3#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;#include &lt;time.h&gt;//函数的声明//初始化棋盘void InitBoard(char board[ROW][COL], int row, int col);//打印棋盘void DisplayBoard(char board[ROW][COL],int row,int col);//玩家下棋void PlayerMove(char board[][COL], int row, int col);//电脑下棋void ComputerMove(char board[ROW][COL], int row, int col);//1.玩家赢了-*//2.电脑赢了-#//3.平局-Q//4.游戏继续-C//判断是否赢游戏char IsWin(char board[ROW][COL], int row, int col);//判断是否继续游戏int IsFull(char boa ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/09/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="JavaScript学习笔记">JavaScript学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-09T09:01:37.000Z" title="发表于 2023-03-09 17:01:37">2023-03-09</time></span></div><div class="content">JavaScript概述
 简称js
 一种脚本语言，脚本语言的特点 java语言是一种脚本语言 JavaScript的目标程序是以普通文本的形式保存，用记事本可以直接打开的
 JavaScript和JScript的关系
@@ -169,15 +180,15 @@ JavaScript和Java的区别 JavaScript运行在浏览器中，浏览器中有JS�
 
 JavaScript 包括三块：ECMAScript、DOM、BOM
 ECMAScript是ECMA制定的262标准，JavaScript和Jscript都遵守这个标准，ECMAScript是JavaScript核心语法
-DOM编程时通过JavaScript对HTML中的dom节点进行操作，DOM时有规范的，DOM规范时W3C制定 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/03/07/CSS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="CSS学习笔记">CSS学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-07T10:14:33.000Z" title="发表于 2023-03-07 18:14:33">2023-03-07</time></span></div><div class="content">承接HTML学习笔记附上动力节点网课视频
-CSS概述和在HTML中嵌入CSS样式的三种方式&lt;!DOCTYPE html&gt;&lt;html&gt;	&lt;head&gt;		&lt;meta charset=&quot;utf-8&quot;&gt;		&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;		&lt;title&gt;CSS概述&lt;/title&gt;	&lt;/head&gt;	&lt;body&gt;		&lt;h1&gt;什么是CSS？&lt;/h1&gt;		&lt;p&gt;			&amp;nbsp;  CSS:Cascading Style Sheet(层叠样式语言).CSS是一种样式表语言。专门用来修饰HTML页面的。让HTML页面更好看。			&lt;br&gt;			&amp;nbsp;  CSS是HTML的化妆品.CSS是离不开HTML的，CSS离开了HTML就没有意义了，所以还是新建HTML文件，编 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/03/05/C%E7%9A%84%E7%AC%94%E8%AE%B0/" title="C的笔记">C的笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-05T07:49:11.000Z" title="发表于 2023-03-05 15:49:11">2023-03-05</time></span></div><div class="content">杨辉三角数组要初始化找规律
-#include &lt;stdio.h&gt;// 1// 1 1// 1 2 1// 1 3 3 1// 1 4 6 4 1int main()&#123;    int arr[10][10] = &#123; 0 &#125;;    int i = 0;    int j = 0;    for (i = 0; i &lt;= 10; i++)    &#123;        for (j = 0; j &lt;= i; j++)        &#123;            //第一列全1            if (j == 0)            &#123;                arr[i][j] = 1;            &#125;            //对角线全1            if (i == j)            &#123;                arr[i][j] = 1;            &#125;            if (i &gt;= 2 &amp;&a ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/03/03/html%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="html学习笔记">html学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-03T02:52:04.000Z" title="发表于 2023-03-03 10:52:04">2023-03-03</time></span></div><div class="content">第一步：安装好要用的编辑器我这里用的是Sublime Text
+DOM编程时通过JavaScript对HTML中的dom节点进行操作，DOM时有规范的，DOM规范时W3C制定 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/07/CSS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="CSS学习笔记">CSS学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-07T10:14:33.000Z" title="发表于 2023-03-07 18:14:33">2023-03-07</time></span></div><div class="content">承接HTML学习笔记附上动力节点网课视频
+CSS概述和在HTML中嵌入CSS样式的三种方式&lt;!DOCTYPE html&gt;&lt;html&gt;	&lt;head&gt;		&lt;meta charset=&quot;utf-8&quot;&gt;		&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;		&lt;title&gt;CSS概述&lt;/title&gt;	&lt;/head&gt;	&lt;body&gt;		&lt;h1&gt;什么是CSS？&lt;/h1&gt;		&lt;p&gt;			&amp;nbsp;  CSS:Cascading Style Sheet(层叠样式语言).CSS是一种样式表语言。专门用来修饰HTML页面的。让HTML页面更好看。			&lt;br&gt;			&amp;nbsp;  CSS是HTML的化妆品.CSS是离不开HTML的，CSS离开了HTML就没有意义了，所以还是新建HTML文件，编 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/05/C%E7%9A%84%E7%AC%94%E8%AE%B0/" title="C的笔记">C的笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-05T07:49:11.000Z" title="发表于 2023-03-05 15:49:11">2023-03-05</time></span></div><div class="content">杨辉三角数组要初始化找规律
+#include &lt;stdio.h&gt;// 1// 1 1// 1 2 1// 1 3 3 1// 1 4 6 4 1int main()&#123;    int arr[10][10] = &#123; 0 &#125;;    int i = 0;    int j = 0;    for (i = 0; i &lt;= 10; i++)    &#123;        for (j = 0; j &lt;= i; j++)        &#123;            //第一列全1            if (j == 0)            &#123;                arr[i][j] = 1;            &#125;            //对角线全1            if (i == j)            &#123;                arr[i][j] = 1;            &#125;            if (i &gt;= 2 &amp;&a ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/03/html%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="html学习笔记">html学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-03T02:52:04.000Z" title="发表于 2023-03-03 10:52:04">2023-03-03</time></span></div><div class="content">第一步：安装好要用的编辑器我这里用的是Sublime Text
 我自己看的学习视频 HTML学习视频。
 第二步：新建HTML文件在用Sublime Text编写html文件时会自动补全.
 我的第一个HTML&lt;!--	1、这是HTML的注释		2、支持多行注释	3、不区分大小写，语法松散不严格	4、但最好还是按结构写--&gt;&lt;!doctype html&gt; &lt;!--加上这句话就是H5，去掉则是H4.0--&gt;&lt;!--根--&gt;&lt;html&gt;		 &lt;!--头部--&gt;   &lt;!--注意缩进--&gt;	&lt;head&gt;		&lt;title&gt;网页的标题&lt;/title&gt; &lt;!--显示在标签页一栏--&gt;	&lt;/head&gt;	&lt;body&gt; &lt;!--主体--&gt;		网页的主体内容,和老杜学习HTML	&lt;/body&gt;&lt;/html&gt; &lt;!--大小写无所谓--&gt;
 
-基本标签&lt;!DOCTYPE html&gt;&lt;html&gt ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/10/16/%E4%B8%80%E9%81%93%E7%A7%AF%E5%88%86%E7%AC%94%E8%AE%B0/" title="一道积分笔记">一道积分笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-16T15:11:36.000Z" title="发表于 2022-10-16 23:11:36">2022-10-16</time></span></div><div class="content">忘记加绝对值
-</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/10/15/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="我的第一篇文章">我的第一篇文章</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-15T01:50:28.000Z" title="发表于 2022-10-15 09:50:28">2022-10-15</time></span></div><div class="content">以一道数学题开始我的发文废话不多说，直接上题
+基本标签&lt;!DOCTYPE html&gt;&lt;html&gt ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/10/16/%E4%B8%80%E9%81%93%E7%A7%AF%E5%88%86%E7%AC%94%E8%AE%B0/" title="一道积分笔记">一道积分笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-16T15:11:36.000Z" title="发表于 2022-10-16 23:11:36">2022-10-16</time></span></div><div class="content">忘记加绝对值
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/10/15/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="我的第一篇文章">我的第一篇文章</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-15T01:50:28.000Z" title="发表于 2022-10-15 09:50:28">2022-10-15</time></span></div><div class="content">以一道数学题开始我的发文废话不多说，直接上题
  &emsp; 其中区域D由直线x + y = 1 与两坐标轴所围成得三角形区域。
 
 解:　　这题的式子较为复杂，直接求解可能计算量偏大，进而考虑其它方法，首先考虑换元法.　　不妨设：
@@ -210,16 +221,5 @@ CSS概述和在HTML中嵌入CSS样式的三种方式&lt;!DOCTYPE html&gt;&lt;htm
 
 
 感谢观看
-参考文章:数学背景知识补充——雅可比矩阵 by Tiger全国大学生数学竞赛历年 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/4/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#content-inner">6</a><a class="extend next" rel="next" href="/page/6/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/foot.ico" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Youzipii</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">41</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Youzipii"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Youzipii" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Practice makes perfect.</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/07/xxl-job/" title="xxl-job">xxl-job</a><time datetime="2024-08-07T14:27:56.000Z" title="发表于 2024-08-07 22:27:56">2024-08-07</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/07/Maven%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="Maven环境配置">Maven环境配置</a><time datetime="2024-08-07T14:27:40.000Z" title="发表于 2024-08-07 22:27:40">2024-08-07</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/06/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E5%9C%BA-zgsf-web1/" title="应急响应靶场-zgsf-web1">应急响应靶场-zgsf-web1</a><time datetime="2024-08-06T04:36:01.000Z" title="发表于 2024-08-06 12:36:01">2024-08-06</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/04/OSCP-005-Broken/" title="OSCP-005-Broken">OSCP-005-Broken</a><time datetime="2024-08-04T07:57:08.000Z" title="发表于 2024-08-04 15:57:08">2024-08-04</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2024/08/01/OSCP-004-Matrix/" title="OSCP-004-Matrix">OSCP-004-Matrix</a><time datetime="2024-08-01T12:21:41.000Z" title="发表于 2024-08-01 20:21:41">2024-08-01</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C</a> <a href="/tags/HTML/" style="font-size: 1.23em; color: #999ea6">HTML</a> <a href="/tags/JS/" style="font-size: 1.1em; color: #999">JS</a> <a href="/tags/Java/" style="font-size: 1.1em; color: #999">Java</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/OJ/" style="font-size: 1.1em; color: #999">OJ</a> <a href="/tags/OSCP/" style="font-size: 1.37em; color: #99a4b2">OSCP</a> <a href="/tags/SQL/" style="font-size: 1.1em; color: #999">SQL</a> <a href="/tags/bash/" style="font-size: 1.1em; color: #999">bash</a> <a href="/tags/docker/" style="font-size: 1.1em; color: #999">docker</a> <a href="/tags/iptables/" style="font-size: 1.1em; color: #999">iptables</a> <a href="/tags/linux/" style="font-size: 1.1em; color: #999">linux</a> <a href="/tags/maven/" style="font-size: 1.1em; color: #999">maven</a> <a href="/tags/ms17-010/" style="font-size: 1.1em; color: #999">ms17_010</a> <a href="/tags/msf/" style="font-size: 1.1em; color: #999">msf</a> <a href="/tags/note/" style="font-size: 1.1em; color: #999">note</a> <a href="/tags/php/" style="font-size: 1.1em; color: #999">php</a> <a href="/tags/pthon/" style="font-size: 1.1em; color: #999">pthon</a> <a href="/tags/shell/" style="font-size: 1.1em; color: #999">shell</a> <a href="/tags/sql/" style="font-size: 1.1em; color: #999">sql</a> <a href="/tags/strings/" style="font-size: 1.1em; color: #999">strings</a> <a href="/tags/tcpdump/" style="font-size: 1.1em; color: #999">tcpdump</a> <a href="/tags/tools/" style="font-size: 1.1em; color: #999">tools</a> <a href="/tags/udf%E6%8F%90%E6%9D%83/" style="font-size: 1.1em; color: #999">udf提权</a> <a href="/tags/vulhub/" style="font-size: 1.1em; color: #999">vulhub</a> <a href="/tags/weblogic/" style="font-size: 1.1em; color: #999">weblogic</a> <a href="/tags/xxl-job/" style="font-size: 1.1em; color: #999">xxl-job</a> <a href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 1.1em; color: #999">反序列化</a> <a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 1.1em; color: #999">命令</a> <a href="/tags/%E5%A5%87%E6%80%9D%E5%A6%99%E6%83%B3/" style="font-size: 1.1em; color: #999">奇思妙想</a> <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" style="font-size: 1.1em; color: #999">应急响应</a> <a href="/tags/%E6%8E%92%E6%9F%A5/" style="font-size: 1.1em; color: #999">排查</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 1.1em; color: #999">数学建模</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E7%AB%9E%E8%B5%9B/" style="font-size: 1.1em; color: #999">数学竞赛</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 1.1em; color: #999">爬虫</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 1.1em; color: #999">环境</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 1.1em; color: #999">环境配置</a> <a href="/tags/%E7%9F%AD%E9%93%BE%E6%8E%A5%E8%BF%98%E5%8E%9F/" style="font-size: 1.1em; color: #999">短链接还原</a> <a href="/tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/" style="font-size: 1.1em; color: #999">缓冲区溢出</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">51</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-08-08T11:13:10.809Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By Youzipii</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
-  endLoading: () => {
-    document.body.style.overflow = 'auto';
-    document.getElementById('loading-box').classList.add("loaded")
-  },
-  initLoading: () => {
-    document.body.style.overflow = '';
-    document.getElementById('loading-box').classList.remove("loaded")
-
-  }
-}
-window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+参考文章:数学背景知识补充——雅可比矩阵 by Tiger全国大学生数学竞赛历年 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/4/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#content-inner">6</a><a class="extend next" rel="next" href="/page/6/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/image/bk_image/favtor.ico" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Youzipii</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">41</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/07/xxl-job/" title="xxl-job">xxl-job</a><time datetime="2024-08-07T14:27:56.000Z" title="发表于 2024-08-07 22:27:56">2024-08-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/07/Maven%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="Maven环境配置">Maven环境配置</a><time datetime="2024-08-07T14:27:40.000Z" title="发表于 2024-08-07 22:27:40">2024-08-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/06/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E5%9C%BA-zgsf-web1/" title="应急响应靶场-zgsf-web1">应急响应靶场-zgsf-web1</a><time datetime="2024-08-06T04:36:01.000Z" title="发表于 2024-08-06 12:36:01">2024-08-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/04/OSCP-005-Broken/" title="OSCP-005-Broken">OSCP-005-Broken</a><time datetime="2024-08-04T07:57:08.000Z" title="发表于 2024-08-04 15:57:08">2024-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/01/OSCP-004-Matrix/" title="OSCP-004-Matrix">OSCP-004-Matrix</a><time datetime="2024-08-01T12:21:41.000Z" title="发表于 2024-08-01 20:21:41">2024-08-01</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/php/" style="font-size: 1.1em; color: #999">php</a> <a href="/tags/linux/" style="font-size: 1.1em; color: #999">linux</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 1.1em; color: #999">环境</a> <a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 1.1em; color: #999">命令</a> <a href="/tags/JS/" style="font-size: 1.1em; color: #999">JS</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 1.1em; color: #999">环境配置</a> <a href="/tags/maven/" style="font-size: 1.1em; color: #999">maven</a> <a href="/tags/ms17-010/" style="font-size: 1.1em; color: #999">ms17_010</a> <a href="/tags/xxl-job/" style="font-size: 1.1em; color: #999">xxl-job</a> <a href="/tags/HTML/" style="font-size: 1.2em; color: #999da3">HTML</a> <a href="/tags/sql/" style="font-size: 1.1em; color: #999">sql</a> <a href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 1.1em; color: #999">反序列化</a> <a href="/tags/OJ/" style="font-size: 1.1em; color: #999">OJ</a> <a href="/tags/%E9%9D%B6%E5%9C%BA/" style="font-size: 1.4em; color: #99a5b6">靶场</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C</a> <a href="/tags/docker/" style="font-size: 1.1em; color: #999">docker</a> <a href="/tags/%E6%8E%92%E6%9F%A5/" style="font-size: 1.1em; color: #999">排查</a> <a href="/tags/OSCP/" style="font-size: 1.3em; color: #99a1ac">OSCP</a> <a href="/tags/tcpdump/" style="font-size: 1.1em; color: #999">tcpdump</a> <a href="/tags/udf%E6%8F%90%E6%9D%83/" style="font-size: 1.1em; color: #999">udf提权</a> <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" style="font-size: 1.1em; color: #999">应急响应</a> <a href="/tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/" style="font-size: 1.1em; color: #999">缓冲区溢出</a> <a href="/tags/weblogic/" style="font-size: 1.1em; color: #999">weblogic</a> <a href="/tags/pthon/" style="font-size: 1.1em; color: #999">pthon</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/tags/iptables/" style="font-size: 1.1em; color: #999">iptables</a> <a href="/tags/strings/" style="font-size: 1.1em; color: #999">strings</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 1.1em; color: #999">数学建模</a> <a href="/tags/note/" style="font-size: 1.1em; color: #999">note</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E7%AB%9E%E8%B5%9B/" style="font-size: 1.1em; color: #999">数学竞赛</a> <a href="/tags/msf/" style="font-size: 1.1em; color: #999">msf</a> <a href="/tags/shell/" style="font-size: 1.1em; color: #999">shell</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 1.1em; color: #999">爬虫</a> <a href="/tags/Java/" style="font-size: 1.1em; color: #999">Java</a> <a href="/tags/SQL/" style="font-size: 1.1em; color: #999">SQL</a> <a href="/tags/bash/" style="font-size: 1.1em; color: #999">bash</a> <a href="/tags/%E5%A5%87%E6%80%9D%E5%A6%99%E6%83%B3/" style="font-size: 1.1em; color: #999">奇思妙想</a> <a href="/tags/vulhub/" style="font-size: 1.1em; color: #999">vulhub</a> <a href="/tags/%E7%9F%AD%E9%93%BE%E6%8E%A5%E8%BF%98%E5%8E%9F/" style="font-size: 1.1em; color: #999">短链接还原</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">51</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-08-08T11:53:04.541Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Youzipii</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
