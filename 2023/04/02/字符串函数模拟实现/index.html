@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>字符串函数模拟实现 | You_zip</title><meta name="author" content="Youzipii"><meta name="copyright" content="Youzipii"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="size_t strlen(const char* str)求字符串长度#include &lt;stdio.h&gt;#include &lt;assert.h&gt;&#x2F;&#x2F;1.计数器版本int my_strlen(const char* str)&amp;#123;	int count &#x3D; 0;	assert(str !&#x3D; NULL);	while (*str !&#x3D; &amp;#x27;\0&amp;#x27;) &amp;#">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>字符串函数模拟实现 | You_zip</title><meta name="author" content="Youzipii"><meta name="copyright" content="Youzipii"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="size_t strlen(const char* str)求字符串长度#include &lt;stdio.h&gt; #include &lt;assert.h&gt; &#x2F;&#x2F;1.计数器版本 int my_strlen(const char* str) &amp;#123;     int count &#x3D; 0;     assert(str !&#x3D; NULL);     while (*str !&#x3D; &amp;#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="字符串函数模拟实现">
 <meta property="og:url" content="http://example.com/2023/04/02/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="You_zip">
-<meta property="og:description" content="size_t strlen(const char* str)求字符串长度#include &lt;stdio.h&gt;#include &lt;assert.h&gt;&#x2F;&#x2F;1.计数器版本int my_strlen(const char* str)&amp;#123;	int count &#x3D; 0;	assert(str !&#x3D; NULL);	while (*str !&#x3D; &amp;#x27;\0&amp;#x27;) &amp;#">
+<meta property="og:description" content="size_t strlen(const char* str)求字符串长度#include &lt;stdio.h&gt; #include &lt;assert.h&gt; &#x2F;&#x2F;1.计数器版本 int my_strlen(const char* str) &amp;#123;     int count &#x3D; 0;     assert(str !&#x3D; NULL);     while (*str !&#x3D; &amp;#">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png">
 <meta property="article:published_time" content="2023-04-02T13:28:19.000Z">
@@ -17,7 +17,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: undefined,
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -153,31 +153,142 @@
         }
       }
       detectApple()
-    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/image/bk_image/bg3.png')"><nav id="nav"><span id="blog-info"><a href="/" title="You_zip"><span class="site-name">You_zip</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">字符串函数模拟实现</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-02T13:28:19.000Z" title="发表于 2023-04-02 21:28:19">2023-04-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-08T08:07:33.846Z" title="更新于 2024-08-08 16:07:33">2024-08-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="字符串函数模拟实现"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="size-t-strlen-const-char-str-求字符串长度"><a href="#size-t-strlen-const-char-str-求字符串长度" class="headerlink" title="size_t strlen(const char* str)求字符串长度"></a>size_t strlen(const char* str)求字符串长度</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="comment">//1.计数器版本</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">my_strlen</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* str)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">	assert(str != <span class="literal">NULL</span>);</span><br><span class="line">	<span class="keyword">while</span> (*str != <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">		count++;</span><br><span class="line">		str++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">char</span> arr[] = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">	<span class="type">int</span> len = my_strlen(arr);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, len);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/image/bk_image/bg3.png')"><nav id="nav"><span id="blog-info"><a href="/" title="You_zip"><span class="site-name">You_zip</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">字符串函数模拟实现</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-02T13:28:19.000Z" title="发表于 2023-04-02 21:28:19">2023-04-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-08T08:07:33.846Z" title="更新于 2024-08-08 16:07:33">2024-08-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="字符串函数模拟实现"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="size-t-strlen-const-char-str-求字符串长度"><a href="#size-t-strlen-const-char-str-求字符串长度" class="headerlink" title="size_t strlen(const char* str)求字符串长度"></a>size_t strlen(const char* str)求字符串长度</h1><pre><code class="C">#include &lt;stdio.h&gt;
+#include &lt;assert.h&gt;
+//1.计数器版本
+int my_strlen(const char* str)
+&#123;
+    int count = 0;
+    assert(str != NULL);
+    while (*str != &#39;\0&#39;) &#123;
+        count++;
+        str++;
+    &#125;
+    return count;
+&#125;
+int main()
+&#123;
+    char arr[] = &quot;abc&quot;;
+    int len = my_strlen(arr);
+    printf(&quot;%d&quot;, len);
+    return 0;
+&#125;
+</code></pre>
 <ol>
 <li>字符串已经以’\0’作为结束标志，strlen函数返回的是在字符串中’\0’前面出现的字符个数（不包含’\0’）。–{‘a’,’b’}不可以</li>
 <li>参数指向的字符串必须要以’\0’结束</li>
 <li>函数的返回值是size_t，是无符号的</li>
 </ol>
-<h1 id="char-strcpy-char-destination-const-char-source-拷贝字符串"><a href="#char-strcpy-char-destination-const-char-source-拷贝字符串" class="headerlink" title="char* strcpy(char* destination, const char* source)拷贝字符串"></a>char* strcpy(char* destination, const char* source)拷贝字符串</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="comment">//str1 -- destination</span></span><br><span class="line"><span class="comment">//str2 -- source</span></span><br><span class="line"><span class="type">char</span>* <span class="title function_">my_strcpy</span><span class="params">(<span class="type">char</span>* str1,<span class="type">const</span> <span class="type">char</span>* str2)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (*str2 != <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">		*(str1 + i) = *str2;</span><br><span class="line">		str2++;</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line">	*(str1 + i) = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">	<span class="keyword">return</span> str1;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">char</span> arr[<span class="number">20</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="type">char</span>* p = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">	my_strcpy(arr, p);</span><br><span class="line">	<span class="built_in">puts</span>(arr);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="char-strcpy-char-destination-const-char-source-拷贝字符串"><a href="#char-strcpy-char-destination-const-char-source-拷贝字符串" class="headerlink" title="char* strcpy(char* destination, const char* source)拷贝字符串"></a>char* strcpy(char* destination, const char* source)拷贝字符串</h1><pre><code class="C">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+//str1 -- destination
+//str2 -- source
+char* my_strcpy(char* str1,const char* str2)
+&#123;
+    int i = 0;
+    while (*str2 != &#39;\0&#39;) &#123;
+        *(str1 + i) = *str2;
+        str2++;
+        i++;
+    &#125;
+    *(str1 + i) = &#39;\0&#39;;
+    return str1;
 
+&#125;
+int main()
+&#123;
+    char arr[20] = &#123; 0 &#125;;
+    char* p = &quot;hello&quot;;
+    my_strcpy(arr, p);
+    puts(arr);
+    return 0;
+&#125;
+</code></pre>
 <ol>
 <li>源字符串必须要以’\0’结束</li>
 <li>会将源字符串中的’\0’拷贝到目标空间</li>
 <li>目标空间必须足够大，以确保能存放源字符串</li>
 <li>目标空间必须可变（不可以是char* str &#x3D; “#####”）</li>
 </ol>
-<h1 id="char-strcat-char-destination-const-char-source-字符串追加"><a href="#char-strcat-char-destination-const-char-source-字符串追加" class="headerlink" title="char* strcat(char* destination, const char* source)字符串追加"></a>char* strcat(char* destination, const char* source)字符串追加</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> _CRT_SECURE_NO_WARNINGS 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="type">void</span>* <span class="title function_">my_strcat</span><span class="params">(<span class="type">char</span>* dest, <span class="type">const</span> <span class="type">char</span>* src)</span></span><br><span class="line">&#123;</span><br><span class="line">	assert(dest &amp;&amp; src);</span><br><span class="line">	<span class="comment">//1.找目标字符串中得\0</span></span><br><span class="line">	<span class="keyword">while</span> (*dest) &#123;</span><br><span class="line">		dest++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//2.追加源字符串，连\0一起</span></span><br><span class="line">	<span class="keyword">while</span> (*dest++ = *src++) &#123;</span><br><span class="line">		;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">char</span> arr[<span class="number">20</span>] = <span class="string">&quot;hello &quot;</span>;<span class="comment">//world!</span></span><br><span class="line">	<span class="type">char</span> arr2[] = <span class="string">&quot;world!&quot;</span>;<span class="comment">//传数组名也可以</span></span><br><span class="line">	<span class="comment">//strcat(arr, arr2);</span></span><br><span class="line">	my_strcat(arr,<span class="string">&quot;world!&quot;</span>);<span class="comment">//字符串追加（连接）</span></span><br><span class="line">	<span class="built_in">puts</span>(arr);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 如果需要返回类型为char*</span></span><br><span class="line"><span class="comment">char* my_strcat(char* dest, const char* src)</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">	char* ret = dest;</span></span><br><span class="line"><span class="comment">	assert(dest &amp;&amp; src);</span></span><br><span class="line"><span class="comment">	//1.找目标字符串中得\0</span></span><br><span class="line"><span class="comment">	while (*dest) &#123;</span></span><br><span class="line"><span class="comment">		dest++;</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">	//2.追加源字符串，连\0一起</span></span><br><span class="line"><span class="comment">	while (*dest++ = *src++) &#123;</span></span><br><span class="line"><span class="comment">		;</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">	return ret;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
+<h1 id="char-strcat-char-destination-const-char-source-字符串追加"><a href="#char-strcat-char-destination-const-char-source-字符串追加" class="headerlink" title="char* strcat(char* destination, const char* source)字符串追加"></a>char* strcat(char* destination, const char* source)字符串追加</h1><pre><code class="C">#define _CRT_SECURE_NO_WARNINGS 1
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+void* my_strcat(char* dest, const char* src)
+&#123;
+    assert(dest &amp;&amp; src);
+    //1.找目标字符串中得\0
+    while (*dest) &#123;
+        dest++;
+    &#125;
+    //2.追加源字符串，连\0一起
+    while (*dest++ = *src++) &#123;
+        ;
+    &#125;
+&#125;
+int main()
+&#123;
+    char arr[20] = &quot;hello &quot;;//world!
+    char arr2[] = &quot;world!&quot;;//传数组名也可以
+    //strcat(arr, arr2);
+    my_strcat(arr,&quot;world!&quot;);//字符串追加（连接）
+    puts(arr);
+    return 0;
+&#125;
+/* 如果需要返回类型为char*
+char* my_strcat(char* dest, const char* src)
+&#123;
+    char* ret = dest;
+    assert(dest &amp;&amp; src);
+    //1.找目标字符串中得\0
+    while (*dest) &#123;
+        dest++;
+    &#125;
+    //2.追加源字符串，连\0一起
+    while (*dest++ = *src++) &#123;
+        ;
+    &#125;
+    return ret;
+&#125;
+*/
+</code></pre>
 <ol>
 <li>源字符串必须以’\0’结束</li>
 <li>目标空间必须足够大。</li>
 <li>目标空间必须可以修改</li>
 <li>但不能自己给自己追加</li>
 </ol>
-<h1 id="int-strcmp-const-char-str1-const-char-str2"><a href="#int-strcmp-const-char-str1-const-char-str2" class="headerlink" title="int strcmp(const char* str1, const char* str2)"></a>int strcmp(const char* str1, const char* str2)</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> _CRT_SECURE_NO_WARNINGS 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">my_strcmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* str1, <span class="type">const</span> <span class="type">char</span>* str2)</span></span><br><span class="line">&#123;</span><br><span class="line">	assert(str1);</span><br><span class="line">	assert(str2);</span><br><span class="line">	<span class="keyword">while</span> (*str1 == *str2)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (*str1 == <span class="string">&#x27;\0&#x27;</span> || *str2 == <span class="string">&#x27;\0&#x27;</span>) </span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		str1++;</span><br><span class="line">		str2++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>  *str1 - *str2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">char</span>* p = <span class="string">&quot;obcb&quot;</span>;</span><br><span class="line">	<span class="type">char</span>* q = <span class="string">&quot;obca&quot;</span>;</span><br><span class="line">	<span class="type">int</span> ret = my_strcmp(p, q);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, ret);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="int-strcmp-const-char-str1-const-char-str2"><a href="#int-strcmp-const-char-str1-const-char-str2" class="headerlink" title="int strcmp(const char* str1, const char* str2)"></a>int strcmp(const char* str1, const char* str2)</h1><pre><code class="C">#define _CRT_SECURE_NO_WARNINGS 1
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+int my_strcmp(const char* str1, const char* str2)
+&#123;
+    assert(str1);
+    assert(str2);
+    while (*str1 == *str2)
+    &#123;
+        if (*str1 == &#39;\0&#39; || *str2 == &#39;\0&#39;) 
+        &#123;
+            break;
+        &#125;
 
+        str1++;
+        str2++;
+    &#125;
+    return  *str1 - *str2;
+&#125;
+
+int main()
+&#123;
+    char* p = &quot;obcb&quot;;
+    char* q = &quot;obca&quot;;
+    int ret = my_strcmp(p, q);
+    printf(&quot;%d&quot;, ret);
+    return 0;
+&#125;
+</code></pre>
 <ol>
 <li>第一个字符串大于第二个字符串，则返回大于0得数字</li>
 <li>等于，则返回0</li>
@@ -185,11 +296,79 @@
 </ol>
 <p><em>strcpy strcat strcmp 长度不受限制的字符串函数</em></p>
 <p><em>strncpy strncay strncmp 长度受限制的字符串，可以控制参与变化的字符串中的字符个数</em></p>
-<h1 id="char-strstr-char-str1-const-char-str2"><a href="#char-strstr-char-str1-const-char-str2" class="headerlink" title="char * strstr (       char * str1, const char * str2 );"></a>char * strstr (       char * str1, const char * str2 );</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> _CRT_SECURE_NO_WARNINGS 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span>* <span class="title function_">my_strstr</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* str1, <span class="type">const</span> <span class="type">char</span>* str2)</span></span><br><span class="line">&#123;</span><br><span class="line">	assert(str1 &amp;&amp; str2);</span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>* s1 = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>* s2 = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>* cp = str1;</span><br><span class="line">	<span class="keyword">if</span> (*str2 == <span class="string">&#x27;\0&#x27;</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> (<span class="type">char</span>*)str1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (*cp)</span><br><span class="line">	&#123;</span><br><span class="line">		s1 = cp;</span><br><span class="line">		s2 = str2;</span><br><span class="line">		<span class="keyword">while</span> (*s1 &amp;&amp; *s2 &amp;&amp; (*s1 == *s2))</span><br><span class="line">		&#123;</span><br><span class="line">			s1++;</span><br><span class="line">			s2++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (*s2 == <span class="string">&#x27;\0&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> (<span class="type">char</span>*)cp;</span><br><span class="line">		&#125;</span><br><span class="line">		cp++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">char</span> arr1[] = <span class="string">&quot;abcdefabcdef&quot;</span>;</span><br><span class="line">	<span class="type">char</span> arr2[] = <span class="string">&quot;bcd&quot;</span>;</span><br><span class="line">	<span class="comment">//在arr1中查找arr2</span></span><br><span class="line">	<span class="type">char</span>* ret = my_strstr(arr1, arr2);</span><br><span class="line">	<span class="keyword">if</span> (ret == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;没找到\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;找到了:%s\n&quot;</span>, ret);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="char-strstr-char-str1-const-char-str2"><a href="#char-strstr-char-str1-const-char-str2" class="headerlink" title="char * strstr (       char * str1, const char * str2 );"></a>char * strstr (       char * str1, const char * str2 );</h1><pre><code class="C">#define _CRT_SECURE_NO_WARNINGS 1
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
 
-<h1 id="char-strtok-char-str-const-char-delimiters-字符串切割函数"><a href="#char-strtok-char-str-const-char-delimiters-字符串切割函数" class="headerlink" title="char * strtok ( char * str, const char * delimiters );字符串切割函数"></a>char * strtok ( char * str, const char * delimiters );字符串切割函数</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="comment">//用法</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">char</span> arr1[] = <span class="string">&quot;123@bcda.com&quot;</span>;</span><br><span class="line">	<span class="type">char</span>* p = <span class="string">&quot;@.&quot;</span>;</span><br><span class="line">	<span class="type">char</span> tmp[<span class="number">20</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="type">char</span>* ret = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">for</span> (ret = strtok(arr1, p); ret != <span class="literal">NULL</span>;ret=strtok(<span class="literal">NULL</span>,p))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">puts</span>(ret);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+char* my_strstr(const char* str1, const char* str2)
+&#123;
+    assert(str1 &amp;&amp; str2);
+    const char* s1 = NULL;
+    const char* s2 = NULL;
+    const char* cp = str1;
+    if (*str2 == &#39;\0&#39;)
+    &#123;
+        return (char*)str1;
+    &#125;
 
+    while (*cp)
+    &#123;
+        s1 = cp;
+        s2 = str2;
+        while (*s1 &amp;&amp; *s2 &amp;&amp; (*s1 == *s2))
+        &#123;
+            s1++;
+            s2++;
+        &#125;
+        if (*s2 == &#39;\0&#39;)
+        &#123;
+            return (char*)cp;
+        &#125;
+        cp++;
+    &#125;
+    return NULL;
+
+
+&#125;
+
+int main()
+&#123;
+    char arr1[] = &quot;abcdefabcdef&quot;;
+    char arr2[] = &quot;bcd&quot;;
+    //在arr1中查找arr2
+    char* ret = my_strstr(arr1, arr2);
+    if (ret == NULL)
+    &#123;
+        printf(&quot;没找到\n&quot;);
+    &#125;
+    else
+    &#123;
+        printf(&quot;找到了:%s\n&quot;, ret);
+    &#125;
+
+    return 0;
+&#125;
+</code></pre>
+<h1 id="char-strtok-char-str-const-char-delimiters-字符串切割函数"><a href="#char-strtok-char-str-const-char-delimiters-字符串切割函数" class="headerlink" title="char * strtok ( char * str, const char * delimiters );字符串切割函数"></a>char * strtok ( char * str, const char * delimiters );字符串切割函数</h1><pre><code class="C">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+//用法
+int main()
+&#123;
+    char arr1[] = &quot;123@bcda.com&quot;;
+    char* p = &quot;@.&quot;;
+    char tmp[20] = &#123; 0 &#125;;
+    char* ret = NULL;
+    for (ret = strtok(arr1, p); ret != NULL;ret=strtok(NULL,p))
+    &#123;
+        puts(ret);
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<pre><code class="C">
+</code></pre>
 <ol>
 <li>sep参数是个字符串，定义了用作分隔符的字符集合</li>
 <li>第一个参数指定一个字符串，它包含了0个或者多个又sep字符串中一个或者多个分隔符分割的标记。</li>
@@ -198,10 +377,49 @@
 <li>strtok函数的第一个参数为NULL，函数将在同一个字符串中被保存的位置开始，朝朝下一个标记。</li>
 <li>如果字符串中不存在更多的标记，则返回NULL指针</li>
 </ol>
-<h1 id="char-strerror-int-errnum-返回错误码，所对应的错误信息"><a href="#char-strerror-int-errnum-返回错误码，所对应的错误信息" class="headerlink" title="char* strerror(int errnum)返回错误码，所对应的错误信息"></a>char* strerror(int errnum)返回错误码，所对应的错误信息</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> _CRT_SECURE_NO_WARNINGS 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="comment">//使用库函数的时候可能失败</span></span><br><span class="line"><span class="comment">//会设置错误代码</span></span><br><span class="line"><span class="comment">//int errno;//5</span></span><br><span class="line"><span class="comment">//C语言已经设置好了</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, strerror(<span class="number">0</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, strerror(<span class="number">1</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, strerror(<span class="number">2</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, strerror(<span class="number">3</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, strerror(<span class="number">4</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="char-strerror-int-errnum-返回错误码，所对应的错误信息"><a href="#char-strerror-int-errnum-返回错误码，所对应的错误信息" class="headerlink" title="char* strerror(int errnum)返回错误码，所对应的错误信息"></a>char* strerror(int errnum)返回错误码，所对应的错误信息</h1><pre><code class="C">#define _CRT_SECURE_NO_WARNINGS 1
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+//使用库函数的时候可能失败
+//会设置错误代码
+//int errno;//5
+//C语言已经设置好了
+int main()
+&#123;
+    printf(&quot;%s\n&quot;, strerror(0));
+    printf(&quot;%s\n&quot;, strerror(1));
+    printf(&quot;%s\n&quot;, strerror(2));
+    printf(&quot;%s\n&quot;, strerror(3));
+    printf(&quot;%s\n&quot;, strerror(4));
+    return 0;
+&#125;
+</code></pre>
 <p><img src="https://s2.loli.net/2023/04/06/ZPfVjiLTNgBovMH.png" alt="image.png"></p>
 <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>比如在打开不存在的文件时，会报错，错误码会记录信息，可以通过这个函数打印出信息，errno是c语言定义好的全局变量，用的时候要包含头文件errno.h</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> _CRT_SECURE_NO_WARNINGS 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="comment">//使用库函数的时候可能失败</span></span><br><span class="line"><span class="comment">//会设置错误代码</span></span><br><span class="line"><span class="comment">//int errno;//5</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	FILE* pf = fopen(<span class="string">&quot;aszxc.txt&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span> (pf == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, strerror(errno));</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	fclose(pf);</span><br><span class="line">	pf = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="C">#define _CRT_SECURE_NO_WARNINGS 1
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+//使用库函数的时候可能失败
+//会设置错误代码
+//int errno;//5
+//
+
+int main()
+&#123;
+    FILE* pf = fopen(&quot;aszxc.txt&quot;, &quot;r&quot;);
+    if (pf == NULL)
+    &#123;
+        printf(&quot;%s\n&quot;, strerror(errno));
+        return 1;
+    &#125;
+    fclose(pf);
+    pf = NULL;
+    return 0;
+&#125;
+
+</code></pre>
 <p><img src="https://s2.loli.net/2023/04/06/pEcQfHUOTn9LNkt.png" alt="image.png"></p>
 <h1 id="perror-char-str-直接打印错误信息"><a href="#perror-char-str-直接打印错误信息" class="headerlink" title="perror(char* str)直接打印错误信息"></a>perror(char* str)直接打印错误信息</h1><ol>
 <li>首先把错误码转化为错误信息</li>

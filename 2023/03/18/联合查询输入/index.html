@@ -17,7 +17,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: undefined,
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -163,11 +163,11 @@
 <p>注：加号’+’在URL中有特殊含义，因此在需要对其进行URL编码为%2b</p>
 <h2 id="2-判断是整型注入还是字符型注入"><a href="#2-判断是整型注入还是字符型注入" class="headerlink" title="2.判断是整型注入还是字符型注入"></a>2.判断是整型注入还是字符型注入</h2><p>数字型与字符型的最大区别在于：<br>    数字类型不需要引号闭合，而字符类型需要使用引号闭合。</p>
 <p>数字型：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="SQL">select * from table where id = 1;
+</code></pre>
 <p>字符型:</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> username <span class="operator">=</span> <span class="string">&#x27;admin&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="SQL">select * from table where username = &#39;admin&#39;;
+</code></pre>
 <h2 id="3-根据不同的分类进行注入"><a href="#3-根据不同的分类进行注入" class="headerlink" title="3.根据不同的分类进行注入"></a>3.根据不同的分类进行注入</h2><p>根据SQL注入语法分类：</p>
 <ul>
 <li>UNION query SQL injection(可联合查询注入)</li>
@@ -187,18 +187,20 @@
 <p>order by 20</p>
 <p>order by 10</p>
 <h3 id="3-3-获取所有数据库名"><a href="#3-3-获取所有数据库名" class="headerlink" title="3.3 获取所有数据库名"></a>3.3 获取所有数据库名</h3><p>group_concat()一次性显示：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> group_concat(SCHEMA_NAME) <span class="keyword">from</span> information_schema.SCHEMATA</span><br></pre></td></tr></table></figure>
+<pre><code class="SQL">select group_concat(SCHEMA_NAME) from information_schema.SCHEMATA
+</code></pre>
 <p>limit逐一显示：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(SCHEMA_NAME) <span class="keyword">FROM</span> information_schema.schemata #查询数据库个数</span><br><span class="line"><span class="keyword">select</span> SCHEMA_NAME <span class="keyword">from</span> information_schema.SCHEMATA limit <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="SQL">select count(SCHEMA_NAME) FROM information_schema.schemata #查询数据库个数
+select SCHEMA_NAME from information_schema.SCHEMATA limit 0,1
+</code></pre>
 <h3 id="3-4-获取数据库-test-所有表名"><a href="#3-4-获取数据库-test-所有表名" class="headerlink" title="3.4 获取数据库(test)所有表名"></a>3.4 获取数据库(test)所有表名</h3><p>group_concat()一次性显示：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> group_concat(TABLE_NAME) <span class="keyword">from</span> information_schema.TABLES <span class="keyword">where</span> table_schema<span class="operator">=</span><span class="string">&#x27;test&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="SQL">select group_concat(TABLE_NAME) from information_schema.TABLES where table_schema=&#39;test&#39;;
+</code></pre>
 <p>limi 逐一显示</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(TABLE_NAME) <span class="keyword">from</span> information_schema.TABLES <span class="keyword">where</span> table_schema<span class="operator">=</span><span class="string">&#x27;test&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> TABLE_NAME <span class="keyword">from</span> information_schema.SCHEMATA <span class="keyword">where</span> table_schema<span class="operator">=</span><span class="string">&#x27;test&#x27;</span> limit <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<pre><code class="SQL">select count(TABLE_NAME) from information_schema.TABLES where table_schema=&#39;test&#39;;
 
-
-
+select TABLE_NAME from information_schema.SCHEMATA where table_schema=&#39;test&#39; limit 0,1
+</code></pre>
 <h2 id="4-联合查询"><a href="#4-联合查询" class="headerlink" title="4.联合查询"></a>4.联合查询</h2><p>前提条件：页面上有显示位</p>
 <p>什么是显示位？</p>
 <p>在一个网站的正常页面，服务端执行SQL语句查询数据库中的数据，客户端将数据展示在页面中，这个展示数据的位置就叫<em>显示位</em></p>
