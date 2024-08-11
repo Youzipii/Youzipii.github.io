@@ -18,7 +18,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -169,8 +169,8 @@
 <p><img src="/../image/image-20240806223452765.png" alt="image-20240806223452765"></p>
 <p>2.将MAVEN_HOME 添加到Path系统变量</p>
 <p><img src="/../image/image-20240806223524333.png" alt="image-20240806223524333"></p>
-<h2 id="Maven-软件版本测试"><a href="#Maven-软件版本测试" class="headerlink" title="Maven 软件版本测试"></a>Maven 软件版本测试</h2><pre><code>mvn -v
-</code></pre>
+<h2 id="Maven-软件版本测试"><a href="#Maven-软件版本测试" class="headerlink" title="Maven 软件版本测试"></a>Maven 软件版本测试</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn -v</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240806223552256.png" alt="image-20240806223552256"></p>
 <h2 id="Maven-仓库"><a href="#Maven-仓库" class="headerlink" title="Maven 仓库"></a>Maven 仓库</h2><ol>
 <li>Maven的仓库分类<br>本地仓库: 位于自己计算机中的仓库, 用来存储从远程仓库或中央仓库下载的插件和 jar 包，<br>远程仓库: 需要联网才可以使用的仓库，阿里提供了一个免费的maven 远程仓库。<br>中央仓库: 在 maven 软件中内置一个远程仓库地址 <a target="_blank" rel="noopener" href="http://repo1.maven.org/maven2">http://repo1.maven.org/maven2</a> ，它是中 央仓库，服务于整个互联网，它是由 Maven 团队自己维护，里面存储了非常全的 jar 包，它包 含了世界上大部分流行的开源项目构件</li>
@@ -191,18 +191,8 @@
 <li>配置阿里云远程仓库</li>
 </ol>
 <p>打开 settings.xml,找到 标签 , 下面的内容复制到 中 即可</p>
-<pre><code class="xml">&lt;!--setting.xml中添加如下配置--&gt;
-&lt;mirrors&gt;
-    &lt;mirror&gt;
-        &lt;id&gt;aliyun&lt;/id&gt;  
-        &lt;!-- 中心仓库的 mirror(镜像) --&gt;
-        &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;    
-        &lt;name&gt;Nexus aliyun&lt;/name&gt;
-        &lt;!-- aliyun仓库地址 以后所有要指向中心仓库的请求，都会指向aliyun仓库--&gt;
-        &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;  
-    &lt;/mirror&gt;
-&lt;/mirrors&gt;
-</code></pre>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--setting.xml中添加如下配置--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span>  </span><br><span class="line">        <span class="comment">&lt;!-- 中心仓库的 mirror(镜像) --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span>    </span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- aliyun仓库地址 以后所有要指向中心仓库的请求，都会指向aliyun仓库--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240806224912908.png" alt="image-20240806224912908"></p>
 <h2 id="在Idea中关联Maven"><a href="#在Idea中关联Maven" class="headerlink" title="在Idea中关联Maven"></a>在Idea中关联Maven</h2><p>详细教程：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43410878/article/details/123812267">https://blog.csdn.net/qq_43410878/article/details/123812267</a></p>
 <p>在idea中关联本地安装的maven，后续就可以通过idea使用maven来管理项目</p>
@@ -227,13 +217,13 @@
 <p><img src="/../image/image-20240806225030929.png" alt="image-20240806225030929"></p>
 <p>这里会自动下载相关项目的插件</p>
 <p><img src="/../image/image-20240806225153556.png" alt="image-20240806225153556"></p>
-<pre><code>mvn install  #
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn install  #</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240806225945110.png" alt="image-20240806225945110"></p>
 <p>但还是有些找不到，本来想试试手动安装，但说是不推荐，后续比较麻烦，但他也提供了另一条命令</p>
 <p><a target="_blank" rel="noopener" href="https://www.coder.work/article/6959032">https://www.coder.work/article/6959032</a></p>
-<pre><code>mvn org.apache.maven.plugins:maven-dependency-plugin:2.6:get -Dartifact=groupId:artifactId:version
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn org.apache.maven.plugins:maven-dependency-plugin:2.6:get -Dartifact=groupId:artifactId:version</span><br></pre></td></tr></table></figure>
+
 <p>有一点麻烦的就是我不知道要不要确定版本号，感觉还是没配置好，但这样一个一个也能解决问题，麻烦一点就是了</p>
 <p><img src="/../image/image-20240807090129426.png" alt="image-20240807090129426"></p>
 <p>有时候是因为自己手动装的环境，它识别不到，和新下载的冲突了，删除原来的又可以了</p>
