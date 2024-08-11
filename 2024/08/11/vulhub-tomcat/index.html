@@ -18,7 +18,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -183,17 +183,15 @@
 <h1 id="CVE-2017-12615：PUT方法任意写文件漏洞"><a href="#CVE-2017-12615：PUT方法任意写文件漏洞" class="headerlink" title="CVE-2017-12615：PUT方法任意写文件漏洞"></a>CVE-2017-12615：PUT方法任意写文件漏洞</h1><ol>
 <li>访问主页</li>
 </ol>
-<pre><code>http://172.16.14.148:8080
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://172.16.14.148:8080</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240718151205060-1723344287772-32.png" alt="image-20240718151205060"></p>
 <p>2.抓包</p>
 <p><img src="/../image/image-20240718151223790-1723344287772-24.png" alt="image-20240718151223790"></p>
 <p>3.修改方法</p>
 <p>在上传文件的时候需要对文件后缀名进行修改绕过</p>
-<pre><code>org.apache.jasper.servlet.JspServlet：默认处理jsp，jspx文件请求，不存在PUT上传逻辑，无法处理PUT请求
-org.apache.catalina.servlets.DefaultServlet：默认处理静态文件（除jsp，jspx之外的文件），存在PUT上传处理逻辑，可以处理PUT请求。
-所以我们即使可以PUT一个文件到服务器但也无法直接PUT以jsp,jspx结尾文件，因为这些这些后缀的文件都是交由JspServlet处理的，它没法处理PUT请求。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">org.apache.jasper.servlet.JspServlet：默认处理jsp，jspx文件请求，不存在PUT上传逻辑，无法处理PUT请求</span><br><span class="line">org.apache.catalina.servlets.DefaultServlet：默认处理静态文件（除jsp，jspx之外的文件），存在PUT上传处理逻辑，可以处理PUT请求。</span><br><span class="line">所以我们即使可以PUT一个文件到服务器但也无法直接PUT以jsp,jspx结尾文件，因为这些这些后缀的文件都是交由JspServlet处理的，它没法处理PUT请求。</span><br></pre></td></tr></table></figure>
+
 <p>但是当我们利用Windows特性以下面两种方式上传文件时，tomcat并不认为其是jsp文件从而交由DefaultServlet处理，从而成功创建jsp文件，这也就是所谓的CVE-2017-12615漏洞。</p>
 <p>给文件后缀加一个 “ &#x2F; ” ,变为 myshell.jsp&#x2F;,这个&#x2F;很关键</p>
 <p><img src="/../image/image-20240718151321666-1723344287772-27.png" alt="image-20240718151321666"></p>
@@ -202,8 +200,8 @@ org.apache.catalina.servlets.DefaultServlet：默认处理静态文件（除jsp�
 <h1 id="CVE-2020-1938：文件包含"><a href="#CVE-2020-1938：文件包含" class="headerlink" title="CVE-2020-1938：文件包含"></a><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=CVE&spm=1001.2101.3001.7020">CVE</a>-2020-1938：文件包含</h1><p>由于 Tomcat AJP 协议设计上存在缺陷，攻击者通过 Tomcat AJP Connector 可以读取或包含 Tomcat 上所有 webapp 目录下的任意文件，例如可以读取 webapp 配置文件或源代码。此外在目标应用有文件上传功能的情况下，配合文件包含的利用还可以达到远程代码执行的危害。</p>
 <p>tomcat 配置了两个Connecto，它们分别是 HTTP 和 AJP ：HTTP默认端口为8080，处理http请求，而AJP默认端口8009，用于处理 AJP 协议的请求，而AJP比http更加优化，多用于反向、集群等，漏洞由于Tomcat AJP协议存在缺陷而导致，攻击者利用该漏洞可通过构造特定参数，读取服务器webapp下的任意文件以及可以包含任意文件，如果有某上传点，上传图片马等等，即可以获取shell。</p>
 <p>环境启动之后，进行端口扫描，查看8009端口是否处于开放状态</p>
-<pre><code>nmap -sV -p- 192.168.174.137
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sV -p- 192.168.174.137</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240726180058968-1723344287772-30.png" alt="image-20240726180058968"></p>
 <p>从Github克隆POC脚本到本地:</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/YDHCUI/CNVD-2020-10487-Tomcat-Ajp-lfi">https://github.com/YDHCUI/CNVD-2020-10487-Tomcat-Ajp-lfi</a></p>

