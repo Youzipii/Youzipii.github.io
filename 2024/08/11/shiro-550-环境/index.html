@@ -21,7 +21,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -167,24 +167,12 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Bossfrank/article/details/130173880">shiro550反序列化漏洞</a></p>
 <h1 id="shiro-550-环境"><a href="#shiro-550-环境" class="headerlink" title="shiro-550-环境"></a>shiro-550-环境</h1><h2 id="0x01前言"><a href="#0x01前言" class="headerlink" title="0x01前言"></a>0x01前言</h2><p>因为在复现漏洞时，一直都是docker起的环境，对这些java开发的项目的具体内容不是很了解，且不懂这些项目的构建过程，故在此总结一下自己在网上看到的搭建环境的过程。对shiro的介绍很多，上面的文章也有，这里就不缀述了</p>
 <h2 id="0x2-环境搭建-git"><a href="#0x2-环境搭建-git" class="headerlink" title="0x2 环境搭建 git"></a>0x2 环境搭建 git</h2><p>这是在视频中学到的，直接从github上clone代码到本地，然后git checkout切换版本，还是第一次用这个功能，有点迟了。。。附上<a target="_blank" rel="noopener" href="https://www.runoob.com/git/git-checkout.html">介绍链接</a>,git也该再去学习一下，只会个clone是不行的。</p>
-<pre><code>git clone https://github.com/apache/shiro.git
-cd shiro
-git checkout shiro-root-1.2.4
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/apache/shiro.git</span><br><span class="line">cd shiro</span><br><span class="line">git checkout shiro-root-1.2.4</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240811191753290.png" alt="image-20240811191753290"></p>
 <p>编辑shiro&#x2F;samples&#x2F;web目录下的pom.xml，手动添加<code>3.2.1</code>的CC依赖包</p>
-<pre><code class="xml">&lt;dependency&gt;
-    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
-    &lt;artifactId&gt;jstl&lt;/artifactId&gt;
-    &lt;version&gt;1.2&lt;/version&gt;
-    &lt;scope&gt;runtime&lt;/scope&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;commons-collections&lt;/groupId&gt;
-    &lt;artifactId&gt;commons-collections&lt;/artifactId&gt;
-    &lt;version&gt;3.2.1&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jstl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240811223850102.png" alt="image-20240811223850102"></p>
 <p>然后用IDEA打开项目，eclipse没试过，可以自己去找找教程</p>
 <p><img src="/../image/image-20240811193059119.png" alt="image-20240811193059119"></p>
@@ -211,9 +199,8 @@ git checkout shiro-root-1.2.4
 <p><strong>第二个目的</strong>是获得加密解密的方法，以此来自行加密解密恶意payload进行传输</p>
 <p>如果是导入war包的形式</p>
 <p>反编译此漏洞环境中的shiro组件jar包</p>
-<pre><code>选中shiro-core-1.2.4.jar -&gt; 右键 -&gt; Add as Library -&gt; ok
-选中shiro-web-1.2.4.jar -&gt; 右键 -&gt; Add as Library -&gt; ok
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">选中shiro-core-1.2.4.jar -&gt; 右键 -&gt; Add as Library -&gt; ok</span><br><span class="line">选中shiro-web-1.2.4.jar -&gt; 右键 -&gt; Add as Library -&gt; ok</span><br></pre></td></tr></table></figure>
+
 <p>而这里我们直接可以看core和web文件下的代码即可</p>
 <p>IDEA中按两次shift 搜索咱们前面准备当做入口点的类，按着函数列表查看后并未发现有关加密的信息，但也有一些关键参数的信息，但我们要找加密函数，so跟进父类AbstractRememberMeManager去看一下（按2下shift，直接搜索）</p>
 <p><img src="/../image/image-20240811212428509.png" alt="image-20240811212313713"></p>
@@ -253,18 +240,16 @@ git checkout shiro-root-1.2.4
 <p>这边调用的是原生的方法，所以可以考虑CC和CB相关的东西，然后分析需要的密钥是什么，直接shift，搜索参数名</p>
 <p><img src="/../image/image-20240812133618798.png" alt="image-20240812133618798"></p>
 <p>发现是一个常量，看一下成员的声明是在哪，往上寻找，发现默认的key值</p>
-<pre><code class="java">private static final byte[] DEFAULT_CIPHER_KEY_BYTES = Base64.decode(&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;);
-</code></pre>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">byte</span>[] DEFAULT_CIPHER_KEY_BYTES = Base64.decode(<span class="string">&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;</span>);</span><br></pre></td></tr></table></figure>
+
 <p>继续分析，可以发现JcaCipherService类</p>
 <p><img src="/../image/image-20240812141529612.png" alt="image-20240812141529612"></p>
 <p>所以利用就是我们需要构造一个序列化payload然后通过这个密钥去加密，传给服务端，然后服务端解密，反序列化后就会执行我们的payload，然后他这里也有自带的CC和CB，也都是存在漏洞的版本，但CC好像不行用，我们用Maven Helper来看看依赖环境</p>
 <p><img src="/../image/image-20240812135039243.png" alt="image-20240812135039243"></p>
 <p>然后这里可以看到有些依赖是test，有些是compile，只有compile和runtime的才会被用，这里主要是验证，后面听不懂了。。。</p>
 <h1 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h1><h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><h3 id="1、git开代理还是慢，且容易报error"><a href="#1、git开代理还是慢，且容易报error" class="headerlink" title="1、git开代理还是慢，且容易报error"></a>1、git开代理还是慢，且容易报error</h3><p>这里直接把git的代理改成对应cfw的代理即可,一般是7890，然后记得http和https都改一下<a target="_blank" rel="noopener" href="https://blog.csdn.net/HD243608836/article/details/127869482">参考</a></p>
-<pre><code>git config --global --list
-git config --global http.proxy s&quot;代理地址&quot;
-git config --global https.proxy &quot;代理地址&quot;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global --list</span><br><span class="line">git config --global http.proxy s&quot;代理地址&quot;</span><br><span class="line">git config --global https.proxy &quot;代理地址&quot;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240811191452718.png" alt="image-20240811191452718"></p>
 <p>gitcheckout:<a target="_blank" rel="noopener" href="https://blog.csdn.net/raoxiaoya/article/details/111321583">https://blog.csdn.net/raoxiaoya/article/details/111321583</a></p>
 <h3 id="2、mvn编译错误"><a href="#2、mvn编译错误" class="headerlink" title="2、mvn编译错误"></a>2、<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38376348/article/details/108962790">mvn编译错误</a></h3><p><img src="/../image/image-20240812093534602.png" alt="image-20240812093534602"></p>

