@@ -1,0 +1,204 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>win隐藏用户 | You_zip</title><meta name="author" content="Youzipii"><meta name="copyright" content="Youzipii"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="win隐藏用户教程：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;bonelee&#x2F;p&#x2F;15938755.htm 一、创建隐藏用户及分配管理员权限要管理员身份运行的cmd net user admin$ 123456 &#x2F;add   注：若不是管理有权限，则创建账号时会提示“发生系统错误 5”。  这时使用net user是查看不到隐藏账号，使用net user admin$这发现这个隐藏账号是存在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="win隐藏用户">
+<meta property="og:url" content="http://example.com/2024/08/23/win%E9%9A%90%E8%97%8F%E7%94%A8%E6%88%B7/index.html">
+<meta property="og:site_name" content="You_zip">
+<meta property="og:description" content="win隐藏用户教程：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;bonelee&#x2F;p&#x2F;15938755.htm 一、创建隐藏用户及分配管理员权限要管理员身份运行的cmd net user admin$ 123456 &#x2F;add   注：若不是管理有权限，则创建账号时会提示“发生系统错误 5”。  这时使用net user是查看不到隐藏账号，使用net user admin$这发现这个隐藏账号是存在">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png">
+<meta property="article:published_time" content="2024-08-23T07:40:14.000Z">
+<meta property="article:modified_time" content="2024-08-23T08:42:57.257Z">
+<meta property="article:author" content="Youzipii">
+<meta property="article:tag" content="隐藏用户">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png"><link rel="shortcut icon" href="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png"><link rel="canonical" href="http://example.com/2024/08/23/win%E9%9A%90%E8%97%8F%E7%94%A8%E6%88%B7/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'win隐藏用户',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-23 16:42:57'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">66</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">58</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/image/bk_image/bg3.png')"><nav id="nav"><span id="blog-info"><a href="/" title="You_zip"><span class="site-name">You_zip</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">win隐藏用户</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-23T07:40:14.000Z" title="发表于 2024-08-23 15:40:14">2024-08-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-23T08:42:57.257Z" title="更新于 2024-08-23 16:42:57">2024-08-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="win隐藏用户"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="win隐藏用户"><a href="#win隐藏用户" class="headerlink" title="win隐藏用户"></a>win隐藏用户</h1><p>教程：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/bonelee/p/15938755.htm">https://www.cnblogs.com/bonelee/p/15938755.htm</a></p>
+<h2 id="一、创建隐藏用户及分配管理员权限"><a href="#一、创建隐藏用户及分配管理员权限" class="headerlink" title="一、创建隐藏用户及分配管理员权限"></a>一、创建隐藏用户及分配管理员权限</h2><p>要管理员身份运行的cmd</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net user admin$ 123456 /add</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/image-20240823155128122.png" alt="image-20240823155128122"></p>
+<p>注：若不是管理有权限，则创建账号时会提示“发生系统错误 5”。</p>
+<p><img src="/../image/image-20240823155047702.png" alt="image-20240823155047702"></p>
+<p>这时使用net user是查看不到隐藏账号，使用net user admin$这发现这个隐藏账号是存在的：</p>
+<p><img src="/../image/image-20240823155159543.png" alt="image-20240823155159543"></p>
+<p>把隐藏账号设为管理员组</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net localgroup administrators admin$ /add</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/image-20240823155337618.png" alt="image-20240823155337618"></p>
+<p>此时隐藏账号admin虽然在CMD里面用net user查看不到，但查看用户和组的时候还是可以发现，所以还需要修改注册表来进行隐藏账号。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net localgroup administrators</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/image-20240823155447457.png" alt="image-20240823155447457"></p>
+<h2 id="二、修改注册表进行账号隐藏和克隆管理员权限"><a href="#二、修改注册表进行账号隐藏和克隆管理员权限" class="headerlink" title="二、修改注册表进行账号隐藏和克隆管理员权限"></a>二、修改注册表进行账号隐藏和克隆管理员权限</h2><p>1）添加查看注册表中账号权限</p>
+<p>在regedt32.exe中来到“HKEY_LOCAL_MACHINE\SAM\SAM”处，点击“安全”菜单→“权限”，在弹出的“SAM的权限”编辑窗口中选中“administrators”账户，在下方的权限设置处勾选“完全控制”，完成后点击“确定”即可。</p>
+<p><img src="/../image/image-20240823155635980.png" alt="image-20240823155635980"></p>
+<p>重进注册表</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net localgroup SYSTEM admin$ /add</span><br></pre></td></tr></table></figure>
+
+<p>2)导出并编辑注册表项</p>
+<p>进入注册表项HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\Names可以看到系统所有账号也包括隐藏账号admin$。点击账号名可在右边看到账号类型，admin$类型是3ec,而administraor的类型是1f4</p>
+<p><img src="/../image/image-20240823155908837.png" alt="image-20240823155908837"></p>
+<p><img src="/../image/image-20240823155919325.png" alt="image-20240823155919325"></p>
+<p>将admin$导出为admin.reg；把000003EC导出为admin3ec.reg；把000001F4导出为admin1f4.reg。</p>
+<p>编辑admin1f4.reg,将它里面属于’F’的内容分复制下来，替换admin3eb.reg里面F的值。</p>
+<p><img src="/../image/image-20240823160317512.png" alt="image-20240823160317512"></p>
+<p>做完这一步后，去命令提示符里面执行，net user admin$ &#x2F;del,删除这个账号</p>
+<p><img src="/../image/image-20240823160353088.png" alt="image-20240823160353088"></p>
+<p>然后将admin.reg和admin3eb.reg双击导入注册表，然后我们再回到注册表把之前改的权限全部取消掉，至此隐藏管理员影子账号就完成了。</p>
+<p><img src="/../image/image-20240823160449973.png" alt="image-20240823160449973"></p>
+<p>去计算机管理成员组里面也是找不到这个账号的。当然重启还是会出现。有些服务器长期不重启，所以能隐藏很久。</p>
+<p>3）远程登录隐藏账号</p>
+<p>使用隐藏账号admin$远程登录，登录后发现查询自己却还是administrator，但登录的确实admin$，这就是克隆了administrator账号并进行隐藏的效果。</p>
+<p>whoami #我是谁</p>
+<p>query user #当前登录的账号</p>
+<p><img src="/../image/image-20240823160759521.png" alt="image-20240823160759521"></p>
+<p><img src="/../image/image-20240823160808908.png" alt="image-20240823160808908"></p>
+<p><img src="/../image/image-20240823163409162.png" alt="image-20240823163409162"></p>
+<p>不懂为什么会这样，我试试不做删除隐藏那一步，创建了个hack$，然后登陆一下下是可以，就是原来的账号被顶掉了</p>
+<p><img src="/../image/image-20240823163909607.png" alt="image-20240823163909607"></p>
+<p><img src="/../image/image-20240823163917469.png" alt="image-20240823163917469"></p>
+<p><img src="/../image/image-20240823163902307.png" alt="image-20240823163902307"></p>
+<p>又改了一下还是这个问题。。。</p>
+<p><img src="/../image/image-20240823164235437.png" alt="image-20240823164235437"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Youzipii</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/08/23/win%E9%9A%90%E8%97%8F%E7%94%A8%E6%88%B7/">http://example.com/2024/08/23/win%E9%9A%90%E8%97%8F%E7%94%A8%E6%88%B7/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">You_zip</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9A%90%E8%97%8F%E7%94%A8%E6%88%B7/">隐藏用户</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/08/22/Windows10%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90-%E4%B8%80/" title="Windows10日志分析(一)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Windows10日志分析(一)</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Youzipii</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">66</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">58</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/youzipii"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#win%E9%9A%90%E8%97%8F%E7%94%A8%E6%88%B7"><span class="toc-text">win隐藏用户</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E9%9A%90%E8%97%8F%E7%94%A8%E6%88%B7%E5%8F%8A%E5%88%86%E9%85%8D%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90"><span class="toc-text">一、创建隐藏用户及分配管理员权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BF%AE%E6%94%B9%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%BF%9B%E8%A1%8C%E8%B4%A6%E5%8F%B7%E9%9A%90%E8%97%8F%E5%92%8C%E5%85%8B%E9%9A%86%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90"><span class="toc-text">二、修改注册表进行账号隐藏和克隆管理员权限</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/23/win%E9%9A%90%E8%97%8F%E7%94%A8%E6%88%B7/" title="win隐藏用户">win隐藏用户</a><time datetime="2024-08-23T07:40:14.000Z" title="发表于 2024-08-23 15:40:14">2024-08-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/22/Windows10%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90-%E4%B8%80/" title="Windows10日志分析(一)">Windows10日志分析(一)</a><time datetime="2024-08-22T09:29:12.000Z" title="发表于 2024-08-22 17:29:12">2024-08-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/19/sqli-labs/" title="sqli-labs">sqli-labs</a><time datetime="2024-08-19T07:31:34.000Z" title="发表于 2024-08-19 15:31:34">2024-08-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/16/%E4%BB%8E0-1%E5%BC%80%E5%A7%8B%E7%9A%84%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" title="从0.1开始的代码审计">从0.1开始的代码审计</a><time datetime="2024-08-16T14:09:27.000Z" title="发表于 2024-08-16 22:09:27">2024-08-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/16/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E7%BB%83%E4%B9%A0/" title="应急响应练习">应急响应练习</a><time datetime="2024-08-16T09:33:44.000Z" title="发表于 2024-08-16 17:33:44">2024-08-16</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/image/bk_image/bg3.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Youzipii</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
