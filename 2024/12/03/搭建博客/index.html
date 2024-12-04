@@ -1,0 +1,237 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>搭建博客 | You_zip</title><meta name="author" content="Youzipii"><meta name="copyright" content="Youzipii"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="搭建博客参考链接：  https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;6844903700725497863?from&#x3D;search-suggest https:&#x2F;&#x2F;blog.peiyingchi.com&#x2F;2017&#x2F;03&#x2F;20&#x2F;deploy-hexo-blog-to-VPS&#x2F; https:&#x2F;&#x2F;zhouw.top&#x2F;2023&#x2F;02&#x2F;25&#x2F;hexo%20+%20vps%20%E6%90%AD%E5%BB%">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建博客">
+<meta property="og:url" content="http://example.com/2024/12/03/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="You_zip">
+<meta property="og:description" content="搭建博客参考链接：  https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;6844903700725497863?from&#x3D;search-suggest https:&#x2F;&#x2F;blog.peiyingchi.com&#x2F;2017&#x2F;03&#x2F;20&#x2F;deploy-hexo-blog-to-VPS&#x2F; https:&#x2F;&#x2F;zhouw.top&#x2F;2023&#x2F;02&#x2F;25&#x2F;hexo%20+%20vps%20%E6%90%AD%E5%BB%">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png">
+<meta property="article:published_time" content="2024-12-03T12:01:14.000Z">
+<meta property="article:modified_time" content="2024-12-04T09:20:13.288Z">
+<meta property="article:author" content="Youzipii">
+<meta property="article:tag" content="博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png"><link rel="shortcut icon" href="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png"><link rel="canonical" href="http://example.com/2024/12/03/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '搭建博客',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-12-04 17:20:13'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">98</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/image/bk_image/bg3.png')"><nav id="nav"><span id="blog-info"><a href="/" title="You_zip"><span class="site-name">You_zip</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">搭建博客</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-03T12:01:14.000Z" title="发表于 2024-12-03 20:01:14">2024-12-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-04T09:20:13.288Z" title="更新于 2024-12-04 17:20:13">2024-12-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="搭建博客"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="搭建博客"><a href="#搭建博客" class="headerlink" title="搭建博客"></a>搭建博客</h1><p>参考链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903700725497863?from=search-suggest">https://juejin.cn/post/6844903700725497863?from=search-suggest</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.peiyingchi.com/2017/03/20/deploy-hexo-blog-to-VPS/">https://blog.peiyingchi.com/2017/03/20/deploy-hexo-blog-to-VPS/</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhouw.top/2023/02/25/hexo%20+%20vps%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">https://zhouw.top/2023/02/25/hexo%20+%20vps%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.zhheo.com/p/12a4e7e6.html">https://blog.zhheo.com/p/12a4e7e6.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1QP4y1q7iK/?spm_id_from=333.337.search-card.all.click&amp;vd_source=3ae03810e5d4ba6e6b93c5edd6c76912">https://www.bilibili.com/video/BV1QP4y1q7iK/?spm_id_from=333.337.search-card.all.click&amp;vd_source=3ae03810e5d4ba6e6b93c5edd6c76912</a></li>
+</ul>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="vps环境"><a href="#vps环境" class="headerlink" title="vps环境"></a>vps环境</h3><p>我的vps是在阿里云买的，配置如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">操作系系统：debian 12.6 64位</span><br><span class="line">CPU：2核</span><br><span class="line">内存：2G</span><br><span class="line">带宽：3M</span><br></pre></td></tr></table></figure>
+
+<p>然后我们为了权限隔离，可以单独创建一个用户用来管理博客</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo adduser git</span><br><span class="line">sudo passwd git //设置密码</span><br></pre></td></tr></table></figure>
+
+<h4 id="赋予git用户sudo权限"><a href="#赋予git用户sudo权限" class="headerlink" title="赋予git用户sudo权限"></a>赋予git用户sudo权限</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo chmod 740 /etc/sudoers</span><br><span class="line">ls -l /etc/sudoers 可以先看一下权限分配，待会改完好改回来</span><br><span class="line">sudo vim /etc/sudoers //配置如下</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/image-20241203204454463.png" alt="image-20241203204454463"></p>
+<p>保存退出后，该回去</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo chmod 440 /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+<h4 id="关闭git用户shell权限"><a href="#关闭git用户shell权限" class="headerlink" title="关闭git用户shell权限"></a>关闭git用户shell权限</h4><p>ssh 连接服务器，登录到服务器上，对服务器进行各种操作，这通常很不安全，也不合适，我们只需要能对仓库操作就可以了，不需要更大的权限。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/passwd //</span><br><span class="line">原文：</span><br><span class="line">git:x:1001:1001:,,,:/home/git:/bin/sh</span><br><span class="line">修改后：</span><br><span class="line">git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/image-20241203211236868.png" alt="image-20241203211236868"></p>
+<h3 id="Git-shell没有启用"><a href="#Git-shell没有启用" class="headerlink" title="Git shell没有启用"></a><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/ask/sof/116908008">Git shell没有启用</a></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chsh -s $(command -v git-shell) &lt;user&gt; //命令指定用户</span><br><span class="line">cp /usr/share/doc/git/contrib/git-shell-commands /home/git/ -R //把git-shell的命令复制到git用户目录下</span><br><span class="line">chown git:git /home/git/git-shell-commands/ -R //权限控制</span><br><span class="line">chmod +x /home/git/git-shell-commands/help </span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/image-20241204170146409.png" alt="image-20241204170146409"></p>
+<h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install git</span><br><span class="line">git --version</span><br><span class="line">//如果安装不成功，可以试一下更新一下</span><br><span class="line">apt update</span><br></pre></td></tr></table></figure>
+
+<p>我这里的git版本</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@debian:~# git --version</span><br><span class="line">git version 2.39</span><br></pre></td></tr></table></figure>
+
+<h4 id="初始化git仓库"><a href="#初始化git仓库" class="headerlink" title="初始化git仓库"></a>初始化git仓库</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /home/git</span><br><span class="line">mkdir youzipii.git //创建git仓库文件夹</span><br><span class="line">cd blog.git</span><br><span class="line">git init --bare //使用--bare参数初始化为裸仓库，这样创建的仓库不包含工作区</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1825910">https://cloud.tencent.com/developer/article/1825910</a></li>
+</ul>
+<h4 id="配置ssh"><a href="#配置ssh" class="headerlink" title="配置ssh"></a>配置ssh</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /home/git</span><br><span class="line">mkdir .ssh</span><br><span class="line">cd .ssh</span><br><span class="line">vim authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>这里需要把用户的公钥文件写入authorized_keys，如果没有可以用ssh-keygen生成</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ssh-keygen -t rsa -C &quot;your_email&quot;</span><br></pre></td></tr></table></figure>
+
+<p>如果怕复制出问题，可以用下面这个命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub &gt;&gt; /home/git/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<h4 id="用户组管理"><a href="#用户组管理" class="headerlink" title="用户组管理"></a>用户组管理</h4><p>确保 blog.git、.ssh、blog 目录的用户组权限为 git:git，若不是，执行下列命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ls -l /home/git/</span><br><span class="line">ll -l /var/www/</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chown -R git:git /目录</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建网站目录"><a href="#创建网站目录" class="headerlink" title="创建网站目录"></a>创建网站目录</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /ver/www/ //没有就创建一个</span><br><span class="line">mkdir blog </span><br></pre></td></tr></table></figure>
+
+<h3 id="使用git-hooks同步网站根目录"><a href="#使用git-hooks同步网站根目录" class="headerlink" title="使用git-hooks同步网站根目录"></a>使用git-hooks同步网站根目录</h3><h4 id="创建post-receive文件"><a href="#创建post-receive文件" class="headerlink" title="创建post-receive文件"></a>创建post-receive文件</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /home/git/youzipii.git/hooks</span><br><span class="line">vim /pose-receive</span><br></pre></td></tr></table></figure>
+
+<p>复制下面的内容到post-receive</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">echo &quot;post-receive hook is running...&quot;</span><br><span class="line"></span><br><span class="line">GIT_REPO=/home/git/youzipii.git</span><br><span class="line">TMP_GIT_CLONE=/tmp/blog</span><br><span class="line">PUBLIC_WWW=/var/www/blog</span><br><span class="line"></span><br><span class="line">rm -rf $&#123;TMP_GIT_CLONE&#125;</span><br><span class="line">git clone $GIT_REPO $TMP_GIT_CLONE</span><br><span class="line">rm -rf $&#123;PUBLIC_WWW&#125;/*</span><br><span class="line">cp -rf $&#123;TMP_GIT_CLONE&#125;/* $&#123;PUBLIC_WWW&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod +x post-receive</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/nginx-setup-intro.html">https://www.runoob.com/w3cnote/nginx-setup-intro.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/panchanggui/p/12067953.html">https://www.cnblogs.com/panchanggui/p/12067953.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://wenku.csdn.net/answer/99c26bcf45e14855a533019c06909406">https://wenku.csdn.net/answer/99c26bcf45e14855a533019c06909406</a></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apt install nginx  		//安装nginx</span><br><span class="line">systemctl start nginx   //启动nginx</span><br><span class="line">systemctl enable nginx  //开机启动</span><br><span class="line">systemctl status nginx //查看nginx运行状态</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/image-20241203210252768.png" alt="image-20241203210252768"></p>
+<p>可以访问<a target="_blank" rel="noopener" href="http://your-ip,看看是否显示nginx的默认页面/">http://your-ip，看看是否显示nginx的默认页面</a></p>
+<p><img src="/../image/image-20241203210334823.png" alt="image-20241203210334823"></p>
+<p>配置nginx</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /etc/nginx/sites-available //有些是改ng</span><br><span class="line"># 备份默认配置</span><br><span class="line">cp default default.bak</span><br><span class="line"># 修改配置</span><br><span class="line">vim default</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>(无域名配置nginx)<a target="_blank" rel="noopener" href="https://blog.csdn.net/yxjie2/article/details/126163577">https://blog.csdn.net/yxjie2/article/details/126163577</a></li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span> default;              <span class="comment">#默认监听80端口</span></span><br><span class="line">    <span class="attribute">root</span> /var/www/blog;             <span class="comment">#网站根目录,可以自己在对应目录下搭建</span></span><br><span class="line">    <span class="attribute">server_name</span> <span class="number">127.0.0.1</span>;          <span class="comment">#自己的网址</span></span><br><span class="line">    <span class="attribute">access_log</span>  /var/log/nginx/blog_access.log;</span><br><span class="line">    <span class="attribute">error_log</span>   /var/log/nginx/blog_error.log;</span><br><span class="line">    <span class="attribute">error_page</span> <span class="number">404</span> =  /<span class="number">404</span>.html;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> <span class="regexp">~* ^.+\.(ico|gif|jpg|jpeg|png)$</span> &#123;</span><br><span class="line">        <span class="attribute">root</span> /var/www/blog;</span><br><span class="line">        <span class="attribute">access_log</span>   <span class="literal">off</span>;</span><br><span class="line">        <span class="attribute">expires</span>      <span class="number">1d</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> <span class="regexp">~* ^.+\.(css|js|txt|xml|swf|wav)$</span> &#123;</span><br><span class="line">        <span class="attribute">root</span> /var/www/blog;</span><br><span class="line">        <span class="attribute">access_log</span>   <span class="literal">off</span>;</span><br><span class="line">        <span class="attribute">expires</span>      <span class="number">10m</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">root</span> /var/www/blog;</span><br><span class="line">        <span class="attribute">if</span> (-f <span class="variable">$request_filename</span>) &#123;</span><br><span class="line">        <span class="attribute">rewrite</span><span class="regexp"> ^/(.*)$</span>  /<span class="variable">$1</span> <span class="literal">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> /nginx_status &#123;</span><br><span class="line">        <span class="attribute">stub_status</span> <span class="literal">on</span>;</span><br><span class="line">        <span class="attribute">access_log</span> <span class="literal">off</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nginx -t //</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Youzipii</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/12/03/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">http://example.com/2024/12/03/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">You_zip</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/11/29/remmina-ctos/" title="remmina-ctos"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">remmina-ctos</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2024/08/08/zZWaxXAdoB6sS8e.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Youzipii</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">98</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/youzipii"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2"><span class="toc-text">搭建博客</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-text">准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vps%E7%8E%AF%E5%A2%83"><span class="toc-text">vps环境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%8B%E4%BA%88git%E7%94%A8%E6%88%B7sudo%E6%9D%83%E9%99%90"><span class="toc-text">赋予git用户sudo权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%97%ADgit%E7%94%A8%E6%88%B7shell%E6%9D%83%E9%99%90"><span class="toc-text">关闭git用户shell权限</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git-shell%E6%B2%A1%E6%9C%89%E5%90%AF%E7%94%A8"><span class="toc-text">Git shell没有启用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git"><span class="toc-text">Git</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96git%E4%BB%93%E5%BA%93"><span class="toc-text">初始化git仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEssh"><span class="toc-text">配置ssh</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86"><span class="toc-text">用户组管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%BD%91%E7%AB%99%E7%9B%AE%E5%BD%95"><span class="toc-text">创建网站目录</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8git-hooks%E5%90%8C%E6%AD%A5%E7%BD%91%E7%AB%99%E6%A0%B9%E7%9B%AE%E5%BD%95"><span class="toc-text">使用git-hooks同步网站根目录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BApost-receive%E6%96%87%E4%BB%B6"><span class="toc-text">创建post-receive文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nginx"><span class="toc-text">Nginx</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/03/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" title="搭建博客">搭建博客</a><time datetime="2024-12-03T12:01:14.000Z" title="发表于 2024-12-03 20:01:14">2024-12-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/29/remmina-ctos/" title="remmina-ctos">remmina-ctos</a><time datetime="2024-11-29T09:50:36.000Z" title="发表于 2024-11-29 17:50:36">2024-11-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/22/gophish%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8/" title="gophish搭建使用">gophish搭建使用</a><time datetime="2024-11-22T01:47:53.000Z" title="发表于 2024-11-22 09:47:53">2024-11-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/20/aquatone-discover%E5%AE%89%E8%A3%85/" title="aquatone-discover安装">aquatone-discover安装</a><time datetime="2024-11-20T09:24:45.000Z" title="发表于 2024-11-20 17:24:45">2024-11-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/20/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" title="信息收集">信息收集</a><time datetime="2024-11-20T07:49:26.000Z" title="发表于 2024-11-20 15:49:26">2024-11-20</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/image/bk_image/bg3.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Youzipii</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
