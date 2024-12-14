@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>卸载conda后，cmd出现的两个问题</title>
+      <link href="/2024/12/14/%E5%8D%B8%E8%BD%BDconda%E5%90%8E%EF%BC%8Ccmd%E5%87%BA%E7%8E%B0%E7%9A%84%E4%B8%A4%E4%B8%AA%E9%97%AE%E9%A2%98/"/>
+      <url>/2024/12/14/%E5%8D%B8%E8%BD%BDconda%E5%90%8E%EF%BC%8Ccmd%E5%87%BA%E7%8E%B0%E7%9A%84%E4%B8%A4%E4%B8%AA%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h1 id="卸载conda后，cmd出现的两个问题"><a href="#卸载conda后，cmd出现的两个问题" class="headerlink" title="卸载conda后，cmd出现的两个问题"></a>卸载conda后，cmd出现的两个问题</h1><h2 id="CMD启动不了"><a href="#CMD启动不了" class="headerlink" title="CMD启动不了"></a>CMD启动不了</h2><p>在用geek.exe卸载conda后，cmd启动不了了，点击就闪退，搜了下</p><ul><li><a href="https://blog.csdn.net/sda42342342423/article/details/119738891">https://blog.csdn.net/sda42342342423/article/details/119738891</a></li></ul><p>但我当时是把AutoRun改成0,然后命令行会跳出</p><p>‘0’不是内部或者外部命令也不是可运行的程序或批处理文件</p><p>搜了好久，才找到解决方法</p><p><a href="https://blog.csdn.net/weixin_63976215/article/details/134198237%E3%80%82">https://blog.csdn.net/weixin_63976215/article/details/134198237。</a></p><p>打开cmd输入</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mshta vbscript:CreateObject(&quot;shell.application&quot;).ShellExecute(&quot;cmd&quot;,&quot;/c reg delete &quot;&quot;HKEY_CURRENT_USER\SOFTWARE\Microsoft\Command Processor&quot;&quot; /v &quot;&quot;AutoRun&quot;&quot; /f&quot;,null,&quot;runas&quot;,1)(close())</span><br><span class="line">mshta vbscript:CreateObject(&quot;shell.application&quot;).ShellExecute(&quot;cmd&quot;,&quot;/c reg delete &quot;&quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Command Processor&quot;&quot; /v &quot;&quot;AutoRun&quot;&quot; /f&quot;,null,&quot;runas&quot;,1)(close())</span><br></pre></td></tr></table></figure><p>后面就行了</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 环境 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>openvpn使用</title>
       <link href="/2024/12/06/openvpn%E4%BD%BF%E7%94%A8/"/>
       <url>/2024/12/06/openvpn%E4%BD%BF%E7%94%A8/</url>
